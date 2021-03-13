@@ -1,4 +1,4 @@
-package com.serverless;
+package com.smilestreet;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

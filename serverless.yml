@@ -13,7 +13,7 @@ package:
 
 functions:
   hello:
-    handler: com.serverless.Handler
+    handler: com.smilestreet.Handler
     events:
       - http:
           path: /user

@@ -1,4 +1,4 @@
-com\serverless\Handler.class
-com\serverless\ApiGatewayResponse$Builder.class
-com\serverless\Response.class
-com\serverless\ApiGatewayResponse.class
+com\smilestreet\Handler.class
+com\smilestreet\ApiGatewayResponse$Builder.class
+com\smilestreet\ApiGatewayResponse.class
+com\smilestreet\Response.class
