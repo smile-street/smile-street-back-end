@@ -1,4 +1,3 @@
-com\smilestreet\Handler.class
 com\smilestreet\ApiGatewayResponse$Builder.class
 com\smilestreet\ApiGatewayResponse.class
-com\smilestreet\Response.class
+com\smilestreet\model\User.class
