@@ -13,7 +13,8 @@ package:
 
 functions:
   hello:
-    handler: com.smilestreet.Handler
+    handler: com.smilestreet.getSkillsHandler
+
     events:
       - http:
           path: /user

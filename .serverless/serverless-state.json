@@ -176,9 +176,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/smile-street-back-end/dev/1615736519517-2021-03-14T15:41:59.517Z/hello-dev.jar"
+                "S3Key": "serverless/smile-street-back-end/dev/1615743682239-2021-03-14T17:41:22.239Z/hello-dev.jar"
               },
-              "Handler": "com.smilestreet.Handler",
+              "Handler": "com.smilestreet.getSkillsHandler",
               "Runtime": "java8",
               "FunctionName": "smile-street-back-end-dev-hello",
               "MemorySize": 1024,
@@ -194,14 +194,14 @@
               "HelloLogGroup"
             ]
           },
-          "HelloLambdaVersionJGqB4kFM7P3IbYSAV6t7WQUDObEyj4B4lxsvJ4vrUg": {
+          "HelloLambdaVersionTcuj5KzfWTFunEOgV1DpV9gDyLciqD8OgBmCWJnZF4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "p5WcQ9aYUo8SCRBsK/+/5Y5jPtZaFjA/EdkzayT8E9M="
+              "CodeSha256": "PKKREc93m5KGDiQTMLeEvCzKr7trXoqJQIr+X4fC+Cc="
             }
           },
           "ApiGatewayRestApi": {
@@ -274,7 +274,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1615736518674": {
+          "ApiGatewayDeployment1615743681430": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -333,7 +333,7 @@
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionJGqB4kFM7P3IbYSAV6t7WQUDObEyj4B4lxsvJ4vrUg"
+              "Ref": "HelloLambdaVersionTcuj5KzfWTFunEOgV1DpV9gDyLciqD8OgBmCWJnZF4"
             }
           },
           "ServiceEndpoint": {
@@ -448,7 +448,7 @@
     "pluginsData": {},
     "functions": {
       "hello": {
-        "handler": "com.smilestreet.Handler",
+        "handler": "com.smilestreet.getSkillsHandler",
         "events": [
           {
             "http": {
@@ -464,7 +464,7 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionJGqB4kFM7P3IbYSAV6t7WQUDObEyj4B4lxsvJ4vrUg"
+        "versionLogicalId": "HelloLambdaVersionTcuj5KzfWTFunEOgV1DpV9gDyLciqD8OgBmCWJnZF4"
       }
     },
     "configValidationMode": "warn",
@@ -480,7 +480,7 @@
       },
       "package": {
         "artifact": "target/hello-dev.jar",
-        "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615736519517-2021-03-14T15:41:59.517Z"
+        "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615743682239-2021-03-14T17:41:22.239Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -489,7 +489,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615736519517-2021-03-14T15:41:59.517Z",
+    "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615743682239-2021-03-14T17:41:22.239Z",
     "artifact": "hello-dev.jar"
   }
 }

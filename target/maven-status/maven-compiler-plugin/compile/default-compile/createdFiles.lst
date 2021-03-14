@@ -1,2 +1,4 @@
+com/smilestreet/getVolunteerHandler.class
+com/smilestreet/getSkillsHandler.class
 com/smilestreet/Response.class
-com/smilestreet/Handler.class
+com/smilestreet/model/Skill.class

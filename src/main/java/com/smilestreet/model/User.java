@@ -14,7 +14,7 @@ public class User {
     private String startdate;
     private String enddate;
 
-    public User(int volunteerId, String firstname, String lastname, String contactnumber, String username, String employername, String primarylocation, String numberofdays, String startdate, String enddate) {
+    public User(String firstname) {
         this.volunteerId = volunteerId;
         this.firstname = firstname;
         this.lastname = lastname;

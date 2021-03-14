@@ -1,14 +1,15 @@
 package com.smilestreet;
-import java.sql.*;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.ArrayList;
-import com.smilestreet.model.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.smilestreet.model.User;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 public class getVolunteerHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
@@ -32,17 +33,16 @@ public class getVolunteerHandler implements RequestHandler<Map<String, Object>, 
 			preparedStatement = connection.prepareStatement("SELECT firstname FROM  VOLUNTEER");
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				User user = new User(resultSet.geString("firnstname"),
-						resultSet.getString("firstname"),
-						resultSet.getString("lastname"),
-						resultSet.getString("contactnumber"),
-						resultSet.getString("username"),
-						resultSet.getString("employername"),
-						resultSet.getString("primarylocation"),
-						resultSet.getString("numberofdays"),
-						resultSet.getString("startdate"),
-						resultSet.getString("enddate"));
-				users.add(user);
+				User user = new User(resultSet.getString("firstname"));
+						//resultSet.getString("lastname"),
+						//resultSet.getString("contactnumber"),
+						//resultSet.getString("username"),
+						//resultSet.getString("employername"),
+						//resultSet.getString("primarylocation"),
+						//resultSet.getString("numberofdays"),
+						//resultSet.getString("startdate"),
+						//resultSet.getString("enddate"));
+						users.add(user);
 
 			}
 		} catch (Exception e) {
