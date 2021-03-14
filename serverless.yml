@@ -12,7 +12,7 @@ package:
   artifact: target/hello-dev.jar
 
 functions:
-  hello:
+  skills:
     handler: com.smilestreet.getSkillsHandler
 
     events:

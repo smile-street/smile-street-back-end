@@ -71,10 +71,10 @@
         }
       }
     },
-    "HelloLogGroup": {
+    "SkillsLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/smile-street-back-end-dev-hello"
+        "LogGroupName": "/aws/lambda/smile-street-back-end-dev-skills"
       }
     },
     "IamRoleLambdaExecution": {
@@ -154,18 +154,18 @@
         }
       }
     },
-    "HelloLambdaFunction": {
+    "SkillsLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1615743682239-2021-03-14T17:41:22.239Z/hello-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1615744144991-2021-03-14T17:49:04.991Z/hello-dev.jar"
         },
         "Handler": "com.smilestreet.getSkillsHandler",
         "Runtime": "java8",
-        "FunctionName": "smile-street-back-end-dev-hello",
+        "FunctionName": "smile-street-back-end-dev-skills",
         "MemorySize": 1024,
         "Timeout": 6,
         "Role": {
@@ -176,17 +176,17 @@
         }
       },
       "DependsOn": [
-        "HelloLogGroup"
+        "SkillsLogGroup"
       ]
     },
-    "HelloLambdaVersionTcuj5KzfWTFunEOgV1DpV9gDyLciqD8OgBmCWJnZF4": {
+    "SkillsLambdaVersionYYTLKvzE59YLd2zE3RbgPziJlG2r1KR2z9CKLB1ehU": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
-          "Ref": "HelloLambdaFunction"
+          "Ref": "SkillsLambdaFunction"
         },
-        "CodeSha256": "PKKREc93m5KGDiQTMLeEvCzKr7trXoqJQIr+X4fC+Cc="
+        "CodeSha256": "27rZpuVfrH5HSvnB1Tj0DM7BINiNxjDrwuZ7EPIr4/A="
       }
     },
     "ApiGatewayRestApi": {
@@ -247,7 +247,7 @@
                 ":lambda:path/2015-03-31/functions/",
                 {
                   "Fn::GetAtt": [
-                    "HelloLambdaFunction",
+                    "SkillsLambdaFunction",
                     "Arn"
                   ]
                 },
@@ -259,7 +259,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1615743681430": {
+    "ApiGatewayDeployment1615744144113": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -271,12 +271,12 @@
         "ApiGatewayMethodUserGet"
       ]
     },
-    "HelloLambdaPermissionApiGateway": {
+    "SkillsLambdaPermissionApiGateway": {
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
           "Fn::GetAtt": [
-            "HelloLambdaFunction",
+            "SkillsLambdaFunction",
             "Arn"
           ]
         },
@@ -315,10 +315,10 @@
         "Ref": "ServerlessDeploymentBucket"
       }
     },
-    "HelloLambdaFunctionQualifiedArn": {
+    "SkillsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionTcuj5KzfWTFunEOgV1DpV9gDyLciqD8OgBmCWJnZF4"
+        "Ref": "SkillsLambdaVersionYYTLKvzE59YLd2zE3RbgPziJlG2r1KR2z9CKLB1ehU"
       }
     },
     "ServiceEndpoint": {
