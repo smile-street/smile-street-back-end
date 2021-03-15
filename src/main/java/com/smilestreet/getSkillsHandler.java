@@ -2,6 +2,8 @@ package com.smilestreet;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.smilestreet.model.Skill;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,7 +15,7 @@ import java.util.Map;
 
 
 public class getSkillsHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    //private static final Logger LOG=new LogManager.getLogger(getVolunteerHandler.class);
+    private static final Logger LOG= LogManager.getLogger(getVolunteerHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet=null;
@@ -41,7 +43,7 @@ public class getSkillsHandler implements RequestHandler<Map<String, Object>, Api
 
             }
         } catch (Exception e) {
-            //LOG.error(String.format("unable to query database"));
+            LOG.error(String.format("unable to query database"));
         }
         finally {
             closeConnection();
@@ -65,7 +67,7 @@ public class getSkillsHandler implements RequestHandler<Map<String, Object>, Api
                 connection.close();
             }
         } catch (Exception e) {
-            //LOG.error("unable to close connection", e.getMessage());
+            LOG.error("unable to close connection", e.getMessage());
         }
     }
 }
