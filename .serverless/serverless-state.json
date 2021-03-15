@@ -8,6 +8,12 @@
       "name": "aws",
       "runtime": "java8",
       "lambdaHashingVersion": "20201221",
+      "environment": {
+        "DB_HOST": "streetsahead.cxoqaafagpfv.eu-west-2.rds.amazonaws.com",
+        "DB_NAME": "smilestreet",
+        "DB_USER": "root",
+        "DB_PASSWORD": "smilestreet123"
+      },
       "region": "eu-west-2",
       "profile": "serverless",
       "stage": "dev",
@@ -188,13 +194,21 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z/hello-dev.jar"
+                "S3Key": "serverless/smile-street-back-end/dev/1615818865735-2021-03-15T14:34:25.735Z/hello-dev.jar"
               },
               "Handler": "com.smilestreet.getSkillsHandler",
               "Runtime": "java8",
               "FunctionName": "smile-street-back-end-dev-skills",
               "MemorySize": 1024,
               "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_HOST": "streetsahead.cxoqaafagpfv.eu-west-2.rds.amazonaws.com",
+                  "DB_NAME": "smilestreet",
+                  "DB_USER": "root",
+                  "DB_PASSWORD": "smilestreet123"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -213,13 +227,21 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z/hello-dev.jar"
+                "S3Key": "serverless/smile-street-back-end/dev/1615818865735-2021-03-15T14:34:25.735Z/hello-dev.jar"
               },
               "Handler": "com.smilestreet.getVolunteerHandler",
               "Runtime": "java8",
               "FunctionName": "smile-street-back-end-dev-volunteers",
               "MemorySize": 1024,
               "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_HOST": "streetsahead.cxoqaafagpfv.eu-west-2.rds.amazonaws.com",
+                  "DB_NAME": "smilestreet",
+                  "DB_USER": "root",
+                  "DB_PASSWORD": "smilestreet123"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -238,13 +260,21 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z/hello-dev.jar"
+                "S3Key": "serverless/smile-street-back-end/dev/1615818865735-2021-03-15T14:34:25.735Z/hello-dev.jar"
               },
               "Handler": "com.smilestreet.get_good_cause_handler",
               "Runtime": "java8",
               "FunctionName": "smile-street-back-end-dev-good_causes",
               "MemorySize": 1024,
               "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "DB_HOST": "streetsahead.cxoqaafagpfv.eu-west-2.rds.amazonaws.com",
+                  "DB_NAME": "smilestreet",
+                  "DB_USER": "root",
+                  "DB_PASSWORD": "smilestreet123"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -256,34 +286,34 @@
               "GoodUnderscorecausesLogGroup"
             ]
           },
-          "SkillsLambdaVersiongLcdQeoCMA6gj2zOjUg4VvAjBBuGesORfelgdejHE": {
+          "SkillsLambdaVersionli8ZyNZ17GmeVP77jsp9bjMNFBMtNmqBMOHqaGx7Zuo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SkillsLambdaFunction"
               },
-              "CodeSha256": "bRrmJZfBm4VcizGUX0pbS0GTAp7YarYjXSowYOeyLHE="
+              "CodeSha256": "B9lyGV4le/0mDXtji2Cd+LN6wQ01E/yvYgAh3Ee7Exw="
             }
           },
-          "VolunteersLambdaVersionH96v0yLhpjnWNEQnmEWyVzpD3P5S9WRtM4kFm6enM": {
+          "VolunteersLambdaVersion11aV1NUM0Bld1XdG7UQOteRrVfBXr2mBZsIodb2sfH0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "VolunteersLambdaFunction"
               },
-              "CodeSha256": "bRrmJZfBm4VcizGUX0pbS0GTAp7YarYjXSowYOeyLHE="
+              "CodeSha256": "B9lyGV4le/0mDXtji2Cd+LN6wQ01E/yvYgAh3Ee7Exw="
             }
           },
-          "GoodUnderscorecausesLambdaVersionmzNBWL7rjA4YLUFK1vFbOTVifXs7bJ6r37s20ytugwU": {
+          "GoodUnderscorecausesLambdaVersiong6B0ry00IcKTQpwQhZ9XnA8DaYgs7lzIXGLGQj4i0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GoodUnderscorecausesLambdaFunction"
               },
-              "CodeSha256": "bRrmJZfBm4VcizGUX0pbS0GTAp7YarYjXSowYOeyLHE="
+              "CodeSha256": "B9lyGV4le/0mDXtji2Cd+LN6wQ01E/yvYgAh3Ee7Exw="
             }
           },
           "ApiGatewayRestApi": {
@@ -472,7 +502,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1615812921843": {
+          "ApiGatewayDeployment1615818864902": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -607,19 +637,19 @@
           "SkillsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SkillsLambdaVersiongLcdQeoCMA6gj2zOjUg4VvAjBBuGesORfelgdejHE"
+              "Ref": "SkillsLambdaVersionli8ZyNZ17GmeVP77jsp9bjMNFBMtNmqBMOHqaGx7Zuo"
             }
           },
           "VolunteersLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "VolunteersLambdaVersionH96v0yLhpjnWNEQnmEWyVzpD3P5S9WRtM4kFm6enM"
+              "Ref": "VolunteersLambdaVersion11aV1NUM0Bld1XdG7UQOteRrVfBXr2mBZsIodb2sfH0"
             }
           },
           "GoodUnderscorecausesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GoodUnderscorecausesLambdaVersionmzNBWL7rjA4YLUFK1vFbOTVifXs7bJ6r37s20ytugwU"
+              "Ref": "GoodUnderscorecausesLambdaVersiong6B0ry00IcKTQpwQhZ9XnA8DaYgs7lzIXGLGQj4i0"
             }
           },
           "ServiceEndpoint": {
@@ -750,7 +780,7 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
-        "versionLogicalId": "SkillsLambdaVersiongLcdQeoCMA6gj2zOjUg4VvAjBBuGesORfelgdejHE"
+        "versionLogicalId": "SkillsLambdaVersionli8ZyNZ17GmeVP77jsp9bjMNFBMtNmqBMOHqaGx7Zuo"
       },
       "volunteers": {
         "handler": "com.smilestreet.getVolunteerHandler",
@@ -769,7 +799,7 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
-        "versionLogicalId": "VolunteersLambdaVersionH96v0yLhpjnWNEQnmEWyVzpD3P5S9WRtM4kFm6enM"
+        "versionLogicalId": "VolunteersLambdaVersion11aV1NUM0Bld1XdG7UQOteRrVfBXr2mBZsIodb2sfH0"
       },
       "good_causes": {
         "handler": "com.smilestreet.get_good_cause_handler",
@@ -788,7 +818,7 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
-        "versionLogicalId": "GoodUnderscorecausesLambdaVersionmzNBWL7rjA4YLUFK1vFbOTVifXs7bJ6r37s20ytugwU"
+        "versionLogicalId": "GoodUnderscorecausesLambdaVersiong6B0ry00IcKTQpwQhZ9XnA8DaYgs7lzIXGLGQj4i0"
       }
     },
     "configValidationMode": "warn",
@@ -804,7 +834,7 @@
       },
       "package": {
         "artifact": "target/hello-dev.jar",
-        "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z"
+        "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615818865735-2021-03-15T14:34:25.735Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -813,7 +843,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z",
+    "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615818865735-2021-03-15T14:34:25.735Z",
     "artifact": "hello-dev.jar"
   }
 }

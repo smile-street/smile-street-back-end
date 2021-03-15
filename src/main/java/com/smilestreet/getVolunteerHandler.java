@@ -27,10 +27,11 @@ public class getVolunteerHandler implements RequestHandler<Map<String, Object>, 
 			Class.forName("com.mysql.jdbc.Driver");
 
 			connection = DriverManager.getConnection(String.format("jdbc:mysql://%s/%s?user=%s&password=%s",
-					"streetsahead.cxoqaafagpfv.eu-west-2.rds.amazonaws.com",
-					"smilestreet",
-					"root",
-					"smilestreet123"));
+					System.getenv("DB_HOST"),
+					System.getenv("DB_NAME"),
+					System.getenv("DB_USER"),
+					System.getenv("DB_PASSWORD")
+			));
 			preparedStatement = connection.prepareStatement("SELECT * FROM  volunteer");
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
