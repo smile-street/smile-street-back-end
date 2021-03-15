@@ -33,7 +33,7 @@ functions:
     handler: com.smilestreet.get_good_cause_handler
     events:
       - http:
-          path: /good_cause
+          path: /good_causes/{good_cause_id}/good_cause
           method: get
 
 

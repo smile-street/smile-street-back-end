@@ -194,7 +194,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/smile-street-back-end/dev/1615828597629-2021-03-15T17:16:37.629Z/hello-dev.jar"
+                "S3Key": "serverless/smile-street-back-end/dev/1615828984407-2021-03-15T17:23:04.407Z/hello-dev.jar"
               },
               "Handler": "com.smilestreet.getSkillsHandler",
               "Runtime": "java8",
@@ -227,7 +227,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/smile-street-back-end/dev/1615828597629-2021-03-15T17:16:37.629Z/hello-dev.jar"
+                "S3Key": "serverless/smile-street-back-end/dev/1615828984407-2021-03-15T17:23:04.407Z/hello-dev.jar"
               },
               "Handler": "com.smilestreet.getVolunteerHandler",
               "Runtime": "java8",
@@ -260,7 +260,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/smile-street-back-end/dev/1615828597629-2021-03-15T17:16:37.629Z/hello-dev.jar"
+                "S3Key": "serverless/smile-street-back-end/dev/1615828984407-2021-03-15T17:23:04.407Z/hello-dev.jar"
               },
               "Handler": "com.smilestreet.get_good_cause_handler",
               "Runtime": "java8",
@@ -358,7 +358,7 @@
               }
             }
           },
-          "ApiGatewayResourceGoodcause": {
+          "ApiGatewayResourceGoodcauses": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -366,6 +366,30 @@
                   "ApiGatewayRestApi",
                   "RootResourceId"
                 ]
+              },
+              "PathPart": "good_causes",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGoodcausesGoodcauseidVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceGoodcauses"
+              },
+              "PathPart": "{good_cause_id}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGoodcausesGoodcauseidVarGoodcause": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceGoodcausesGoodcauseidVar"
               },
               "PathPart": "good_cause",
               "RestApiId": {
@@ -459,13 +483,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayMethodGoodcauseGet": {
+          "ApiGatewayMethodGoodcausesGoodcauseidVarGoodcauseGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceGoodcause"
+                "Ref": "ApiGatewayResourceGoodcausesGoodcauseidVarGoodcause"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -502,7 +526,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1615828596773": {
+          "ApiGatewayDeployment1615828983611": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -513,7 +537,7 @@
             "DependsOn": [
               "ApiGatewayMethodSkillGet",
               "ApiGatewayMethodVolunteerGet",
-              "ApiGatewayMethodGoodcauseGet"
+              "ApiGatewayMethodGoodcausesGoodcauseidVarGoodcauseGet"
             ]
           },
           "SkillsLambdaPermissionApiGateway": {
@@ -806,7 +830,7 @@
         "events": [
           {
             "http": {
-              "path": "good_cause",
+              "path": "good_causes/{good_cause_id}/good_cause",
               "method": "get",
               "integration": "AWS_PROXY"
             }
@@ -834,7 +858,7 @@
       },
       "package": {
         "artifact": "target/hello-dev.jar",
-        "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615828597629-2021-03-15T17:16:37.629Z"
+        "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615828984407-2021-03-15T17:23:04.407Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -843,7 +867,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615828597629-2021-03-15T17:16:37.629Z",
+    "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615828984407-2021-03-15T17:23:04.407Z",
     "artifact": "hello-dev.jar"
   }
 }
