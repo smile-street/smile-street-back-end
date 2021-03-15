@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 
+
 public class getVolunteerHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
 	//private static final Logger LOG=new LogManager.getLogger(getVolunteerHandler.class);
 	private Connection connection = null;
@@ -30,18 +31,20 @@ public class getVolunteerHandler implements RequestHandler<Map<String, Object>, 
 					"smilestreet",
 					"root",
 					"smilestreet123"));
-			preparedStatement = connection.prepareStatement("SELECT firstname FROM  VOLUNTEER");
+			preparedStatement = connection.prepareStatement("SELECT * FROM  volunteer");
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				User user = new User(resultSet.getString("firstname"));
-						//resultSet.getString("lastname"),
-						//resultSet.getString("contactnumber"),
-						//resultSet.getString("username"),
-						//resultSet.getString("employername"),
-						//resultSet.getString("primarylocation"),
-						//resultSet.getString("numberofdays"),
-						//resultSet.getString("startdate"),
-						//resultSet.getString("enddate"));
+				User user = new User(resultSet.getInt("volunteer_id"),
+									resultSet.getString("firstname"),
+									resultSet.getString("lastname"),
+									resultSet.getString("contactnumber"),
+									resultSet.getString("username"),
+									resultSet.getString("employername"),
+									resultSet.getString("primarylocation"),
+									resultSet.getInt("numberofdays"),
+									resultSet.getString("startdate"),
+									resultSet.getString("enddate")
+									);
 						users.add(user);
 
 			}

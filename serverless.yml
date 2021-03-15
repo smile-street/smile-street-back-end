@@ -14,8 +14,21 @@ package:
 functions:
   skills:
     handler: com.smilestreet.getSkillsHandler
-
     events:
       - http:
-          path: /user
+          path: /skill
           method: get
+  volunteers:
+    handler: com.smilestreet.getVolunteerHandler
+    events:
+      - http:
+          path: /volunteer
+          method: get
+  good_causes:
+    handler: com.smilestreet.get_good_cause_handler
+    events:
+      - http:
+          path: /good_cause
+          method: get
+
+

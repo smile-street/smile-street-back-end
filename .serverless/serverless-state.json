@@ -92,6 +92,18 @@
               "LogGroupName": "/aws/lambda/smile-street-back-end-dev-skills"
             }
           },
+          "VolunteersLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/smile-street-back-end-dev-volunteers"
+            }
+          },
+          "GoodUnderscorecausesLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/smile-street-back-end-dev-good_causes"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -176,7 +188,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/smile-street-back-end/dev/1615744144991-2021-03-14T17:49:04.991Z/hello-dev.jar"
+                "S3Key": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z/hello-dev.jar"
               },
               "Handler": "com.smilestreet.getSkillsHandler",
               "Runtime": "java8",
@@ -194,14 +206,84 @@
               "SkillsLogGroup"
             ]
           },
-          "SkillsLambdaVersionYYTLKvzE59YLd2zE3RbgPziJlG2r1KR2z9CKLB1ehU": {
+          "VolunteersLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z/hello-dev.jar"
+              },
+              "Handler": "com.smilestreet.getVolunteerHandler",
+              "Runtime": "java8",
+              "FunctionName": "smile-street-back-end-dev-volunteers",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "VolunteersLogGroup"
+            ]
+          },
+          "GoodUnderscorecausesLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z/hello-dev.jar"
+              },
+              "Handler": "com.smilestreet.get_good_cause_handler",
+              "Runtime": "java8",
+              "FunctionName": "smile-street-back-end-dev-good_causes",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GoodUnderscorecausesLogGroup"
+            ]
+          },
+          "SkillsLambdaVersiongLcdQeoCMA6gj2zOjUg4VvAjBBuGesORfelgdejHE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SkillsLambdaFunction"
               },
-              "CodeSha256": "27rZpuVfrH5HSvnB1Tj0DM7BINiNxjDrwuZ7EPIr4/A="
+              "CodeSha256": "bRrmJZfBm4VcizGUX0pbS0GTAp7YarYjXSowYOeyLHE="
+            }
+          },
+          "VolunteersLambdaVersionH96v0yLhpjnWNEQnmEWyVzpD3P5S9WRtM4kFm6enM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "VolunteersLambdaFunction"
+              },
+              "CodeSha256": "bRrmJZfBm4VcizGUX0pbS0GTAp7YarYjXSowYOeyLHE="
+            }
+          },
+          "GoodUnderscorecausesLambdaVersionmzNBWL7rjA4YLUFK1vFbOTVifXs7bJ6r37s20ytugwU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GoodUnderscorecausesLambdaFunction"
+              },
+              "CodeSha256": "bRrmJZfBm4VcizGUX0pbS0GTAp7YarYjXSowYOeyLHE="
             }
           },
           "ApiGatewayRestApi": {
@@ -216,7 +298,7 @@
               "Policy": ""
             }
           },
-          "ApiGatewayResourceUser": {
+          "ApiGatewayResourceSkill": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -225,19 +307,49 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "user",
+              "PathPart": "skill",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodUserGet": {
+          "ApiGatewayResourceVolunteer": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "volunteer",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGoodcause": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "good_cause",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodSkillGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceUser"
+                "Ref": "ApiGatewayResourceSkill"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -274,7 +386,93 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1615744144113": {
+          "ApiGatewayMethodVolunteerGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceVolunteer"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "VolunteersLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayMethodGoodcauseGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGoodcause"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GoodUnderscorecausesLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            }
+          },
+          "ApiGatewayDeployment1615812921843": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -283,7 +481,9 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodUserGet"
+              "ApiGatewayMethodSkillGet",
+              "ApiGatewayMethodVolunteerGet",
+              "ApiGatewayMethodGoodcauseGet"
             ]
           },
           "SkillsLambdaPermissionApiGateway": {
@@ -292,6 +492,80 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "SkillsLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "VolunteersLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "VolunteersLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GoodUnderscorecausesLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GoodUnderscorecausesLambdaFunction",
                   "Arn"
                 ]
               },
@@ -333,7 +607,19 @@
           "SkillsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SkillsLambdaVersionYYTLKvzE59YLd2zE3RbgPziJlG2r1KR2z9CKLB1ehU"
+              "Ref": "SkillsLambdaVersiongLcdQeoCMA6gj2zOjUg4VvAjBBuGesORfelgdejHE"
+            }
+          },
+          "VolunteersLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "VolunteersLambdaVersionH96v0yLhpjnWNEQnmEWyVzpD3P5S9WRtM4kFm6enM"
+            }
+          },
+          "GoodUnderscorecausesLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GoodUnderscorecausesLambdaVersionmzNBWL7rjA4YLUFK1vFbOTVifXs7bJ6r37s20ytugwU"
             }
           },
           "ServiceEndpoint": {
@@ -452,7 +738,7 @@
         "events": [
           {
             "http": {
-              "path": "user",
+              "path": "skill",
               "method": "get",
               "integration": "AWS_PROXY"
             }
@@ -464,7 +750,45 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
-        "versionLogicalId": "SkillsLambdaVersionYYTLKvzE59YLd2zE3RbgPziJlG2r1KR2z9CKLB1ehU"
+        "versionLogicalId": "SkillsLambdaVersiongLcdQeoCMA6gj2zOjUg4VvAjBBuGesORfelgdejHE"
+      },
+      "volunteers": {
+        "handler": "com.smilestreet.getVolunteerHandler",
+        "events": [
+          {
+            "http": {
+              "path": "volunteer",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "smile-street-back-end-dev-volunteers",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "java8",
+        "vpc": {},
+        "versionLogicalId": "VolunteersLambdaVersionH96v0yLhpjnWNEQnmEWyVzpD3P5S9WRtM4kFm6enM"
+      },
+      "good_causes": {
+        "handler": "com.smilestreet.get_good_cause_handler",
+        "events": [
+          {
+            "http": {
+              "path": "good_cause",
+              "method": "get",
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "smile-street-back-end-dev-good_causes",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "java8",
+        "vpc": {},
+        "versionLogicalId": "GoodUnderscorecausesLambdaVersionmzNBWL7rjA4YLUFK1vFbOTVifXs7bJ6r37s20ytugwU"
       }
     },
     "configValidationMode": "warn",
@@ -480,7 +804,7 @@
       },
       "package": {
         "artifact": "target/hello-dev.jar",
-        "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615744144991-2021-03-14T17:49:04.991Z"
+        "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z"
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -489,7 +813,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615744144991-2021-03-14T17:49:04.991Z",
+    "artifactDirectoryName": "serverless/smile-street-back-end/dev/1615812922666-2021-03-15T12:55:22.666Z",
     "artifact": "hello-dev.jar"
   }
 }

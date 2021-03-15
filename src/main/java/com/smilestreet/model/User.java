@@ -1,21 +1,24 @@
 
 package com.smilestreet.model;
+import java.sql.Date;
+
 
 public class User {
-    
-    private int volunteerId;
+
+    private int volunteer_id;
     private String firstname;
     private String lastname;
     private String contactnumber;
     private String username;
     private String employername;
     private String primarylocation;
-    private String numberofdays;
+    private int numberofdays;
     private String startdate;
     private String enddate;
 
-    public User(String firstname) {
-        this.volunteerId = volunteerId;
+
+    public User(int volunteer_id, String firstname, String lastname, String contactnumber, String username, String employername, String primarylocation, int numberofdays, String startdate, String enddate) {
+        this.volunteer_id = volunteer_id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.contactnumber = contactnumber;
@@ -27,16 +30,16 @@ public class User {
         this.enddate = enddate;
     }
 
-    public int getVolunteerId() {
-        return this.volunteerId;
+    public int getVolunteer_id() {
+        return volunteer_id;
     }
 
-    public void setVolunteerId(int volunteerId) {
-        this.volunteerId = volunteerId;
+    public void setVolunteer_id(int volunteer_id) {
+        this.volunteer_id = volunteer_id;
     }
 
     public String getFirstname() {
-        return this.firstname;
+        return firstname;
     }
 
     public void setFirstname(String firstname) {
@@ -44,7 +47,7 @@ public class User {
     }
 
     public String getLastname() {
-        return this.lastname;
+        return lastname;
     }
 
     public void setLastname(String lastname) {
@@ -52,7 +55,7 @@ public class User {
     }
 
     public String getContactnumber() {
-        return this.contactnumber;
+        return contactnumber;
     }
 
     public void setContactnumber(String contactnumber) {
@@ -60,7 +63,7 @@ public class User {
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setUsername(String username) {
@@ -68,7 +71,7 @@ public class User {
     }
 
     public String getEmployername() {
-        return this.employername;
+        return employername;
     }
 
     public void setEmployername(String employername) {
@@ -76,23 +79,23 @@ public class User {
     }
 
     public String getPrimarylocation() {
-        return this.primarylocation;
+        return primarylocation;
     }
 
     public void setPrimarylocation(String primarylocation) {
         this.primarylocation = primarylocation;
     }
 
-    public String getNumberofdays() {
-        return this.numberofdays;
+    public int getNumberofdays() {
+        return numberofdays;
     }
 
-    public void setNumberofdays(String numberofdays) {
+    public void setNumberofdays(int numberofdays) {
         this.numberofdays = numberofdays;
     }
 
     public String getStartdate() {
-        return this.startdate;
+        return startdate;
     }
 
     public void setStartdate(String startdate) {
@@ -100,11 +103,10 @@ public class User {
     }
 
     public String getEnddate() {
-        return this.enddate;
+        return enddate;
     }
 
     public void setEnddate(String enddate) {
         this.enddate = enddate;
     }
-    
 }
