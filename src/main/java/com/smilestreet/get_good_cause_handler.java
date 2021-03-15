@@ -1,8 +1,9 @@
 package com.smilestreet;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.smilestreet.model.Good_cause;
-import com.smilestreet.model.Skill;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,17 +13,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
-public class get_good_cause_handler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
+public class get_good_cause_handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
     private static final Logger LOG= LogManager.getLogger(getVolunteerHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet=null;
 
     @Override
-    public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
+    public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
         List<Good_cause> good_causes = null;
         try {
             good_causes = new ArrayList<>();
@@ -37,7 +37,7 @@ public class get_good_cause_handler implements RequestHandler<Map<String, Object
             preparedStatement = connection.prepareStatement("SELECT * FROM  good_cause");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Good_cause good_cause=new Good_cause(resultSet.getInt("good_cause_id"),
+                Good_cause good_cause = new Good_cause(resultSet.getInt("good_cause_id"),
                         resultSet.getString("descriptionofgoodcause"),
                         resultSet.getString("firstname"),
                         resultSet.getString("lastname"),
@@ -49,17 +49,13 @@ public class get_good_cause_handler implements RequestHandler<Map<String, Object
             }
         } catch (Exception e) {
             LOG.error(String.format("unable to query database"));
-        }
-        finally {
+        } finally {
             closeConnection();
         }
-
-
-        return ApiGatewayResponse.builder()
-                .setStatusCode(200)
-                .setObjectBody(good_causes)
-                .build();
+        return null;
     }
+
+
     private void closeConnection() {
         try {
             if (resultSet != null) {

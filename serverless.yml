@@ -23,7 +23,7 @@ functions:
       - http:
           path: /skill
           method: get
-  volunteers:
+  get-volunteer:
     handler: com.smilestreet.getVolunteerHandler
     events:
       - http:
