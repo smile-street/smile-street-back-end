@@ -1,9 +1,11 @@
 package com.smilestreet;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.smilestreet.model.Skill;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class getSkillsHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
+public class SaveSkillsHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
     private static final Logger LOG= LogManager.getLogger(getVolunteerHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;

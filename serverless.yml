@@ -14,21 +14,35 @@ provider:
   profile: serverless
 
 package:
-  artifact: target/hello-dev.jar
+  artifact: target/smile-street-dev.jar
 
 functions:
-  skills:
+  get-skills:
     handler: com.smilestreet.getSkillsHandler
     events:
       - http:
           path: /skill
           method: get
+  save-skills:
+    handler: com.smilestreet.SaveSkillsHandler
+    events:
+      - http:
+          path: /skill1
+          method: post
+          cors: true
   get-volunteer:
     handler: com.smilestreet.getVolunteerHandler
     events:
       - http:
           path: /volunteer
           method: get
+  save-volunteer:
+    handler: com.smilestreet.SaveVolunteerHandler
+    events:
+      - http:
+          path: /Volunteers
+          method: post
+          cors: true
   good_causes:
     handler: com.smilestreet.get_good_cause_handler
     events:

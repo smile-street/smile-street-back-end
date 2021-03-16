@@ -1,7 +1,7 @@
 package com.smilestreet;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.smilestreet.model.User;
+import com.smilestreet.model.Volunteer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.sql.Connection;
@@ -22,9 +22,9 @@ public class getVolunteerHandler implements RequestHandler<Map<String, Object>, 
 
 	@Override
 	public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
-		List<User> users = null;
+		List<Volunteer> volunteers = null;
 		try {
-			users = new ArrayList<>();
+			volunteers = new ArrayList<>();
 			Class.forName("com.mysql.jdbc.Driver");
 
 			connection = DriverManager.getConnection(String.format("jdbc:mysql://%s/%s?user=%s&password=%s",
@@ -36,7 +36,7 @@ public class getVolunteerHandler implements RequestHandler<Map<String, Object>, 
 			preparedStatement = connection.prepareStatement("SELECT * FROM  volunteer");
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				User user = new User(resultSet.getInt("volunteer_id"),
+				Volunteer volunteer = new Volunteer(resultSet.getInt("volunteer_id"),
 									resultSet.getString("firstname"),
 									resultSet.getString("lastname"),
 									resultSet.getString("contactnumber"),
@@ -47,7 +47,7 @@ public class getVolunteerHandler implements RequestHandler<Map<String, Object>, 
 									resultSet.getString("startdate"),
 									resultSet.getString("enddate")
 									);
-						users.add(user);
+						volunteers.add(volunteer);
 
 			}
 		} catch (Exception e) {
@@ -60,7 +60,7 @@ public class getVolunteerHandler implements RequestHandler<Map<String, Object>, 
 
 		return ApiGatewayResponse.builder()
 				.setStatusCode(200)
-				.setObjectBody(users)
+				.setObjectBody(volunteers)
 				.build();
 	}
 	private void closeConnection() {

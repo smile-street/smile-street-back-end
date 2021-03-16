@@ -1,9 +1,8 @@
 
 package com.smilestreet.model;
-import java.sql.Date;
 
 
-public class User {
+public class Volunteer {
 
     private int volunteer_id;
     private String firstname;
@@ -17,7 +16,7 @@ public class User {
     private String enddate;
 
 
-    public User(int volunteer_id, String firstname, String lastname, String contactnumber, String username, String employername, String primarylocation, int numberofdays, String startdate, String enddate) {
+    public Volunteer(int volunteer_id, String firstname, String lastname, String contactnumber, String username, String employername, String primarylocation, int numberofdays, String startdate, String enddate) {
         this.volunteer_id = volunteer_id;
         this.firstname = firstname;
         this.lastname = lastname;
