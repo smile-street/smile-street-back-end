@@ -2,7 +2,6 @@ package com.smilestreet;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.smilestreet.model.Skill;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,50 +9,38 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-
-
 public class SaveSkillsHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private static final Logger LOG= LogManager.getLogger(getVolunteerHandler.class);
+    private static final Logger LOG= LogManager.getLogger(SaveSkillsHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet=null;
-
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
-        List<Skill> skills = null;
+        LOG.debug("saving skills");
         try {
-            skills = new ArrayList<>();
             Class.forName("com.mysql.jdbc.Driver");
-
             connection = DriverManager.getConnection(String.format("jdbc:mysql://%s/%s?user=%s&password=%s",
                     System.getenv("DB_HOST"),
                     System.getenv("DB_NAME"),
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")
             ));
-            preparedStatement = connection.prepareStatement("SELECT * FROM  skill");
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Skill skill=new Skill(resultSet.getInt("skill_id"),
-                                    resultSet.getString("skillname"));
-
-                skills.add(skill);
-
-            }
+            int skill_id = 51;
+            String skillname = "Taslima";
+            PreparedStatement pst = connection.prepareStatement("INSERT INTO skill(skill_id, skillname) VALUES(?,?)");
+            pst.setInt(1, skill_id);
+            pst.setString(2,skillname);
+            pst.executeUpdate();
         } catch (Exception e) {
             LOG.error(String.format("unable to query database"));
         }
         finally {
             closeConnection();
         }
-
-
         return ApiGatewayResponse.builder()
                 .setStatusCode(200)
-                .setObjectBody(skills)
+                .setObjectBody("saved")
                 .build();
     }
     private void closeConnection() {
