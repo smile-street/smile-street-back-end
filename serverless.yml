@@ -30,12 +30,7 @@ functions:
           path: /skill1
           method: post
           cors: true
-  get-volunteer:
-    handler: com.smilestreet.getVolunteerHandler
-    events:
-      - http:
-          path: /volunteer
-          method: get
+
   save-volunteer:
     handler: com.smilestreet.SaveVolunteerHandler
     events:

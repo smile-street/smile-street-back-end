@@ -16,7 +16,7 @@ import java.util.List;
 
 
 public class get_good_cause_handler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
-    private static final Logger LOG= LogManager.getLogger(getVolunteerHandler.class);
+    private static final Logger LOG= LogManager.getLogger(get_good_cause_handler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet=null;

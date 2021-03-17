@@ -1,4 +1,5 @@
 package com.smilestreet;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
@@ -25,7 +27,6 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
         LOG.info("received the request");
 
-        String volunteerId = request.getPathParameters().get("volunteer_id");
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -45,23 +46,19 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement = connection.prepareStatement("INSERT INTO volunteer VALUES ( ?, ?, ?,?,?,?,?,?,?)");
+            PreparedStatement pst = connection.prepareStatement("INSERT INTO volunteer(volunteer_id, firstname, lastname, contactnumber, username) VALUES (?, ?, ?, ?,?)");
           //  preparedStatement.setString(1, UUID.randomUUID().toString());
-            preparedStatement.setInt(2, Integer.parseInt(volunteerId));
-            preparedStatement.setString(3, v.getFirstname());
-            preparedStatement.setString(4, v.getLastname());
-            preparedStatement.setString(5, v.getContactnumber());
-            preparedStatement.setString(6, v.getUsername());
-            preparedStatement.setString(7, v.getEmployername());
-            preparedStatement.setString(8, v.getPrimarylocation());
-            preparedStatement.setInt(9, v.getNumberofdays());
-            preparedStatement.setString(10, v.getStartdate());
-            preparedStatement.setString(11, v.getEnddate());
+            //preparedStatement.setInt(2, Integer.parseInt(volunteerId));
+            pst.setInt(1, v.getVolunteer_id());
+            pst.setString(2, v.getFirstname());
+            pst.setString(3, v.getLastname());
+            pst.setString(4, v.getContactnumber());
+            pst.setString(5, v.getUsername());
 
 
-            preparedStatement.execute();
 
-            connection.close();
+            pst.executeUpdate();
+
         } catch (IOException e) {
             LOG.error("Unable to unmarshal JSON for adding a task", e);
         } catch (ClassNotFoundException e) {
@@ -72,7 +69,7 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
         finally {
             closeConnection();
         }
-
+        LOG.debug(" vol initial details added");
         return response;
     }
 

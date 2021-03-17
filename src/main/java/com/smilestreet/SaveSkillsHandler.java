@@ -49,6 +49,8 @@ public class SaveSkillsHandler implements RequestHandler<APIGatewayProxyRequestE
         }
         finally {
             closeConnection();
+
+
         }
         LOG.debug("Skills added");
         return response;
