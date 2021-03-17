@@ -32,7 +32,7 @@ public class SaveSkillsHandler implements RequestHandler<APIGatewayProxyRequestE
         response.setHeaders(headers);
         try {
             Skill s = objMapper.readValue(requestBody, Skill.class);
-            Class.forName("com.mysql.jdbc.Driver");
+           // Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(String.format("jdbc:mysql://%s/%s?user=%s&password=%s",
                     System.getenv("DB_HOST"),
                     System.getenv("DB_NAME"),
@@ -51,7 +51,7 @@ public class SaveSkillsHandler implements RequestHandler<APIGatewayProxyRequestE
             closeConnection();
         }
         LOG.debug("Skills added");
-        return null;
+        return response;
     }
     private void closeConnection() {
         try {
