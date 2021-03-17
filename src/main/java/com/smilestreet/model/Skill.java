@@ -8,6 +8,7 @@ public class Skill {
         this.skill_id = skill_id;
         this.skillname = skillname;
     }
+    public Skill() {}
 
     public int getSkill_id() {
         return skill_id;
