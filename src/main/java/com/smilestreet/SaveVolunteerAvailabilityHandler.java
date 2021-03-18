@@ -24,7 +24,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
         LOG.info("received the request");
 
-        //  String volunteerId = request.getPathParameters().get("volunteer_id");
+        String volunteerId = request.getPathParameters().get("volunteer_id");
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -55,7 +55,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
             preparedStatement.setString(4, v.getStartdate());
             preparedStatement.setString(5, v.getEnddate());
 
-            preparedStatement.setInt(6, 191);
+            preparedStatement.setInt(6, Integer.parseInt(volunteerId));
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);

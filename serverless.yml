@@ -47,7 +47,7 @@ functions:
     handler: com.smilestreet.SaveVolunteerAvailabilityHandler
     events:
       - http:
-          path: /AddAvailability
+          path: /Volunteer/{volunteer_id}/VolunteerAvailability
           method: put
           cors: true
   good_causes:
