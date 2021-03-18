@@ -1,4 +1,5 @@
 package com.smilestreet;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
@@ -25,7 +26,7 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
         LOG.info("received the request");
 
-        String volunteerId = request.getPathParameters().get("volunteer_id");
+      //  String volunteerId = request.getPathParameters().get("volunteer_id");
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -45,18 +46,14 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement = connection.prepareStatement("INSERT INTO volunteer VALUES ( ?, ?, ?,?,?,?,?,?,?)");
-          //  preparedStatement.setString(1, UUID.randomUUID().toString());
-            preparedStatement.setInt(2, Integer.parseInt(volunteerId));
-            preparedStatement.setString(3, v.getFirstname());
-            preparedStatement.setString(4, v.getLastname());
-            preparedStatement.setString(5, v.getContactnumber());
-            preparedStatement.setString(6, v.getUsername());
-            preparedStatement.setString(7, v.getEmployername());
-            preparedStatement.setString(8, v.getPrimarylocation());
-            preparedStatement.setInt(9, v.getNumberofdays());
-            preparedStatement.setString(10, v.getStartdate());
-            preparedStatement.setString(11, v.getEnddate());
+            preparedStatement = connection.prepareStatement("INSERT INTO volunteer (firstname, lastname, contactnumber, username) VALUES (  ?, ?,?,?)");
+           // preparedStatement.setInt(1, v.getVolunteer_id());
+            //preparedStatement.setInt(2, Integer.parseInt(volunteerId));
+            preparedStatement.setString(1, v.getFirstname());
+            preparedStatement.setString(2, v.getLastname());
+            preparedStatement.setString(3, v.getContactnumber());
+            preparedStatement.setString(4, v.getUsername());
+
 
 
             preparedStatement.execute();

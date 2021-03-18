@@ -14,7 +14,7 @@ import java.util.Map;
 
 
 public class getSkillsHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private static final Logger LOG= LogManager.getLogger(getVolunteerHandler.class);
+    private static final Logger LOG= LogManager.getLogger(getSkillsHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet=null;
