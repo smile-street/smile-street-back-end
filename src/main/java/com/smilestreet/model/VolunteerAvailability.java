@@ -1,16 +1,18 @@
 package com.smilestreet.model;
 
+import java.sql.Date;
+
 public class VolunteerAvailability {
     private String employername;
     private String primarylocation;
     private int numberofdays;
-    private String startdate;
-    private  String enddate;
+    private Date startdate;
+    private  Date enddate;
 
     public VolunteerAvailability(){
 
     }
-    public VolunteerAvailability(String employername, String primarylocation, int numberofdays, String startdate, String enddate) {
+    public VolunteerAvailability(String employername, String primarylocation, int numberofdays, Date startdate, Date enddate) {
         this.employername = employername;
         this.primarylocation = primarylocation;
         this.numberofdays = numberofdays;
@@ -42,19 +44,19 @@ public class VolunteerAvailability {
         this.numberofdays = numberofdays;
     }
 
-    public String getStartdate() {
-        return startdate;
+    public java.sql.Date getStartdate() {
+        return (java.sql.Date) startdate;
     }
 
-    public void setStartdate(String startdate) {
+    public void setStartdate(Date startdate) {
         this.startdate = startdate;
     }
 
-    public String getEnddate() {
+    public Date getEnddate() {
         return enddate;
     }
 
-    public void setEnddate(String enddate) {
+    public void setEnddate(Date enddate) {
         this.enddate = enddate;
     }
 }
