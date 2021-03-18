@@ -43,6 +43,13 @@ functions:
           path: /Volunteers
           method: post
           cors: true
+  save-availability:
+    handler: com.smilestreet.SaveVolunteerAvailabilityHandler
+    events:
+      - http:
+          path: /AddAvailability
+          method: put
+          cors: true
   good_causes:
     handler: com.smilestreet.get_good_cause_handler
     events:

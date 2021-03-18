@@ -2,9 +2,10 @@
 /Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/model/Skill.java
 /Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/ApiGatewayResponse.java
 /Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/model/Volunteer.java
+/Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/model/VolunteerAvailability.java
 /Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/SaveVolunteerHandler.java
-/Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/getVolunteerHandler.java
 /Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/Response.java
 /Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/getSkillsHandler.java
+/Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/SaveVolunteerAvailabilityHandler.java
 /Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/SaveSkillsHandler.java
 /Users/bangl1/Documents/Tech-Returners/smile-street-back-end/src/main/java/com/smilestreet/model/Good_cause.java
