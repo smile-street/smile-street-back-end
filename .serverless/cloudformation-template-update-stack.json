@@ -191,7 +191,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616074810245-2021-03-18T13:40:10.245Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616075002855-2021-03-18T13:43:22.855Z/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.getSkillsHandler",
         "Runtime": "java8",
@@ -224,7 +224,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616074810245-2021-03-18T13:40:10.245Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616075002855-2021-03-18T13:43:22.855Z/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.SaveSkillsHandler",
         "Runtime": "java8",
@@ -257,7 +257,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616074810245-2021-03-18T13:40:10.245Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616075002855-2021-03-18T13:43:22.855Z/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.getVolunteerHandler",
         "Runtime": "java8",
@@ -290,7 +290,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616074810245-2021-03-18T13:40:10.245Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616075002855-2021-03-18T13:43:22.855Z/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.SaveVolunteerHandler",
         "Runtime": "java8",
@@ -323,7 +323,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616074810245-2021-03-18T13:40:10.245Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616075002855-2021-03-18T13:43:22.855Z/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.SaveVolunteerAvailabilityHandler",
         "Runtime": "java8",
@@ -356,7 +356,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616074810245-2021-03-18T13:40:10.245Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616075002855-2021-03-18T13:43:22.855Z/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.get_good_cause_handler",
         "Runtime": "java8",
@@ -382,64 +382,64 @@
         "GoodUnderscorecausesLogGroup"
       ]
     },
-    "GetDashskillsLambdaVersionzayJxDs5Zu29hARRte4V9kYHFOjAl1d3qzOUQuyGsU": {
+    "GetDashskillsLambdaVersionakNzZIlaXFJUVhwEG55fVepHjN43Ig4W5cFi2r0SI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashskillsLambdaFunction"
         },
-        "CodeSha256": "MgeinPRNYSKmVNxW/ydewApw6ZzCAmh3DbSEqgvZy9g="
+        "CodeSha256": "R5hwA3qG3Xo6Dj8yxF3OGG31pyojQvkOszKLS4Rhrec="
       }
     },
-    "SaveDashskillsLambdaVersionz4oMj2R5fo8UCzvznZ2VIQXjHdhP1WmllnpVp66N4Yg": {
+    "SaveDashskillsLambdaVersionRFkamtOB9ED9o2YEbyVijzTmcBudtQz3hlnFoTWvIEs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashskillsLambdaFunction"
         },
-        "CodeSha256": "MgeinPRNYSKmVNxW/ydewApw6ZzCAmh3DbSEqgvZy9g="
+        "CodeSha256": "R5hwA3qG3Xo6Dj8yxF3OGG31pyojQvkOszKLS4Rhrec="
       }
     },
-    "GetDashvolunteerLambdaVersionlLKSGBn97olbIV7S3HLaodgtTXLifw6Pwq6kMPiLvA": {
+    "GetDashvolunteerLambdaVersionz9wRjCoy1jj2IFXduVl8NsqRXLFMR2ik1lFleQgNo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashvolunteerLambdaFunction"
         },
-        "CodeSha256": "MgeinPRNYSKmVNxW/ydewApw6ZzCAmh3DbSEqgvZy9g="
+        "CodeSha256": "R5hwA3qG3Xo6Dj8yxF3OGG31pyojQvkOszKLS4Rhrec="
       }
     },
-    "SaveDashvolunteerLambdaVersionPSC1RdSQI3FGkGQB2cwTvpdRFGoUU7ku00OFQFk": {
+    "SaveDashvolunteerLambdaVersion1Bi4s6x9k9vWNacs9TWd0Hsj1b2Pt8ShxbauXXLI3o": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashvolunteerLambdaFunction"
         },
-        "CodeSha256": "MgeinPRNYSKmVNxW/ydewApw6ZzCAmh3DbSEqgvZy9g="
+        "CodeSha256": "R5hwA3qG3Xo6Dj8yxF3OGG31pyojQvkOszKLS4Rhrec="
       }
     },
-    "SaveDashavailabilityLambdaVersionHkA1kaFsamvlc6gmPIrMOuOfIZW010j4wvLL3pMhb8": {
+    "SaveDashavailabilityLambdaVersioncB73avHU8o8FYkAMkP7U07sTrl9nPFPtmuNMr3qLQ": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashavailabilityLambdaFunction"
         },
-        "CodeSha256": "MgeinPRNYSKmVNxW/ydewApw6ZzCAmh3DbSEqgvZy9g="
+        "CodeSha256": "R5hwA3qG3Xo6Dj8yxF3OGG31pyojQvkOszKLS4Rhrec="
       }
     },
-    "GoodUnderscorecausesLambdaVersion0F0KjHLkAAsDs3bL7N5YI5C53LxxbNDDixnfOcQKeEA": {
+    "GoodUnderscorecausesLambdaVersionCl5lurKpdMzRsGGY2XZ9SxC0ymZobfrkn1o3E4KmkE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GoodUnderscorecausesLambdaFunction"
         },
-        "CodeSha256": "MgeinPRNYSKmVNxW/ydewApw6ZzCAmh3DbSEqgvZy9g="
+        "CodeSha256": "R5hwA3qG3Xo6Dj8yxF3OGG31pyojQvkOszKLS4Rhrec="
       }
     },
     "ApiGatewayRestApi": {
@@ -493,7 +493,7 @@
             "RootResourceId"
           ]
         },
-        "PathPart": "Volunteer",
+        "PathPart": "volunteer",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -514,25 +514,28 @@
         }
       }
     },
-    "ApiGatewayResourceVolunteerVolunteeridVar": {
+    "ApiGatewayResourceVolunteeravailability": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
-          "Ref": "ApiGatewayResourceVolunteer"
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
         },
-        "PathPart": "{volunteer_id}",
+        "PathPart": "VolunteerAvailability",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
       }
     },
-    "ApiGatewayResourceVolunteerVolunteeridVarVolunteeravailability": {
+    "ApiGatewayResourceVolunteeravailabilityVolunteeridVar": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
-          "Ref": "ApiGatewayResourceVolunteerVolunteeridVar"
+          "Ref": "ApiGatewayResourceVolunteeravailability"
         },
-        "PathPart": "VolunteerAvailability",
+        "PathPart": "{volunteer_id}",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -667,7 +670,7 @@
         }
       }
     },
-    "ApiGatewayMethodVolunteerVolunteeridVarVolunteeravailabilityOptions": {
+    "ApiGatewayMethodVolunteeravailabilityVolunteeridVarOptions": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "AuthorizationType": "NONE",
@@ -705,7 +708,7 @@
           ]
         },
         "ResourceId": {
-          "Ref": "ApiGatewayResourceVolunteerVolunteeridVarVolunteeravailability"
+          "Ref": "ApiGatewayResourceVolunteeravailabilityVolunteeridVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -884,13 +887,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodVolunteerVolunteeridVarVolunteeravailabilityPut": {
+    "ApiGatewayMethodVolunteeravailabilityVolunteeridVarPut": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "PUT",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceVolunteerVolunteeridVarVolunteeravailability"
+          "Ref": "ApiGatewayResourceVolunteeravailabilityVolunteeridVar"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -970,7 +973,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1616074809428": {
+    "ApiGatewayDeployment1616075001930": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -981,12 +984,12 @@
       "DependsOn": [
         "ApiGatewayMethodSkill1Options",
         "ApiGatewayMethodVolunteersOptions",
-        "ApiGatewayMethodVolunteerVolunteeridVarVolunteeravailabilityOptions",
+        "ApiGatewayMethodVolunteeravailabilityVolunteeridVarOptions",
         "ApiGatewayMethodSkillGet",
         "ApiGatewayMethodSkill1Post",
         "ApiGatewayMethodVolunteerGet",
         "ApiGatewayMethodVolunteersPost",
-        "ApiGatewayMethodVolunteerVolunteeridVarVolunteeravailabilityPut",
+        "ApiGatewayMethodVolunteeravailabilityVolunteeridVarPut",
         "ApiGatewayMethodGoodcausesGoodcauseidVarGoodcauseGet"
       ]
     },
@@ -1222,37 +1225,37 @@
     "GetDashskillsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDashskillsLambdaVersionzayJxDs5Zu29hARRte4V9kYHFOjAl1d3qzOUQuyGsU"
+        "Ref": "GetDashskillsLambdaVersionakNzZIlaXFJUVhwEG55fVepHjN43Ig4W5cFi2r0SI"
       }
     },
     "SaveDashskillsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveDashskillsLambdaVersionz4oMj2R5fo8UCzvznZ2VIQXjHdhP1WmllnpVp66N4Yg"
+        "Ref": "SaveDashskillsLambdaVersionRFkamtOB9ED9o2YEbyVijzTmcBudtQz3hlnFoTWvIEs"
       }
     },
     "GetDashvolunteerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDashvolunteerLambdaVersionlLKSGBn97olbIV7S3HLaodgtTXLifw6Pwq6kMPiLvA"
+        "Ref": "GetDashvolunteerLambdaVersionz9wRjCoy1jj2IFXduVl8NsqRXLFMR2ik1lFleQgNo"
       }
     },
     "SaveDashvolunteerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveDashvolunteerLambdaVersionPSC1RdSQI3FGkGQB2cwTvpdRFGoUU7ku00OFQFk"
+        "Ref": "SaveDashvolunteerLambdaVersion1Bi4s6x9k9vWNacs9TWd0Hsj1b2Pt8ShxbauXXLI3o"
       }
     },
     "SaveDashavailabilityLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveDashavailabilityLambdaVersionHkA1kaFsamvlc6gmPIrMOuOfIZW010j4wvLL3pMhb8"
+        "Ref": "SaveDashavailabilityLambdaVersioncB73avHU8o8FYkAMkP7U07sTrl9nPFPtmuNMr3qLQ"
       }
     },
     "GoodUnderscorecausesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GoodUnderscorecausesLambdaVersion0F0KjHLkAAsDs3bL7N5YI5C53LxxbNDDixnfOcQKeEA"
+        "Ref": "GoodUnderscorecausesLambdaVersionCl5lurKpdMzRsGGY2XZ9SxC0ymZobfrkn1o3E4KmkE"
       }
     },
     "ServiceEndpoint": {
