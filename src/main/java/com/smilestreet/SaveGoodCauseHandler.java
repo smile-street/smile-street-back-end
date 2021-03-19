@@ -47,13 +47,14 @@ public class SaveGoodCauseHandler implements RequestHandler<APIGatewayProxyReque
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement = connection.prepareStatement("INSERT INTO good_cause (firstname, lastname, contactnumber, emailaddress) VALUES (  ?, ?,?,?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO good_cause (firstname, lastname, emailaddress, contactnumber) VALUES (  ?, ?,?,?)");
             // preparedStatement.setInt(1, v.getVolunteer_id());
             //preparedStatement.setInt(2, Integer.parseInt(volunteerId));
             preparedStatement.setString(1, v.getFirstname());
             preparedStatement.setString(2, v.getLastname());
-            preparedStatement.setString(3, v.getContactnumber());
-            preparedStatement.setString(4, v.getEmailaddress());
+            preparedStatement.setString(3, v.getEmailaddress());
+            preparedStatement.setString(4, v.getContactnumber());
+
 
 
 
