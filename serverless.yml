@@ -56,5 +56,10 @@ functions:
       - http:
           path: /good_causes/{good_cause_id}/good_cause
           method: get
-
+  update-volunteer:
+    handler: com.smilestreet.UpdateVolunteerHandler
+    events:
+      - http:
+          path: /Volunteers/{volunteer_id}/update
+          method: put
 
