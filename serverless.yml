@@ -57,4 +57,11 @@ functions:
           path: /good_causes/{good_cause_id}/good_cause
           method: get
 
+  save-good-cause:
+    handler: com.smilestreet.SaveGoodCauseHandler
+    events:
+      - http:
+          path: /sgoodcause
+          method: post
+          cors: true
 
