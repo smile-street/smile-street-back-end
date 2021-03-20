@@ -114,7 +114,7 @@ Will add more information in to a volunteer table :
 
 4. To build the application run
 
-        ./build.sh 
+       
 
 5. To deploy the lambda functions
 
