@@ -56,7 +56,7 @@ functions:
       - http:
           path: /good_causesaves/{good_cause_id}/good_cause
           method: get
-<<<<<<< HEAD
+
 
   save-good-cause:
     handler: com.smilestreet.SaveGoodCauseHandler
@@ -65,12 +65,12 @@ functions:
           path: /sgoodcause
           method: post
           cors: true
-=======
+
   update-volunteer:
     handler: com.smilestreet.UpdateVolunteerHandler
     events:
       - http:
           path: /Volunteers/{volunteer_id}/update
           method: put
->>>>>>> UpdateVolunteer
+
 
