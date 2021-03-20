@@ -107,6 +107,12 @@
         "LogGroupName": "/aws/lambda/smile-street-back-end-dev-good_causes"
       }
     },
+    "SaveDashgoodDashcauseLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/smile-street-back-end-dev-save-good-cause"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -191,7 +197,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616089993380-2021-03-18T17:53:13.380Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616181434159-2021-03-19T19:17:14.159Z/target/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.getSkillsHandler",
         "Runtime": "java8",
@@ -224,7 +230,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616089993380-2021-03-18T17:53:13.380Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616181434159-2021-03-19T19:17:14.159Z/target/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.SaveSkillsHandler",
         "Runtime": "java8",
@@ -257,7 +263,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616089993380-2021-03-18T17:53:13.380Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616181434159-2021-03-19T19:17:14.159Z/target/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.getVolunteerHandler",
         "Runtime": "java8",
@@ -290,7 +296,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616089993380-2021-03-18T17:53:13.380Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616181434159-2021-03-19T19:17:14.159Z/target/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.SaveVolunteerHandler",
         "Runtime": "java8",
@@ -323,7 +329,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616089993380-2021-03-18T17:53:13.380Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616181434159-2021-03-19T19:17:14.159Z/target/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.SaveVolunteerAvailabilityHandler",
         "Runtime": "java8",
@@ -356,7 +362,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/smile-street-back-end/dev/1616089993380-2021-03-18T17:53:13.380Z/smile-street-dev.jar"
+          "S3Key": "serverless/smile-street-back-end/dev/1616181434159-2021-03-19T19:17:14.159Z/target/smile-street-dev.jar"
         },
         "Handler": "com.smilestreet.get_good_cause_handler",
         "Runtime": "java8",
@@ -382,64 +388,107 @@
         "GoodUnderscorecausesLogGroup"
       ]
     },
-    "GetDashskillsLambdaVersionrxERFt7HbKD7UszdghKC0t0ZGIX9NzgiTLp0fmZ5k": {
+    "SaveDashgoodDashcauseLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/smile-street-back-end/dev/1616181434159-2021-03-19T19:17:14.159Z/target/smile-street-dev.jar"
+        },
+        "Handler": "com.smilestreet.SaveGoodCauseHandler",
+        "Runtime": "java8",
+        "FunctionName": "smile-street-back-end-dev-save-good-cause",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "DB_HOST": "streetsahead.cxoqaafagpfv.eu-west-2.rds.amazonaws.com",
+            "DB_NAME": "smilestreet",
+            "DB_USER": "root",
+            "DB_PASSWORD": "smilestreet123"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "SaveDashgoodDashcauseLogGroup"
+      ]
+    },
+    "GetDashskillsLambdaVersionzNNeANB4X20lbfwXjdveVtmmk4OpTMVmITsXfyVXnE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashskillsLambdaFunction"
         },
-        "CodeSha256": "PUKSQmbfkUn3WQOPP4C1gOHNEr1Mmvby11nge/CENRg="
+        "CodeSha256": "a5gPbZhiVIHH7WSb1NsQiDTaebfNptdCJmybMZZiBY0="
       }
     },
-    "SaveDashskillsLambdaVersion15nZ0K6KjMRIS0Jywd6mLXHJdQsNZ1SE82ejFLy9A": {
+    "SaveDashskillsLambdaVersionxRbiYM61YAKSHvBoTBhpybGQWCAbjFqtiYGJ6qZM7g": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashskillsLambdaFunction"
         },
-        "CodeSha256": "PUKSQmbfkUn3WQOPP4C1gOHNEr1Mmvby11nge/CENRg="
+        "CodeSha256": "a5gPbZhiVIHH7WSb1NsQiDTaebfNptdCJmybMZZiBY0="
       }
     },
-    "GetDashvolunteerLambdaVersionsxTlvmMnsAM8igAU7diWZsXBxezlyyOc86edOtxEZJg": {
+    "GetDashvolunteerLambdaVersionyOmnQthBZdMPQz0DS6FqSYLIH1Gk9JOv8p6uDbeBytk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashvolunteerLambdaFunction"
         },
-        "CodeSha256": "PUKSQmbfkUn3WQOPP4C1gOHNEr1Mmvby11nge/CENRg="
+        "CodeSha256": "a5gPbZhiVIHH7WSb1NsQiDTaebfNptdCJmybMZZiBY0="
       }
     },
-    "SaveDashvolunteerLambdaVersionOQkhmiVySweDQ9y5pOWE6cxqSta1hGfXwpAsX5Olc": {
+    "SaveDashvolunteerLambdaVersionHEeodMIfeJ0NhpfumJPYV8CECr2DwoDBUL3IOxEYI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashvolunteerLambdaFunction"
         },
-        "CodeSha256": "PUKSQmbfkUn3WQOPP4C1gOHNEr1Mmvby11nge/CENRg="
+        "CodeSha256": "a5gPbZhiVIHH7WSb1NsQiDTaebfNptdCJmybMZZiBY0="
       }
     },
-    "SaveDashavailabilityLambdaVersionI6tl0I2apfDoqdlLB6AOGIeOgBa8csl9Ytvpg7uQ": {
+    "SaveDashavailabilityLambdaVersionKwDWwir5S16CpZVirhXqSpD0GsqR1NeHDz7xG3nVNE": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashavailabilityLambdaFunction"
         },
-        "CodeSha256": "PUKSQmbfkUn3WQOPP4C1gOHNEr1Mmvby11nge/CENRg="
+        "CodeSha256": "a5gPbZhiVIHH7WSb1NsQiDTaebfNptdCJmybMZZiBY0="
       }
     },
-    "GoodUnderscorecausesLambdaVersionauswxjt2F67T0pyyDD5hwrL4TjZ6qVyGSuHg6YwsZ8": {
+    "GoodUnderscorecausesLambdaVersion6zJ65YZE9oPg78b2bTgbdTDgyIZFaOCahpzMVHgCg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GoodUnderscorecausesLambdaFunction"
         },
-        "CodeSha256": "PUKSQmbfkUn3WQOPP4C1gOHNEr1Mmvby11nge/CENRg="
+        "CodeSha256": "a5gPbZhiVIHH7WSb1NsQiDTaebfNptdCJmybMZZiBY0="
+      }
+    },
+    "SaveDashgoodDashcauseLambdaVersionRKLAEABai7yjl39JblLOZvf66FcQmOCaibYBlH59gk": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "SaveDashgoodDashcauseLambdaFunction"
+        },
+        "CodeSha256": "a5gPbZhiVIHH7WSb1NsQiDTaebfNptdCJmybMZZiBY0="
       }
     },
     "ApiGatewayRestApi": {
@@ -541,7 +590,7 @@
         }
       }
     },
-    "ApiGatewayResourceGoodcauses": {
+    "ApiGatewayResourceGoodcausesaves": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
@@ -550,17 +599,17 @@
             "RootResourceId"
           ]
         },
-        "PathPart": "good_causes",
+        "PathPart": "good_causesaves",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
       }
     },
-    "ApiGatewayResourceGoodcausesGoodcauseidVar": {
+    "ApiGatewayResourceGoodcausesavesGoodcauseidVar": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
-          "Ref": "ApiGatewayResourceGoodcauses"
+          "Ref": "ApiGatewayResourceGoodcausesaves"
         },
         "PathPart": "{good_cause_id}",
         "RestApiId": {
@@ -568,13 +617,28 @@
         }
       }
     },
-    "ApiGatewayResourceGoodcausesGoodcauseidVarGoodcause": {
+    "ApiGatewayResourceGoodcausesavesGoodcauseidVarGoodcause": {
       "Type": "AWS::ApiGateway::Resource",
       "Properties": {
         "ParentId": {
-          "Ref": "ApiGatewayResourceGoodcausesGoodcauseidVar"
+          "Ref": "ApiGatewayResourceGoodcausesavesGoodcauseidVar"
         },
         "PathPart": "good_cause",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceSgoodcause": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Fn::GetAtt": [
+            "ApiGatewayRestApi",
+            "RootResourceId"
+          ]
+        },
+        "PathPart": "sgoodcause",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -709,6 +773,51 @@
         },
         "ResourceId": {
           "Ref": "ApiGatewayResourceVolunteeravailabilityVolunteeridVar"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayMethodSgoodcauseOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+              },
+              "ResponseTemplates": {
+                "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceSgoodcause"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -930,13 +1039,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayMethodGoodcausesGoodcauseidVarGoodcauseGet": {
+    "ApiGatewayMethodGoodcausesavesGoodcauseidVarGoodcauseGet": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
         "HttpMethod": "GET",
         "RequestParameters": {},
         "ResourceId": {
-          "Ref": "ApiGatewayResourceGoodcausesGoodcauseidVarGoodcause"
+          "Ref": "ApiGatewayResourceGoodcausesavesGoodcauseidVarGoodcause"
         },
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
@@ -973,7 +1082,50 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1616089992557": {
+    "ApiGatewayMethodSgoodcausePost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceSgoodcause"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "SaveDashgoodDashcauseLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1616181432587": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -985,12 +1137,14 @@
         "ApiGatewayMethodSkill1Options",
         "ApiGatewayMethodVolunteersOptions",
         "ApiGatewayMethodVolunteeravailabilityVolunteeridVarOptions",
+        "ApiGatewayMethodSgoodcauseOptions",
         "ApiGatewayMethodSkillGet",
         "ApiGatewayMethodSkill1Post",
         "ApiGatewayMethodVolunteerGet",
         "ApiGatewayMethodVolunteersPost",
         "ApiGatewayMethodVolunteeravailabilityVolunteeridVarPut",
-        "ApiGatewayMethodGoodcausesGoodcauseidVarGoodcauseGet"
+        "ApiGatewayMethodGoodcausesavesGoodcauseidVarGoodcauseGet",
+        "ApiGatewayMethodSgoodcausePost"
       ]
     },
     "GetDashskillsLambdaPermissionApiGateway": {
@@ -1214,6 +1368,43 @@
           ]
         }
       }
+    },
+    "SaveDashgoodDashcauseLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "SaveDashgoodDashcauseLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -1225,37 +1416,43 @@
     "GetDashskillsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDashskillsLambdaVersionrxERFt7HbKD7UszdghKC0t0ZGIX9NzgiTLp0fmZ5k"
+        "Ref": "GetDashskillsLambdaVersionzNNeANB4X20lbfwXjdveVtmmk4OpTMVmITsXfyVXnE"
       }
     },
     "SaveDashskillsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveDashskillsLambdaVersion15nZ0K6KjMRIS0Jywd6mLXHJdQsNZ1SE82ejFLy9A"
+        "Ref": "SaveDashskillsLambdaVersionxRbiYM61YAKSHvBoTBhpybGQWCAbjFqtiYGJ6qZM7g"
       }
     },
     "GetDashvolunteerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetDashvolunteerLambdaVersionsxTlvmMnsAM8igAU7diWZsXBxezlyyOc86edOtxEZJg"
+        "Ref": "GetDashvolunteerLambdaVersionyOmnQthBZdMPQz0DS6FqSYLIH1Gk9JOv8p6uDbeBytk"
       }
     },
     "SaveDashvolunteerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveDashvolunteerLambdaVersionOQkhmiVySweDQ9y5pOWE6cxqSta1hGfXwpAsX5Olc"
+        "Ref": "SaveDashvolunteerLambdaVersionHEeodMIfeJ0NhpfumJPYV8CECr2DwoDBUL3IOxEYI"
       }
     },
     "SaveDashavailabilityLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveDashavailabilityLambdaVersionI6tl0I2apfDoqdlLB6AOGIeOgBa8csl9Ytvpg7uQ"
+        "Ref": "SaveDashavailabilityLambdaVersionKwDWwir5S16CpZVirhXqSpD0GsqR1NeHDz7xG3nVNE"
       }
     },
     "GoodUnderscorecausesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GoodUnderscorecausesLambdaVersionauswxjt2F67T0pyyDD5hwrL4TjZ6qVyGSuHg6YwsZ8"
+        "Ref": "GoodUnderscorecausesLambdaVersion6zJ65YZE9oPg78b2bTgbdTDgyIZFaOCahpzMVHgCg"
+      }
+    },
+    "SaveDashgoodDashcauseLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "SaveDashgoodDashcauseLambdaVersionRKLAEABai7yjl39JblLOZvf66FcQmOCaibYBlH59gk"
       }
     },
     "ServiceEndpoint": {
