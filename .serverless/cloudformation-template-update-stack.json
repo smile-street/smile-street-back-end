@@ -107,6 +107,12 @@
         "LogGroupName": "/aws/lambda/smile-street-back-end-dev-good_causes"
       }
     },
+    "UpdateDashvolunteerLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/smile-street-back-end-dev-update-volunteer"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -191,7 +197,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
+<<<<<<< HEAD
           "S3Key": "serverless/smile-street-back-end/dev/1616154118798-2021-03-19T11:41:58.798Z/smile-street-dev.jar"
+=======
+          "S3Key": "serverless/smile-street-back-end/dev/1616181319117-2021-03-19T19:15:19.117Z/target/smile-street-dev.jar"
+>>>>>>> UpdateVolunteer
         },
         "Handler": "com.smilestreet.getSkillsHandler",
         "Runtime": "java8",
@@ -224,7 +234,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
+<<<<<<< HEAD
           "S3Key": "serverless/smile-street-back-end/dev/1616154118798-2021-03-19T11:41:58.798Z/smile-street-dev.jar"
+=======
+          "S3Key": "serverless/smile-street-back-end/dev/1616181319117-2021-03-19T19:15:19.117Z/target/smile-street-dev.jar"
+>>>>>>> UpdateVolunteer
         },
         "Handler": "com.smilestreet.SaveSkillsHandler",
         "Runtime": "java8",
@@ -257,7 +271,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
+<<<<<<< HEAD
           "S3Key": "serverless/smile-street-back-end/dev/1616154118798-2021-03-19T11:41:58.798Z/smile-street-dev.jar"
+=======
+          "S3Key": "serverless/smile-street-back-end/dev/1616181319117-2021-03-19T19:15:19.117Z/target/smile-street-dev.jar"
+>>>>>>> UpdateVolunteer
         },
         "Handler": "com.smilestreet.getVolunteerHandler",
         "Runtime": "java8",
@@ -290,7 +308,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
+<<<<<<< HEAD
           "S3Key": "serverless/smile-street-back-end/dev/1616154118798-2021-03-19T11:41:58.798Z/smile-street-dev.jar"
+=======
+          "S3Key": "serverless/smile-street-back-end/dev/1616181319117-2021-03-19T19:15:19.117Z/target/smile-street-dev.jar"
+>>>>>>> UpdateVolunteer
         },
         "Handler": "com.smilestreet.SaveVolunteerHandler",
         "Runtime": "java8",
@@ -323,7 +345,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
+<<<<<<< HEAD
           "S3Key": "serverless/smile-street-back-end/dev/1616154118798-2021-03-19T11:41:58.798Z/smile-street-dev.jar"
+=======
+          "S3Key": "serverless/smile-street-back-end/dev/1616181319117-2021-03-19T19:15:19.117Z/target/smile-street-dev.jar"
+>>>>>>> UpdateVolunteer
         },
         "Handler": "com.smilestreet.SaveVolunteerAvailabilityHandler",
         "Runtime": "java8",
@@ -356,7 +382,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
+<<<<<<< HEAD
           "S3Key": "serverless/smile-street-back-end/dev/1616154118798-2021-03-19T11:41:58.798Z/smile-street-dev.jar"
+=======
+          "S3Key": "serverless/smile-street-back-end/dev/1616181319117-2021-03-19T19:15:19.117Z/target/smile-street-dev.jar"
+>>>>>>> UpdateVolunteer
         },
         "Handler": "com.smilestreet.get_good_cause_handler",
         "Runtime": "java8",
@@ -382,64 +412,150 @@
         "GoodUnderscorecausesLogGroup"
       ]
     },
+<<<<<<< HEAD
     "GetDashskillsLambdaVersionxnZXcOSJFpODxPnVvTZAJgAociDLueTN1IXf7S6ako": {
+=======
+    "UpdateDashvolunteerLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/smile-street-back-end/dev/1616181319117-2021-03-19T19:15:19.117Z/target/smile-street-dev.jar"
+        },
+        "Handler": "com.smilestreet.UpdateVolunteerHandler",
+        "Runtime": "java8",
+        "FunctionName": "smile-street-back-end-dev-update-volunteer",
+        "MemorySize": 1024,
+        "Timeout": 6,
+        "Environment": {
+          "Variables": {
+            "DB_HOST": "streetsahead.cxoqaafagpfv.eu-west-2.rds.amazonaws.com",
+            "DB_NAME": "smilestreet",
+            "DB_USER": "root",
+            "DB_PASSWORD": "smilestreet123"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "UpdateDashvolunteerLogGroup"
+      ]
+    },
+    "GetDashskillsLambdaVersionqymmxlOf1SLwh0ZyFLjeOAS2hTTVVfXiSbUme3LWf6M": {
+>>>>>>> UpdateVolunteer
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashskillsLambdaFunction"
         },
+<<<<<<< HEAD
         "CodeSha256": "kB2NBbH+LGSa6lE6AdGNaD+9JkMqhpK/XZu1gWRXyDI="
       }
     },
     "SaveDashskillsLambdaVersioncZa5v5DU0XiXjWlRvYzOg6xOxeLyop4mv9EKd8bgd5s": {
+=======
+        "CodeSha256": "4BFEasBEnwBYBFXcEvehTDGyj5RoZhnnOzHL0qfnVVI="
+      }
+    },
+    "SaveDashskillsLambdaVersionT29e254oTtVEInsHt26B8UlOJv23ftY83sZG59zyqU": {
+>>>>>>> UpdateVolunteer
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashskillsLambdaFunction"
         },
+<<<<<<< HEAD
         "CodeSha256": "kB2NBbH+LGSa6lE6AdGNaD+9JkMqhpK/XZu1gWRXyDI="
       }
     },
     "GetDashvolunteerLambdaVersionxGCNtLVAc0jbBV6VqdPiMZd8E97UvuRZdt9wAPv86g": {
+=======
+        "CodeSha256": "4BFEasBEnwBYBFXcEvehTDGyj5RoZhnnOzHL0qfnVVI="
+      }
+    },
+    "GetDashvolunteerLambdaVersion5aV0cZGxYSUqXsmwFoXvkKVc8jdfVcbRUw1D1hdZ5xI": {
+>>>>>>> UpdateVolunteer
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetDashvolunteerLambdaFunction"
         },
+<<<<<<< HEAD
         "CodeSha256": "kB2NBbH+LGSa6lE6AdGNaD+9JkMqhpK/XZu1gWRXyDI="
       }
     },
     "SaveDashvolunteerLambdaVersionUWFh2WegICaUXeIleifEGo1kSeB4hWksGTePHSYMZ0": {
+=======
+        "CodeSha256": "4BFEasBEnwBYBFXcEvehTDGyj5RoZhnnOzHL0qfnVVI="
+      }
+    },
+    "SaveDashvolunteerLambdaVersionTo0X9UkPJ25ioBFHMJjST0ATBXe6WnckOQVIGQk7BtQ": {
+>>>>>>> UpdateVolunteer
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashvolunteerLambdaFunction"
         },
+<<<<<<< HEAD
         "CodeSha256": "kB2NBbH+LGSa6lE6AdGNaD+9JkMqhpK/XZu1gWRXyDI="
       }
     },
     "SaveDashavailabilityLambdaVersionO51vWd44i3pe3ipbAP7JdKijyxzeznTIXOhRmjvP7g8": {
+=======
+        "CodeSha256": "4BFEasBEnwBYBFXcEvehTDGyj5RoZhnnOzHL0qfnVVI="
+      }
+    },
+    "SaveDashavailabilityLambdaVersionnnfUVAekyUG5hbAauNlwxw2t4cXJyqXBCnjiBLYpw4": {
+>>>>>>> UpdateVolunteer
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveDashavailabilityLambdaFunction"
         },
+<<<<<<< HEAD
         "CodeSha256": "kB2NBbH+LGSa6lE6AdGNaD+9JkMqhpK/XZu1gWRXyDI="
       }
     },
     "GoodUnderscorecausesLambdaVersionmf4ZxI61ELbwbSjaJNts2PJ78DJ1LCDEFLksfQ54Q": {
+=======
+        "CodeSha256": "4BFEasBEnwBYBFXcEvehTDGyj5RoZhnnOzHL0qfnVVI="
+      }
+    },
+    "GoodUnderscorecausesLambdaVersionMDdOm1jZVBcLWWx8A7P4nyDJoEFsGLZiUKnthDRGs": {
+>>>>>>> UpdateVolunteer
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GoodUnderscorecausesLambdaFunction"
         },
+<<<<<<< HEAD
         "CodeSha256": "kB2NBbH+LGSa6lE6AdGNaD+9JkMqhpK/XZu1gWRXyDI="
+=======
+        "CodeSha256": "4BFEasBEnwBYBFXcEvehTDGyj5RoZhnnOzHL0qfnVVI="
+      }
+    },
+    "UpdateDashvolunteerLambdaVersionV0y7z4wB47QaxOCWZnDJ7tQUNUOdmjSrcE2JrstOW7I": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "UpdateDashvolunteerLambdaFunction"
+        },
+        "CodeSha256": "4BFEasBEnwBYBFXcEvehTDGyj5RoZhnnOzHL0qfnVVI="
+>>>>>>> UpdateVolunteer
       }
     },
     "ApiGatewayRestApi": {
@@ -509,6 +625,30 @@
           ]
         },
         "PathPart": "Volunteers",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceVolunteersVolunteeridVar": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceVolunteers"
+        },
+        "PathPart": "{volunteer_id}",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceVolunteersVolunteeridVarUpdate": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceVolunteersVolunteeridVar"
+        },
+        "PathPart": "update",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -973,7 +1113,54 @@
         "MethodResponses": []
       }
     },
+<<<<<<< HEAD
     "ApiGatewayDeployment1616154117867": {
+=======
+    "ApiGatewayMethodVolunteersVolunteeridVarUpdatePut": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "PUT",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceVolunteersVolunteeridVarUpdate"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "UpdateDashvolunteerLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1616181314939": {
+>>>>>>> UpdateVolunteer
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -990,7 +1177,8 @@
         "ApiGatewayMethodVolunteerGet",
         "ApiGatewayMethodVolunteersPost",
         "ApiGatewayMethodVolunteeravailabilityVolunteeridVarPut",
-        "ApiGatewayMethodGoodcausesGoodcauseidVarGoodcauseGet"
+        "ApiGatewayMethodGoodcausesGoodcauseidVarGoodcauseGet",
+        "ApiGatewayMethodVolunteersVolunteeridVarUpdatePut"
       ]
     },
     "GetDashskillsLambdaPermissionApiGateway": {
@@ -1214,6 +1402,43 @@
           ]
         }
       }
+    },
+    "UpdateDashvolunteerLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "UpdateDashvolunteerLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
     }
   },
   "Outputs": {
@@ -1225,37 +1450,67 @@
     "GetDashskillsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
+<<<<<<< HEAD
         "Ref": "GetDashskillsLambdaVersionxnZXcOSJFpODxPnVvTZAJgAociDLueTN1IXf7S6ako"
+=======
+        "Ref": "GetDashskillsLambdaVersionqymmxlOf1SLwh0ZyFLjeOAS2hTTVVfXiSbUme3LWf6M"
+>>>>>>> UpdateVolunteer
       }
     },
     "SaveDashskillsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
+<<<<<<< HEAD
         "Ref": "SaveDashskillsLambdaVersioncZa5v5DU0XiXjWlRvYzOg6xOxeLyop4mv9EKd8bgd5s"
+=======
+        "Ref": "SaveDashskillsLambdaVersionT29e254oTtVEInsHt26B8UlOJv23ftY83sZG59zyqU"
+>>>>>>> UpdateVolunteer
       }
     },
     "GetDashvolunteerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
+<<<<<<< HEAD
         "Ref": "GetDashvolunteerLambdaVersionxGCNtLVAc0jbBV6VqdPiMZd8E97UvuRZdt9wAPv86g"
+=======
+        "Ref": "GetDashvolunteerLambdaVersion5aV0cZGxYSUqXsmwFoXvkKVc8jdfVcbRUw1D1hdZ5xI"
+>>>>>>> UpdateVolunteer
       }
     },
     "SaveDashvolunteerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
+<<<<<<< HEAD
         "Ref": "SaveDashvolunteerLambdaVersionUWFh2WegICaUXeIleifEGo1kSeB4hWksGTePHSYMZ0"
+=======
+        "Ref": "SaveDashvolunteerLambdaVersionTo0X9UkPJ25ioBFHMJjST0ATBXe6WnckOQVIGQk7BtQ"
+>>>>>>> UpdateVolunteer
       }
     },
     "SaveDashavailabilityLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
+<<<<<<< HEAD
         "Ref": "SaveDashavailabilityLambdaVersionO51vWd44i3pe3ipbAP7JdKijyxzeznTIXOhRmjvP7g8"
+=======
+        "Ref": "SaveDashavailabilityLambdaVersionnnfUVAekyUG5hbAauNlwxw2t4cXJyqXBCnjiBLYpw4"
+>>>>>>> UpdateVolunteer
       }
     },
     "GoodUnderscorecausesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
+<<<<<<< HEAD
         "Ref": "GoodUnderscorecausesLambdaVersionmf4ZxI61ELbwbSjaJNts2PJ78DJ1LCDEFLksfQ54Q"
+=======
+        "Ref": "GoodUnderscorecausesLambdaVersionMDdOm1jZVBcLWWx8A7P4nyDJoEFsGLZiUKnthDRGs"
+      }
+    },
+    "UpdateDashvolunteerLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "UpdateDashvolunteerLambdaVersionV0y7z4wB47QaxOCWZnDJ7tQUNUOdmjSrcE2JrstOW7I"
+>>>>>>> UpdateVolunteer
       }
     },
     "ServiceEndpoint": {
