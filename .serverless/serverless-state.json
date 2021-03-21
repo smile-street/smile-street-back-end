@@ -230,7 +230,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
+
                 "S3Key": "serverless/smile-street-back-end/dev/1616258847372-2021-03-20T16:47:27.372Z/target/smile-street-dev.jar"
+
               },
               "Handler": "com.smilestreet.getSkillsHandler",
               "Runtime": "java8",
@@ -263,7 +265,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
+
                 "S3Key": "serverless/smile-street-back-end/dev/1616258847372-2021-03-20T16:47:27.372Z/target/smile-street-dev.jar"
+
               },
               "Handler": "com.smilestreet.SaveSkillsHandler",
               "Runtime": "java8",
@@ -296,7 +300,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
+
                 "S3Key": "serverless/smile-street-back-end/dev/1616258847372-2021-03-20T16:47:27.372Z/target/smile-street-dev.jar"
+
               },
               "Handler": "com.smilestreet.getVolunteerHandler",
               "Runtime": "java8",
@@ -329,7 +335,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
+
                 "S3Key": "serverless/smile-street-back-end/dev/1616258847372-2021-03-20T16:47:27.372Z/target/smile-street-dev.jar"
+
               },
               "Handler": "com.smilestreet.SaveVolunteerHandler",
               "Runtime": "java8",
@@ -362,7 +370,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
+
                 "S3Key": "serverless/smile-street-back-end/dev/1616258847372-2021-03-20T16:47:27.372Z/target/smile-street-dev.jar"
+
               },
               "Handler": "com.smilestreet.SaveVolunteerAvailabilityHandler",
               "Runtime": "java8",
@@ -395,7 +405,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
+
                 "S3Key": "serverless/smile-street-back-end/dev/1616258847372-2021-03-20T16:47:27.372Z/target/smile-street-dev.jar"
+
               },
               "Handler": "com.smilestreet.get_good_cause_handler",
               "Runtime": "java8",
@@ -421,6 +433,7 @@
               "GoodUnderscorecausesLogGroup"
             ]
           },
+
           "SaveDashgoodDashcauseLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -521,62 +534,74 @@
             ]
           },
           "GetDashskillsLambdaVersiongU88Ox4ZlMOca88PSqBOFnWFh0QrNACWD83t6g1Xg": {
+
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetDashskillsLambdaFunction"
               },
+
               "CodeSha256": "x9KFWRzf4Z85nZfFFJy8YMKDnkQwWHCLtzM+fklpabY="
             }
           },
           "SaveDashskillsLambdaVersionw2pWMsUuoYy3CLANasQmmF5Duja26OUrsQOENk2Vg": {
+
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SaveDashskillsLambdaFunction"
               },
+
               "CodeSha256": "x9KFWRzf4Z85nZfFFJy8YMKDnkQwWHCLtzM+fklpabY="
             }
           },
           "GetDashvolunteerLambdaVersionoWyuWnosrdxw6wxx0rtAmWQZtu4YbWbIurdHbwqtv8": {
+
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetDashvolunteerLambdaFunction"
               },
+
               "CodeSha256": "x9KFWRzf4Z85nZfFFJy8YMKDnkQwWHCLtzM+fklpabY="
             }
           },
           "SaveDashvolunteerLambdaVersion7bKcA9sWIV4wfo9STcfIINVad9P6eBDvJiGyJ3iEmxg": {
+
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SaveDashvolunteerLambdaFunction"
               },
+
               "CodeSha256": "x9KFWRzf4Z85nZfFFJy8YMKDnkQwWHCLtzM+fklpabY="
             }
           },
           "SaveDashavailabilityLambdaVersionPG2u9vHNTiIS2rRiLpTlk3PgVhD8jHLQjieUJZiIZCs": {
+
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SaveDashavailabilityLambdaFunction"
               },
+
               "CodeSha256": "x9KFWRzf4Z85nZfFFJy8YMKDnkQwWHCLtzM+fklpabY="
             }
           },
           "GoodUnderscorecausesLambdaVersionslKkx6TOm6CysxflvywsHLqp4dKIMolyHeJ2mNCBcHs": {
+
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GoodUnderscorecausesLambdaFunction"
               },
+
               "CodeSha256": "x9KFWRzf4Z85nZfFFJy8YMKDnkQwWHCLtzM+fklpabY="
             }
           },
@@ -608,6 +633,7 @@
                 "Ref": "SaveDashgoodDashcauseDashdetailsLambdaFunction"
               },
               "CodeSha256": "x9KFWRzf4Z85nZfFFJy8YMKDnkQwWHCLtzM+fklpabY="
+
             }
           },
           "ApiGatewayRestApi": {
@@ -1426,7 +1452,9 @@
               "MethodResponses": []
             }
           },
+
           "ApiGatewayDeployment1616258846049": {
+
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1794,36 +1822,47 @@
           "GetDashskillsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
+
               "Ref": "GetDashskillsLambdaVersiongU88Ox4ZlMOca88PSqBOFnWFh0QrNACWD83t6g1Xg"
+
             }
           },
           "SaveDashskillsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
+
               "Ref": "SaveDashskillsLambdaVersionw2pWMsUuoYy3CLANasQmmF5Duja26OUrsQOENk2Vg"
+
             }
           },
           "GetDashvolunteerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
+
               "Ref": "GetDashvolunteerLambdaVersionoWyuWnosrdxw6wxx0rtAmWQZtu4YbWbIurdHbwqtv8"
+
             }
           },
           "SaveDashvolunteerLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
+
               "Ref": "SaveDashvolunteerLambdaVersion7bKcA9sWIV4wfo9STcfIINVad9P6eBDvJiGyJ3iEmxg"
+
             }
           },
           "SaveDashavailabilityLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
+
               "Ref": "SaveDashavailabilityLambdaVersionPG2u9vHNTiIS2rRiLpTlk3PgVhD8jHLQjieUJZiIZCs"
+
             }
           },
           "GoodUnderscorecausesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
+
               "Ref": "GoodUnderscorecausesLambdaVersionslKkx6TOm6CysxflvywsHLqp4dKIMolyHeJ2mNCBcHs"
             }
           },
@@ -1843,6 +1882,7 @@
             "Description": "Current Lambda function version",
             "Value": {
               "Ref": "SaveDashgoodDashcauseDashdetailsLambdaVersionBZZ3zl3GpGw1HSneU9fPblRdG9NuA6X2tbpYXUGQXeo"
+
             }
           },
           "ServiceEndpoint": {
@@ -1973,7 +2013,9 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
+
         "versionLogicalId": "GetDashskillsLambdaVersiongU88Ox4ZlMOca88PSqBOFnWFh0QrNACWD83t6g1Xg"
+
       },
       "save-skills": {
         "handler": "com.smilestreet.SaveSkillsHandler",
@@ -2011,7 +2053,9 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
+
         "versionLogicalId": "SaveDashskillsLambdaVersionw2pWMsUuoYy3CLANasQmmF5Duja26OUrsQOENk2Vg"
+
       },
       "get-volunteer": {
         "handler": "com.smilestreet.getVolunteerHandler",
@@ -2030,7 +2074,9 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
+
         "versionLogicalId": "GetDashvolunteerLambdaVersionoWyuWnosrdxw6wxx0rtAmWQZtu4YbWbIurdHbwqtv8"
+
       },
       "save-volunteer": {
         "handler": "com.smilestreet.SaveVolunteerHandler",
@@ -2068,7 +2114,9 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
+
         "versionLogicalId": "SaveDashvolunteerLambdaVersion7bKcA9sWIV4wfo9STcfIINVad9P6eBDvJiGyJ3iEmxg"
+
       },
       "save-availability": {
         "handler": "com.smilestreet.SaveVolunteerAvailabilityHandler",
@@ -2106,7 +2154,9 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
+
         "versionLogicalId": "SaveDashavailabilityLambdaVersionPG2u9vHNTiIS2rRiLpTlk3PgVhD8jHLQjieUJZiIZCs"
+
       },
       "good_causes": {
         "handler": "com.smilestreet.get_good_cause_handler",
@@ -2125,6 +2175,7 @@
         "timeout": 6,
         "runtime": "java8",
         "vpc": {},
+
         "versionLogicalId": "GoodUnderscorecausesLambdaVersionslKkx6TOm6CysxflvywsHLqp4dKIMolyHeJ2mNCBcHs"
       },
       "save-good-cause": {
@@ -2221,6 +2272,7 @@
         "runtime": "java8",
         "vpc": {},
         "versionLogicalId": "SaveDashgoodDashcauseDashdetailsLambdaVersionBZZ3zl3GpGw1HSneU9fPblRdG9NuA6X2tbpYXUGQXeo"
+
       }
     },
     "configValidationMode": "warn",
@@ -2236,7 +2288,9 @@
       },
       "package": {
         "artifact": "target/smile-street-dev.jar",
+
         "artifactDirectoryName": "serverless/smile-street-back-end/dev/1616258847372-2021-03-20T16:47:27.372Z"
+
       },
       "functions": {
         "$ref": "$[\"service\"][\"functions\"]"
@@ -2245,7 +2299,9 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
+
     "artifactDirectoryName": "serverless/smile-street-back-end/dev/1616258847372-2021-03-20T16:47:27.372Z",
+
     "artifact": "target/smile-street-dev.jar"
   }
 }
