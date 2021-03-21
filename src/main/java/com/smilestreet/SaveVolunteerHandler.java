@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
@@ -26,7 +27,7 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
         LOG.info("received the request");
 
-      //  String volunteerId = request.getPathParameters().get("volunteer_id");
+        String volunteerId = UUID.randomUUID().toString(); // create a unique ID for a newly registered user
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -34,6 +35,7 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
         Map<String, String> headers = new HashMap<>();
         headers.put("Access-Control-Allow-Origin", "*");
         response.setHeaders(headers);
+        response.setBody(volunteerId); // to return the newly created volunteer_id to the front-end
 
         try {
             Volunteer v = objMapper.readValue(requestBody, Volunteer.class);
@@ -46,15 +48,12 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement = connection.prepareStatement("INSERT INTO volunteer (firstname, lastname, contactnumber, username) VALUES (  ?, ?,?,?)");
-           // preparedStatement.setInt(1, v.getVolunteer_id());
-            //preparedStatement.setInt(2, Integer.parseInt(volunteerId));
-            preparedStatement.setString(1, v.getFirstname());
-            preparedStatement.setString(2, v.getLastname());
-            preparedStatement.setString(3, v.getContactnumber());
-            preparedStatement.setString(4, v.getUsername());
-
-
+            preparedStatement = connection.prepareStatement("INSERT INTO volunteer (volunteer_id, firstname, lastname, contactnumber, username) VALUES (?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, volunteerId);
+            preparedStatement.setString(2, v.getFirstname());
+            preparedStatement.setString(3, v.getLastname());
+            preparedStatement.setString(4, v.getContactnumber());
+            preparedStatement.setString(5, v.getUsername());
 
             preparedStatement.execute();
 
