@@ -50,11 +50,34 @@ functions:
           path: /VolunteerAvailability/{volunteer_id}
           method: put
           cors: true
+
   good_causes:
     handler: com.smilestreet.get_good_cause_handler
     events:
       - http:
-          path: /good_causes/{good_cause_id}/good_cause
+          path: /good_causesaves/{good_cause_id}/good_cause
           method: get
 
 
+  save-good-cause:
+    handler: com.smilestreet.SaveGoodCauseHandler
+    events:
+      - http:
+          path: /sgoodcause
+          method: post
+          cors: true
+
+  update-volunteer:
+    handler: com.smilestreet.UpdateVolunteerHandler
+    events:
+      - http:
+          path: /Volunteers/{volunteer_id}/update
+          method: put
+
+  save-good-cause-details:
+    handler: com.smilestreet.SaveGoodCauseDetailsHandler
+    events:
+      - http:
+          path: /GoodCauseDetails/{good_cause_id}
+          method: put
+          cors: true
