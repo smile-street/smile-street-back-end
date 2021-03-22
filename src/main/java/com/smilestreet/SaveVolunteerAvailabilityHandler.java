@@ -55,7 +55,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
             preparedStatement.setDate(4, v.getStartdate());
             preparedStatement.setDate(5, v.getEnddate());
 
-            preparedStatement.setInt(6, Integer.parseInt(volunteerId));
+            preparedStatement.setString(6, (volunteerId));
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);
