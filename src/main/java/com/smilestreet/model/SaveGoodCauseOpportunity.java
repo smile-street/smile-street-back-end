@@ -8,18 +8,18 @@ public class SaveGoodCauseOpportunity {
 
     private String opportunityname;
     private String opportunitydescription;
-    private Date startdate;
-    private  Date enddate;
+    private Date opportunitydate;
+    private Date enddate;
     private String good_cause_id;
 
-    public SaveGoodCauseOpportunity(){
+    public SaveGoodCauseOpportunity() {
 
     }
 
-    public SaveGoodCauseOpportunity(String opportunityname, String opportunitydescription, Date startdate, Date enddate, String good_cause_id) {
+    public SaveGoodCauseOpportunity(String opportunityname, String opportunitydescription, Date opportunitydate, Date enddate, String good_cause_id) {
         this.opportunityname = opportunityname;
         this.opportunitydescription = opportunitydescription;
-        this.startdate = startdate;
+        this.opportunitydate = opportunitydate;
         this.enddate = enddate;
         this.good_cause_id = good_cause_id;
     }
@@ -40,12 +40,12 @@ public class SaveGoodCauseOpportunity {
         this.opportunitydescription = opportunitydescription;
     }
 
-    public Date getStartdate() {
-        return startdate;
+    public Date getOpportunitydate() {
+        return opportunitydate;
     }
 
-    public void setStartdate(Date startdate) {
-        this.startdate = startdate;
+    public void setOpportunitydate(Date opportunitydate) {
+        this.opportunitydate = opportunitydate;
     }
 
     public Date getEnddate() {
@@ -64,4 +64,3 @@ public class SaveGoodCauseOpportunity {
         this.good_cause_id = good_cause_id;
     }
 }
-
