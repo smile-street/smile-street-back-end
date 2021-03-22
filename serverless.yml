@@ -25,6 +25,14 @@ functions:
           method: post
           cors: true
 
+  save-good-cause-details:
+    handler: com.smilestreet.SaveGoodCauseDetailsHandler
+    events:
+      - http:
+          path: /GoodCauseDetails/{good_cause_id}
+          method: put
+          cors: true
+
   save-volunteer:
     handler: com.smilestreet.SaveVolunteerHandler
     events:
@@ -54,14 +62,6 @@ functions:
       - http:
           path: /Volunteers/{volunteer_id}/update
           method: put
-
-  save-good-cause-details:
-    handler: com.smilestreet.SaveGoodCauseDetailsHandler
-    events:
-      - http:
-          path: /GoodCauseDetails/{good_cause_id}
-          method: put
-          cors: true
 
   save-good-cause-opportunity:
     handler: com.smilestreet.SaveGoodCauseOpportunityHandler
