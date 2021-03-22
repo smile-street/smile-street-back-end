@@ -68,5 +68,5 @@ functions:
     events:
       - http:
           path: /SaveGoodCauseOpportunity/{good_cause_id}
-          method: put
+          method: post
           cors: true

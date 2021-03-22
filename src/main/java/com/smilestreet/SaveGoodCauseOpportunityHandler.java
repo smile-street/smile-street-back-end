@@ -26,7 +26,7 @@ public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewa
         LOG.info("received the request");
 
         //its gets the id from the previous page or via add opportunity
-        String good_cause_id = request.getPathParameters().get("good_cause_id");
+        String good_cause_uid = request.getPathParameters().get("good_cause_id");
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -52,19 +52,17 @@ public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewa
 
 
             preparedStatement  = connection.prepareStatement(
-                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydescription, startdate, enddate, good_cause_id) VALUES (?,?,?,?,?,?");
+                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydate, opportunitydescription, good_cause_uid) VALUES (?,?,?,?,?)");
 
-            preparedStatement.setString(1, UUID.randomUUID().toString() );
+            preparedStatement.setString(1, UUID.randomUUID().toString());
             preparedStatement.setString(2, v.getOpportunityname());
+            preparedStatement.setDate(3, v.getOpportunitydate());
             preparedStatement.setString(3, v.getOpportunitydescription());
-            preparedStatement.setDate(4, v.getStartdate());
-            preparedStatement.setDate(5, v.getEnddate());
-
-            preparedStatement.setString(6, good_cause_id);
+            preparedStatement.setString(4, good_cause_uid);
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
 
             connection.close();
         } catch (IOException e) {
