@@ -53,7 +53,7 @@ public class SaveGoodCauseDetailsHandler implements RequestHandler<APIGatewayPro
             preparedStatement.setString(1, v.getDescriptionofgoodcause());
             preparedStatement.setString(2, v.getGood_cause_name());
 
-            preparedStatement.setInt(3, Integer.parseInt(goodCauseId));
+            preparedStatement.setString(3, goodCauseId);
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);
