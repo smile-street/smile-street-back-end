@@ -4,17 +4,18 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.smilestreet.model.SaveGoodCauseDetails;
+import com.smilestreet.model.SaveGoodCauseRegistration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
-public class SaveGoodCauseDetailsHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class SaveGoodCauseRegistrationHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    private static final Logger LOG = LogManager.getLogger(SaveGoodCauseDetailsHandler.class);
+    private static final Logger LOG = LogManager.getLogger(SaveGoodCauseRegistrationHandler.class);
 
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
@@ -24,7 +25,7 @@ public class SaveGoodCauseDetailsHandler implements RequestHandler<APIGatewayPro
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
         LOG.info("received the request");
 
-        String goodCauseId = request.getPathParameters().get("good_cause_id");
+        String goodCauseId = UUID.randomUUID().toString(); // create a unique ID for a newly registered user
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -32,11 +33,10 @@ public class SaveGoodCauseDetailsHandler implements RequestHandler<APIGatewayPro
         Map<String, String> headers = new HashMap<>();
         headers.put("Access-Control-Allow-Origin", "*");
         response.setHeaders(headers);
+        response.setBody(goodCauseId);
 
         try {
-
-            LOG.debug("trying");
-            SaveGoodCauseDetails v = objMapper.readValue(requestBody, SaveGoodCauseDetails.class);
+            SaveGoodCauseRegistration v = objMapper.readValue(requestBody, SaveGoodCauseRegistration.class);
 
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -46,19 +46,21 @@ public class SaveGoodCauseDetailsHandler implements RequestHandler<APIGatewayPro
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement  = connection.prepareStatement(
-                    "UPDATE good_cause SET descriptionofgoodcause = ? , good_cause_name = ? WHERE good_cause_id = ? ");
+            preparedStatement = connection.prepareStatement("INSERT INTO good_cause (" +
+                    "good_cause_id, " +
+                    "firstname, " +
+                    "lastname, " +
+                    "username, " +
+                    "contactnumber) " +
+                    "VALUES (?, ?, ?, ?, ?)");
 
+            preparedStatement.setString(1, goodCauseId);
+            preparedStatement.setString(2, v.getFirstname());
+            preparedStatement.setString(3, v.getLastname());
+            preparedStatement.setString(4, v.getUsername());
+            preparedStatement.setString(5, v.getContactnumber());
 
-            preparedStatement.setString(1, v.getDescriptionofgoodcause());
-            preparedStatement.setString(2, v.getGood_cause_name());
-
-            preparedStatement.setString(3, goodCauseId);
-            LOG.debug("this is the prepared statement object");
-
-            LOG.debug(preparedStatement);
-            preparedStatement.executeUpdate();
-
+            preparedStatement.execute();
             connection.close();
         } catch (IOException e) {
             LOG.error("Unable to unmarshal JSON for adding a task", e);
@@ -93,3 +95,4 @@ public class SaveGoodCauseDetailsHandler implements RequestHandler<APIGatewayPro
         }
     }
 }
+

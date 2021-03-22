@@ -1,20 +1,21 @@
 package com.smilestreet.model;
 
-public class SaveGoodCause {
+public class SaveGoodCauseRegistration {
 
     private String firstname;
     private String lastname;
     private String contactnumber;
-    private String emailaddress;
+    private String username;
 
-    public SaveGoodCause(){
+    public SaveGoodCauseRegistration() {
 
     }
-    public SaveGoodCause(String firstname, String lastname, String contactnumber, String emailaddress) {
+
+    public SaveGoodCauseRegistration(String firstname, String lastname, String contactnumber, String username) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.contactnumber = contactnumber;
-        this.emailaddress = emailaddress;
+        this.username = username;
     }
 
     public String getFirstname() {
@@ -41,11 +42,11 @@ public class SaveGoodCause {
         this.contactnumber = contactnumber;
     }
 
-    public String getEmailaddress() {
-        return emailaddress;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmailaddress(String emailaddress) {
-        this.emailaddress = emailaddress;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

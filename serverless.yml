@@ -17,25 +17,22 @@ package:
   artifact: target/smile-street-dev.jar
 
 functions:
-  get-skills:
-    handler: com.smilestreet.getSkillsHandler
+  save-good-cause-registration:
+    handler: com.smilestreet.SaveGoodCauseRegistrationHandler
     events:
       - http:
-          path: /skill
-          method: get
-  save-skills:
-    handler: com.smilestreet.SaveSkillsHandler
-    events:
-      - http:
-          path: /skill1
+          path: /sgoodcauseregistration
           method: post
           cors: true
-  get-volunteer:
-    handler: com.smilestreet.getVolunteerHandler
+
+  save-good-cause-details:
+    handler: com.smilestreet.SaveGoodCauseDetailsHandler
     events:
       - http:
-          path: /volunteer
-          method: get
+          path: /GoodCauseDetails/{good_cause_id}
+          method: put
+          cors: true
+
   save-volunteer:
     handler: com.smilestreet.SaveVolunteerHandler
     events:
@@ -43,6 +40,7 @@ functions:
           path: /Volunteers
           method: post
           cors: true
+
   save-availability:
     handler: com.smilestreet.SaveVolunteerAvailabilityHandler
     events:
@@ -58,15 +56,6 @@ functions:
           path: /good_causesaves/{good_cause_id}/good_cause
           method: get
 
-
-  save-good-cause:
-    handler: com.smilestreet.SaveGoodCauseHandler
-    events:
-      - http:
-          path: /sgoodcause
-          method: post
-          cors: true
-
   update-volunteer:
     handler: com.smilestreet.UpdateVolunteerHandler
     events:
@@ -74,10 +63,10 @@ functions:
           path: /Volunteers/{volunteer_id}/update
           method: put
 
-  save-good-cause-details:
-    handler: com.smilestreet.SaveGoodCauseDetailsHandler
+  save-good-cause-opportunity:
+    handler: com.smilestreet.SaveGoodCauseOpportunityHandler
     events:
       - http:
-          path: /GoodCauseDetails/{good_cause_id}
+          path: /SaveGoodCauseOpportunity/{good_cause_id}
           method: put
           cors: true
