@@ -1,23 +1,21 @@
 package com.smilestreet;
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.smilestreet.model.SaveGoodCause;
+import com.smilestreet.model.SaveGoodCauseOpportunity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class SaveGoodCauseHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    private static final Logger LOG = LogManager.getLogger(SaveGoodCauseHandler.class);
+    private static final Logger LOG = LogManager.getLogger(SaveGoodCauseOpportunity.class);
 
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
@@ -27,7 +25,8 @@ public class SaveGoodCauseHandler implements RequestHandler<APIGatewayProxyReque
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
         LOG.info("received the request");
 
-        String goodCauseId = UUID.randomUUID().toString(); // create a unique ID for a newly registered user
+        //its gets the id from the previous page or via add opportunity
+        String good_cause_id = request.getPathParameters().get("good_cause_id");
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -35,10 +34,11 @@ public class SaveGoodCauseHandler implements RequestHandler<APIGatewayProxyReque
         Map<String, String> headers = new HashMap<>();
         headers.put("Access-Control-Allow-Origin", "*");
         response.setHeaders(headers);
-        response.setBody(goodCauseId);
 
         try {
-            SaveGoodCause v = objMapper.readValue(requestBody, SaveGoodCause.class);
+
+            LOG.debug("trying");
+            SaveGoodCauseOpportunity v = objMapper.readValue(requestBody, SaveGoodCauseOpportunity.class);
 
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -48,21 +48,24 @@ public class SaveGoodCauseHandler implements RequestHandler<APIGatewayProxyReque
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement = connection.prepareStatement("INSERT INTO good_cause (" +
-                    "good_cause_id, " +
-                    "firstname, " +
-                    "lastname, " +
-                    "emailaddress, " +
-                    "contactnumber) " +
-                    "VALUES (?, ?, ?, ?, ?)");
 
-            preparedStatement.setString(1, goodCauseId);
-            preparedStatement.setString(2, v.getFirstname());
-            preparedStatement.setString(3, v.getLastname());
-            preparedStatement.setString(4, v.getEmailaddress());
-            preparedStatement.setString(5, v.getContactnumber());
 
-            preparedStatement.execute();
+
+            preparedStatement  = connection.prepareStatement(
+                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydescription, startdate, enddate, good_cause_id) VALUES (?,?,?,?,?,?");
+
+            preparedStatement.setString(1, UUID.randomUUID().toString() );
+            preparedStatement.setString(2, v.getOpportunityname());
+            preparedStatement.setString(3, v.getOpportunitydescription());
+            preparedStatement.setDate(4, v.getStartdate());
+            preparedStatement.setDate(5, v.getEnddate());
+
+            preparedStatement.setString(6, good_cause_id);
+            LOG.debug("this is the prepared statement object");
+
+            LOG.debug(preparedStatement);
+            preparedStatement.executeUpdate();
+
             connection.close();
         } catch (IOException e) {
             LOG.error("Unable to unmarshal JSON for adding a task", e);
@@ -97,4 +100,3 @@ public class SaveGoodCauseHandler implements RequestHandler<APIGatewayProxyReque
         }
     }
 }
-
