@@ -57,8 +57,8 @@ public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewa
             preparedStatement.setString(1, UUID.randomUUID().toString());
             preparedStatement.setString(2, v.getOpportunityname());
             preparedStatement.setDate(3, v.getOpportunitydate());
-            preparedStatement.setString(3, v.getOpportunitydescription());
-            preparedStatement.setString(4, good_cause_uid);
+            preparedStatement.setString(4, v.getOpportunitydescription());
+            preparedStatement.setString(5, good_cause_uid);
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);
