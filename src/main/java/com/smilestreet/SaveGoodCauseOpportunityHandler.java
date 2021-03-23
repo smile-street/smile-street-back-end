@@ -26,7 +26,7 @@ public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewa
         LOG.info("received the request");
 
         //its gets the id from the previous page or via add opportunity
-        String good_cause_id = request.getPathParameters().get("good_cause_id");
+        String good_cause_uid = request.getPathParameters().get("good_cause_id");
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -52,19 +52,36 @@ public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewa
 
 
             preparedStatement  = connection.prepareStatement(
-                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydescription, startdate, enddate, good_cause_id) VALUES (?,?,?,?,?,?");
+                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydate, opportunitydescription, good_cause_uid, web_design, SEO, Graphic_Design, Teaching, Public_Health, Empowerment, Sports, Construction, Cooking, Accessibility, Mental_Health, Event_Planning, Gardening, Music, Dance) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-            preparedStatement.setString(1, UUID.randomUUID().toString() );
+            preparedStatement.setString(1, UUID.randomUUID().toString());
             preparedStatement.setString(2, v.getOpportunityname());
-            preparedStatement.setString(3, v.getOpportunitydescription());
-            preparedStatement.setDate(4, v.getStartdate());
-            preparedStatement.setDate(5, v.getEnddate());
+            preparedStatement.setDate(3, v.getOpportunitydate());
+            preparedStatement.setString(4, v.getOpportunitydescription());
+            preparedStatement.setString(5, good_cause_uid);
+            preparedStatement.setBoolean(6,v.isWeb_design());
+            preparedStatement.setBoolean(7, v.isSEO());
+            preparedStatement.setBoolean(8, v.isGraphic_Design());
+            preparedStatement.setBoolean(9, v.isTeaching());
+            preparedStatement.setBoolean(10, v.isPublic_Health());
+            preparedStatement.setBoolean(11, v.isEmpowerment());
+            preparedStatement.setBoolean(12, v.isSports());
+            preparedStatement.setBoolean(13, v.isConstruction());
+            preparedStatement.setBoolean(14, v.isCooking());
+            preparedStatement.setBoolean(15, v.isAccessibility());
+            preparedStatement.setBoolean(16, v.isMental_Health());
+            preparedStatement.setBoolean(17, v.isEvent_Planning());
+            preparedStatement.setBoolean(18, v.isGardening());
+            preparedStatement.setBoolean(19, v.isMusic());
+            preparedStatement.setBoolean(20, v.isDance());
 
-            preparedStatement.setString(6, good_cause_id);
+
+
+
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);
-            preparedStatement.executeUpdate();
+            preparedStatement.execute();
 
             connection.close();
         } catch (IOException e) {
