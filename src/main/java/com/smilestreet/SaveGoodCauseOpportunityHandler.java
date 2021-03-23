@@ -52,13 +52,14 @@ public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewa
 
 
             preparedStatement  = connection.prepareStatement(
-                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydate, opportunitydescription, good_cause_uid) VALUES (?,?,?,?,?)");
+                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydate, opportunitydescription, good_cause_uid, web_design) VALUES (?,?,?,?,?,?)");
 
             preparedStatement.setString(1, UUID.randomUUID().toString());
             preparedStatement.setString(2, v.getOpportunityname());
             preparedStatement.setDate(3, v.getOpportunitydate());
             preparedStatement.setString(4, v.getOpportunitydescription());
             preparedStatement.setString(5, good_cause_uid);
+            preparedStatement.setBoolean(6,v.isWeb_design());
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);
