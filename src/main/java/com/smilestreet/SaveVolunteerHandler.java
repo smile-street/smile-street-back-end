@@ -35,7 +35,7 @@ public class SaveVolunteerHandler implements RequestHandler<APIGatewayProxyReque
         Map<String, String> headers = new HashMap<>();
         headers.put("Access-Control-Allow-Origin", "*");
         response.setHeaders(headers);
-        response.setBody(volunteerId); // to return the newly created volunteer_id to the front-end
+        response.setBody(volunteerId);
 
         try {
             Volunteer v = objMapper.readValue(requestBody, Volunteer.class);
