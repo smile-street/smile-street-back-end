@@ -5,6 +5,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smilestreet.model.VolunteerAvailability;
+import jdk.incubator.jpackage.internal.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
         LOG.info("received the request");
 
         String volunteerId = request.getPathParameters().get("volunteer_id");
+       // Log.info(volunteerId);
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -32,6 +34,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
         Map<String, String> headers = new HashMap<>();
         headers.put("Access-Control-Allow-Origin", "*");
         response.setHeaders(headers);
+        response.setBody(volunteerId);
 
         try {
 
@@ -54,8 +57,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
             preparedStatement.setInt(3, v.getNumberofdays());
             preparedStatement.setDate(4, v.getStartdate());
             preparedStatement.setDate(5, v.getEnddate());
-
-            preparedStatement.setString(6, (volunteerId));
+            preparedStatement.setString(6, volunteerId);
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);
