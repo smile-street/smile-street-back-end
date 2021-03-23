@@ -1,23 +1,32 @@
 package com.smilestreet;
 
 import com.amazonaws.services.lambda.runtime.Context;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.smilestreet.model.Good_cause;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.smilestreet.model.GetVolunteerMatches;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class GetVolunteerMatchesHandler {
+
+public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
+    private static final Logger LOG= LogManager.getLogger(GetVolunteerMatchesHandler.class);
+    private Connection connection = null;
+    private PreparedStatement preparedStatement = null;
     private ResultSet resultSet=null;
 
     @Override
-    public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
-        List<Good_cause> good_causes = null;
+    public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
+        List<GetVolunteerMatches> volunteerMatch = null;
+        String volunteer_id = request.getPathParameters().get("volunteer_id");
         try {
-            good_causes = new ArrayList<>();
+            volunteerMatch = new ArrayList<>();
             Class.forName("com.mysql.jdbc.Driver");
 
             connection = DriverManager.getConnection(String.format("jdbc:mysql://%s/%s?user=%s&password=%s",
@@ -26,28 +35,39 @@ public class GetVolunteerMatchesHandler {
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")
             ));
-            preparedStatement = connection.prepareStatement("SELECT * FROM  good_cause");
+            preparedStatement = connection.prepareStatement("SELECT * FROM good_cause_opportunity" +
+                    "WHERE good_cause_opportunity.opportunitydate BETWEEN" +
+                    "(SELECT volunteer.startdate FROM volunteer WHERE volunteer.vol_id =? )" +
+                    "AND" +
+                    "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = ?);");
+
+            preparedStatement.setString(1, volunteer_id );
+            preparedStatement.setString(2, volunteer_id );
+
             resultSet = preparedStatement.executeQuery();
+
+
             while (resultSet.next()) {
-                Good_cause good_cause = new Good_cause(resultSet.getInt("good_cause_id"),
-                        resultSet.getString("descriptionofgoodcause"),
-                        resultSet.getString("firstname"),
-                        resultSet.getString("lastname"),
-                        resultSet.getString("emailaddress"),
-                        resultSet.getString("contactnumber"));
+                GetVolunteerMatches vMatch=new GetVolunteerMatches(resultSet.getString("good_cause_opportunity_id"));
 
-                good_causes.add(good_cause);
-
+                volunteerMatch.add(vMatch);
             }
+
+
+            ============================================================
         } catch (Exception e) {
             LOG.error(String.format("unable to query database"));
-        } finally {
+        }
+        finally {
             closeConnection();
         }
-        return null;
+
+
+        return ApiGatewayResponse.builder()
+                .setStatusCode(200)
+                .setObjectBody(skills)
+                .build();
     }
-
-
     private void closeConnection() {
         try {
             if (resultSet != null) {
@@ -64,4 +84,4 @@ public class GetVolunteerMatchesHandler {
         }
     }
 }
-}
+
