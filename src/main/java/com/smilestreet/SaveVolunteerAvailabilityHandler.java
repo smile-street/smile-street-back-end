@@ -34,6 +34,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
         Map<String, String> headers = new HashMap<>();
         headers.put("Access-Control-Allow-Origin", "*");
         response.setHeaders(headers);
+        response.setBody(volunteerId);
 
         try {
 
