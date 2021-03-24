@@ -139,11 +139,24 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
         }
     }
 
+    // function matches the array ist containing the matching location and dates with the skills of our volunteer and saves that in a arraylist of
+    //Matched opportunities
     public ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc (GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject>locDates) {
 
         int count = 0;
         for (GetVolunteerMatchesOpportunityObject A : locDates) {
-            if (A.isAccessibility() ==) {
+            if (A.isAccessibility() == V.isAccessibility())
+            count +=1;
+            if
+
+
+                //if count == 3, add obj to GetOpportubnitiesArray
+
+            // finish matching each parameter
+            // declare a second getVolunteermatchesopportunityobject array
+            // save opportunities with 3 or more matches in that array.
+
+            // what paramters does the match object need????
 
         }
     }
