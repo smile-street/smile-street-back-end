@@ -2,11 +2,8 @@ package com.smilestreet;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.smilestreet.model.GetVolunteerMatches;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.smilestreet.model.GetVolunteerMatchesOpportunityObject;
+import com.smilestreet.model.Volunteer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +22,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
 
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
-        List<GetVolunteerMatches> locDates = null;
+        List<GetVolunteerMatchesOpportunityObject> locDates = null;
         try {
             locDates = new ArrayList<>();
             Class.forName("com.mysql.jdbc.Driver");
@@ -46,14 +43,78 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                             "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = 1234 );");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                 skill=new Skill(resultSet.getInt("skill_id"),
-                        resultSet.getString("skillname"));
+            GetVolunteerMatchesOpportunityObject MatchedLocationAndData=new GetVolunteerMatchesOpportunityObject(resultSet.getString("good_cause_opportunity_id"),
+                        resultSet.getString("opportunityname"),
+                            resultSet.getDate("opportunitydate"),
+                            resultSet.getString("opportunitydescription"),
+                            resultSet.getString("good_cause_uid"),
+                    resultSet.getInt("joining_id"),
+                    resultSet.getBoolean("Web_Design"),
+                    resultSet.getBoolean("SEO"),
+                    resultSet.getBoolean("Graphic_Design"),
+                    resultSet.getBoolean("Teaching"),
+                    resultSet.getBoolean("Public_Health"),
+                    resultSet.getBoolean("Empowerment"),
+                    resultSet.getBoolean("Sports"),
+                    resultSet.getBoolean("Construction"),
+                    resultSet.getBoolean("Cooking"),
+                    resultSet.getBoolean("Accessibility"),
+                    resultSet.getBoolean("Mental_Health"),
+                    resultSet.getBoolean("Event_Planning"),
+                    resultSet.getBoolean("Gardening"),
+                    resultSet.getBoolean("Music"),
+                            resultSet.getBoolean("Dance"),
+                            resultSet.getString("Location"));
 
-                skills.add(skill);
+            //all opportunites that match the volunteers location and dates are in the array
+                locDates.add(MatchedLocationAndData);
+            }
+
+            preparedStatement = connection.prepareStatement(
+                    "SELECT * FROM volunteer");
+
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                GetVolunteerMatchSingle v1 = new GetVolunteerMatchSingle(resultSet.getInt("vol_id"),
+                        resultSet.getString("volunteer_id"),
+                        resultSet.getString("firstname"),
+                        resultSet.getString("lastname"),
+                        resultSet.getString("contactnumber"),
+                        resultSet.getString("username"),
+                        resultSet.getString("employername"),
+                        resultSet.getString("primarylocation"),
+                        resultSet.getInt("numberofdays"),
+                        resultSet.getDate("datetime"),
+                        resultSet.getDate("enddate"),
+                        resultSet.getBoolean("Web_Design"),
+                        resultSet.getBoolean("SEO"),
+                        resultSet.getBoolean("Graphic_Design"),
+                        resultSet.getBoolean("Teaching"),
+                        resultSet.getBoolean("Public_Health"),
+                        resultSet.getBoolean("Empowerment"),
+                        resultSet.getBoolean("Sports"),
+                        resultSet.getBoolean("Construction"),
+                        resultSet.getBoolean("Cooking"),
+                        resultSet.getBoolean("Accessibility"),
+                        resultSet.getBoolean("Mental_Health"),
+                        resultSet.getBoolean("Event_Planning"),
+                        resultSet.getBoolean("Gardening"),
+                        resultSet.getBoolean("Music"),
+                        resultSet.getBoolean("Dance"));
+
+
+
 
             }
+            int count =0;
+            for (GetVolunteerMatchesOpportunityObject A : locDates){
+                if (A.isAccessibility() == v1.){
+
+                }
+            }
         } catch (Exception e) {
-            LOG.error(String.format("unable to query database"));
+           // LOG.error(String.format("unable to query database"));
         }
         finally {
             closeConnection();
@@ -62,7 +123,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
 
         return ApiGatewayResponse.builder()
                 .setStatusCode(200)
-                .setObjectBody(skills)
+                .setObjectBody(locDates)
                 .build();
     }
     private void closeConnection() {
@@ -77,8 +138,14 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                 connection.close();
             }
         } catch (Exception e) {
-            LOG.error("unable to close connection", e.getMessage());
+            //LOG.error("unable to close connection", e.getMessage());
         }
     }
+
+
 }
+        
+
+
+
 
