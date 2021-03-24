@@ -70,3 +70,10 @@ functions:
           path: /SaveGoodCauseOpportunity/{good_cause_id}
           method: post
           cors: true
+  save-volunteer-intrests:
+    handler: com.smilestreet.SaveVolunteerIntrestsHandaler
+    events:
+      - http:
+          path: /SaveVolunteerIntrests/{volunteer_id}
+          method: put
+          cors: true

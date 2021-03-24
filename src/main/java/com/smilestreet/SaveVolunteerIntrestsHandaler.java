@@ -58,7 +58,23 @@ public class SaveVolunteerIntrestsHandaler implements RequestHandler<APIGatewayP
                             "Accessibility=? Mental_Health=? ,Event_Planning=? Gardening=?" +
                             "Music =? ,Dance=?  WHERE volunteer_id = ? ");
 
-            preparedStatement.setString(1, );
+            preparedStatement.setBoolean(1,i.isWeb_Design() );
+            preparedStatement.setBoolean(2,i.isSEO());
+            preparedStatement.setBoolean(3,i.isGraphic_Design());
+            preparedStatement.setBoolean(4,i.isTeaching();
+            preparedStatement.setBoolean(5,i.isPublic_Health());
+            preparedStatement.setBoolean(6,i.isEmpowerment());
+            preparedStatement.setBoolean(7,i.isSports());
+            preparedStatement.setBoolean(8,i.isConstruction());
+            preparedStatement.setBoolean(9,i.isCooking());
+            preparedStatement.setBoolean(10,i.isAccessibility());
+            preparedStatement.setBoolean(11,i.isMental_Health());
+            preparedStatement.setBoolean(12,i.isEvent_Planning());
+            preparedStatement.setBoolean(13,i.isMusic());
+            preparedStatement.setBoolean(14,i.isDance());
+            preparedStatement.setString(15, volunteerId);
+
+
 
             LOG.debug("this is the prepared statement object");
 

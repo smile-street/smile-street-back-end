@@ -35,6 +35,10 @@ public class SaveVolunteerIntrests {
         Dance = dance;
     }
 
+    public SaveVolunteerIntrests(){
+
+    }
+
     public boolean isWeb_Design() {
         return Web_Design;
     }
