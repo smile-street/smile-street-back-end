@@ -24,12 +24,13 @@ public class SaveGoodCauseOpportunity {
     private boolean Gardening;
     private boolean Music;
     private boolean Dance;
+    private String Location;
 
     public SaveGoodCauseOpportunity() {
 
     }
 
-    public SaveGoodCauseOpportunity(String opportunityname, String opportunitydescription, Date opportunitydate, boolean web_design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance) {
+    public SaveGoodCauseOpportunity(String opportunityname, String opportunitydescription, Date opportunitydate, boolean web_design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance, String location) {
         this.opportunityname = opportunityname;
         this.opportunitydescription = opportunitydescription;
         this.opportunitydate = opportunitydate;
@@ -48,6 +49,7 @@ public class SaveGoodCauseOpportunity {
         Gardening = gardening;
         Music = music;
         Dance = dance;
+        Location = location;
     }
 
     public String getOpportunityname() {
@@ -192,5 +194,13 @@ public class SaveGoodCauseOpportunity {
 
     public void setDance(boolean dance) {
         Dance = dance;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
     }
 }
