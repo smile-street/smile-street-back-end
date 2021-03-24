@@ -51,17 +51,12 @@ public class SaveVolunteerIntrestsHandaler implements RequestHandler<APIGatewayP
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement  = connection.prepareStatement(
-                    "UPDATE volunteer SET Web_Design = ?, SEO = ? , Graphic_Design= ? , Teaching = ? , " +
-                            "Public_Health = ? " +
-                            "Empowerment =? ,Sports=?,Construction=? ,Cooking=?" +
-                            "Accessibility=? Mental_Health=? ,Event_Planning=? Gardening=?" +
-                            "Music =? ,Dance=?  WHERE volunteer_id = ? ");
+            preparedStatement  = connection.prepareStatement("UPDATE volunteer SET Web_Design = ?, SEO = ? , Graphic_Design= ? , Teaching = ? , Public_Health = ?  ,Empowerment = ? ,Sports= ?,Construction= ? ,Cooking= ? , Accessibility= ? Mental_Health= ? ,Event_Planning= ? Gardening= ?  Music = ? ,Dance= ?  WHERE volunteer_id = ? ");
 
             preparedStatement.setBoolean(1,i.isWeb_Design() );
             preparedStatement.setBoolean(2,i.isSEO());
             preparedStatement.setBoolean(3,i.isGraphic_Design());
-            preparedStatement.setBoolean(4,i.isTeaching();
+            preparedStatement.setBoolean(4,i.isTeaching());
             preparedStatement.setBoolean(5,i.isPublic_Health());
             preparedStatement.setBoolean(6,i.isEmpowerment());
             preparedStatement.setBoolean(7,i.isSports());

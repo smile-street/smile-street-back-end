@@ -17,6 +17,12 @@ public class SaveVolunteerIntrests {
     private boolean Music;
     private boolean Dance;
 
+
+
+    public SaveVolunteerIntrests(){
+
+    }
+
     public SaveVolunteerIntrests(boolean web_Design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance) {
         Web_Design = web_Design;
         this.SEO = SEO;
@@ -33,10 +39,6 @@ public class SaveVolunteerIntrests {
         Gardening = gardening;
         Music = music;
         Dance = dance;
-    }
-
-    public SaveVolunteerIntrests(){
-
     }
 
     public boolean isWeb_Design() {
