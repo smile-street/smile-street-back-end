@@ -2,6 +2,8 @@ package com.smilestreet;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.smilestreet.model.GetVolunteerMatches;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,17 +18,16 @@ import java.util.Map;
 
 
 public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    private static final Logger LOG= LogManager.getLogger(GetVolunteerMatchesHandler.class);
+    //private static final Logger LOG= LogManager.getLogger(GetVolunteerMatchesHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet=null;
 
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
-        List<GetVolunteerMatches> volunteerMatch = null;
-        String volunteer_id = request.getPathParameters().get("volunteer_id");
+        List<GetVolunteerMatches> locDates = null;
         try {
-            volunteerMatch = new ArrayList<>();
+            locDates = new ArrayList<>();
             Class.forName("com.mysql.jdbc.Driver");
 
             connection = DriverManager.getConnection(String.format("jdbc:mysql://%s/%s?user=%s&password=%s",
@@ -35,26 +36,22 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")
             ));
-            preparedStatement = connection.prepareStatement("SELECT * FROM good_cause_opportunity" +
-                    "WHERE good_cause_opportunity.opportunitydate BETWEEN" +
-                    "(SELECT volunteer.startdate FROM volunteer WHERE volunteer.vol_id =? )" +
-                    "AND" +
-                    "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = ?);");
-
-            preparedStatement.setString(1, volunteer_id );
-            preparedStatement.setString(2, volunteer_id );
-
+            preparedStatement = connection.prepareStatement(
+                            "SELECT * FROM good_cause_opportunity" +
+                            "WHERE good_cause_opportunity.good_cause_opportunity_id NOT IN" +
+                            "( SELECT matching_list.join_id FROM matching_list WHERE matching_list.voln_id = 1234 )" +
+                            "AND good_cause_opportunity.opportunitydate BETWEEN" +
+                            "( SELECT volunteer.startdate FROM volunteer WHERE volunteer.vol_id = 1234 )" +
+                            "AND" +
+                            "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = 1234 );");
             resultSet = preparedStatement.executeQuery();
-
-
             while (resultSet.next()) {
-                GetVolunteerMatches vMatch=new GetVolunteerMatches(resultSet.getString("good_cause_opportunity_id"));
+                 skill=new Skill(resultSet.getInt("skill_id"),
+                        resultSet.getString("skillname"));
 
-                volunteerMatch.add(vMatch);
+                skills.add(skill);
+
             }
-
-
-            ============================================================
         } catch (Exception e) {
             LOG.error(String.format("unable to query database"));
         }
