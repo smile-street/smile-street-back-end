@@ -17,28 +17,26 @@ public class SaveVolunteerIntrests {
     private boolean Music;
     private boolean Dance;
 
-
-
-    public SaveVolunteerIntrests(){
-
+    public SaveVolunteerIntrests(boolean web_Design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance) {
+        this.Web_Design = web_Design;
+        this.SEO = SEO;
+        this.Graphic_Design = graphic_Design;
+        this.Teaching = teaching;
+        this.Public_Health = public_Health;
+        this.Empowerment = empowerment;
+        this.Sports = sports;
+        this.Construction = construction;
+        this.Cooking = cooking;
+        this.Accessibility = accessibility;
+        this.Mental_Health = mental_Health;
+        this.Event_Planning = event_Planning;
+        this.Gardening = gardening;
+        this.Music = music;
+        this.Dance = dance;
     }
 
-    public SaveVolunteerIntrests(boolean web_Design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance) {
-        Web_Design = web_Design;
-        this.SEO = SEO;
-        Graphic_Design = graphic_Design;
-        Teaching = teaching;
-        Public_Health = public_Health;
-        Empowerment = empowerment;
-        Sports = sports;
-        Construction = construction;
-        Cooking = cooking;
-        Accessibility = accessibility;
-        Mental_Health = mental_Health;
-        Event_Planning = event_Planning;
-        Gardening = gardening;
-        Music = music;
-        Dance = dance;
+    public  SaveVolunteerIntrests(){
+
     }
 
     public boolean isWeb_Design() {
@@ -46,7 +44,7 @@ public class SaveVolunteerIntrests {
     }
 
     public void setWeb_Design(boolean web_Design) {
-        Web_Design = web_Design;
+        this.Web_Design = web_Design;
     }
 
     public boolean isSEO() {
@@ -62,7 +60,7 @@ public class SaveVolunteerIntrests {
     }
 
     public void setGraphic_Design(boolean graphic_Design) {
-        Graphic_Design = graphic_Design;
+        this.Graphic_Design = graphic_Design;
     }
 
     public boolean isTeaching() {

@@ -50,7 +50,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
                     System.getenv("DB_PASSWORD")));
 
             preparedStatement  = connection.prepareStatement(
-                    "UPDATE volunteer SET employername = ?, primarylocation = ? , numberofdays= ? , startdate = ? , enddate = ?  WHERE volunteer_id = ? ");
+                    "UPDATE volunteer SET employername = ? , primarylocation = ? , numberofdays= ? , startdate = ? , enddate = ?  WHERE volunteer_id = ? ");
 
             preparedStatement.setString(1, v.getEmployername());
             preparedStatement.setString(2, v.getPrimarylocation());

@@ -51,9 +51,9 @@ public class SaveVolunteerIntrestsHandaler implements RequestHandler<APIGatewayP
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement  = connection.prepareStatement("UPDATE volunteer SET Web_Design = ?, SEO = ? , Graphic_Design= ? , Teaching = ? , Public_Health = ?  ,Empowerment = ? ,Sports= ?,Construction= ? ,Cooking= ? , Accessibility= ? Mental_Health= ? ,Event_Planning= ? Gardening= ?  Music = ? ,Dance= ?  WHERE volunteer_id = ? ");
+            preparedStatement  = connection.prepareStatement("UPDATE volunteer SET Web_Design = ? , SEO = ? , Graphic_Design= ? , Teaching = ? , Public_Health = ?  ,Empowerment = ? ,Sports= ?,Construction= ? ,Cooking= ? , Accessibility= ? ,Mental_Health= ? ,Event_Planning= ? ,Gardening= ? , Music = ? ,Dance= ?  WHERE volunteer_id = ? ");
 
-            preparedStatement.setBoolean(1,i.isWeb_Design() );
+            preparedStatement.setBoolean(1,i.isWeb_Design());
             preparedStatement.setBoolean(2,i.isSEO());
             preparedStatement.setBoolean(3,i.isGraphic_Design());
             preparedStatement.setBoolean(4,i.isTeaching());
@@ -65,9 +65,10 @@ public class SaveVolunteerIntrestsHandaler implements RequestHandler<APIGatewayP
             preparedStatement.setBoolean(10,i.isAccessibility());
             preparedStatement.setBoolean(11,i.isMental_Health());
             preparedStatement.setBoolean(12,i.isEvent_Planning());
-            preparedStatement.setBoolean(13,i.isMusic());
-            preparedStatement.setBoolean(14,i.isDance());
-            preparedStatement.setString(15, volunteerId);
+            preparedStatement.setBoolean(13,i.isGardening());
+            preparedStatement.setBoolean(14,i.isMusic());
+            preparedStatement.setBoolean(15,i.isDance());
+            preparedStatement.setString(16, volunteerId);
 
 
 
