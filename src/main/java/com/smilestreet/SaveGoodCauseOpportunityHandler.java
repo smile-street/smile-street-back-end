@@ -52,7 +52,7 @@ public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewa
 
 
             preparedStatement  = connection.prepareStatement(
-                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydate, opportunitydescription, good_cause_uid, web_design, SEO, Graphic_Design, Teaching, Public_Health, Empowerment, Sports, Construction, Cooking, Accessibility, Mental_Health, Event_Planning, Gardening, Music, Dance) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    "INSERT INTO good_cause_opportunity (good_cause_opportunity_id, opportunityname, opportunitydate, opportunitydescription, good_cause_uid, web_design, SEO, Graphic_Design, Teaching, Public_Health, Empowerment, Sports, Construction, Cooking, Accessibility, Mental_Health, Event_Planning, Gardening, Music, Dance, Location) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             preparedStatement.setString(1, UUID.randomUUID().toString());
             preparedStatement.setString(2, v.getOpportunityname());
@@ -74,6 +74,7 @@ public class SaveGoodCauseOpportunityHandler implements RequestHandler<APIGatewa
             preparedStatement.setBoolean(18, v.isGardening());
             preparedStatement.setBoolean(19, v.isMusic());
             preparedStatement.setBoolean(20, v.isDance());
+            preparedStatement.setString(21, v.getLocation());
 
 
 
