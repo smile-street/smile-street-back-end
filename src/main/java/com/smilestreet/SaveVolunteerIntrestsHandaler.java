@@ -41,7 +41,7 @@ public class SaveVolunteerIntrestsHandaler implements RequestHandler<APIGatewayP
         try {
 
             LOG.debug("trying");
-            SaveVolunteerIntrests i = objMapper.readValue(requestBody, SaveVolunteerIntrests.class);
+            SaveVolunteerIntrests v = objMapper.readValue(requestBody, SaveVolunteerIntrests.class);
 
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -51,23 +51,24 @@ public class SaveVolunteerIntrestsHandaler implements RequestHandler<APIGatewayP
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement  = connection.prepareStatement("UPDATE volunteer SET Web_Design = ? , SEO = ? , Graphic_Design= ? , Teaching = ? , Public_Health = ?  ,Empowerment = ? ,Sports= ?,Construction= ? ,Cooking= ? , Accessibility= ? ,Mental_Health= ? ,Event_Planning= ? ,Gardening= ? , Music = ? ,Dance= ?  WHERE volunteer_id = ? ");
+            preparedStatement  = connection.prepareStatement("UPDATE volunteer SET web_design = ? , SEO = ? , Graphic_Design= ? , Teaching = ? , Public_Health = ?  ,Empowerment = ? ,Sports= ?,Construction= ? ,Cooking= ? , Accessibility= ? ,Mental_Health= ? ,Event_Planning= ? ,Gardening= ? , Music = ? ,Dance= ?  WHERE volunteer_id = ? ");
 
-            preparedStatement.setBoolean(1,i.isWeb_Design());
-            preparedStatement.setBoolean(2,i.isSEO());
-            preparedStatement.setBoolean(3,i.isGraphic_Design());
-            preparedStatement.setBoolean(4,i.isTeaching());
-            preparedStatement.setBoolean(5,i.isPublic_Health());
-            preparedStatement.setBoolean(6,i.isEmpowerment());
-            preparedStatement.setBoolean(7,i.isSports());
-            preparedStatement.setBoolean(8,i.isConstruction());
-            preparedStatement.setBoolean(9,i.isCooking());
-            preparedStatement.setBoolean(10,i.isAccessibility());
-            preparedStatement.setBoolean(11,i.isMental_Health());
-            preparedStatement.setBoolean(12,i.isEvent_Planning());
-            preparedStatement.setBoolean(13,i.isGardening());
-            preparedStatement.setBoolean(14,i.isMusic());
-            preparedStatement.setBoolean(15,i.isDance());
+
+            preparedStatement.setBoolean(1,v.isWeb_design());
+            preparedStatement.setBoolean(2, v.isSEO());
+            preparedStatement.setBoolean(3, v.isGraphic_Design());
+            preparedStatement.setBoolean(4, v.isTeaching());
+            preparedStatement.setBoolean(5, v.isPublic_Health());
+            preparedStatement.setBoolean(6, v.isEmpowerment());
+            preparedStatement.setBoolean(7, v.isSports());
+            preparedStatement.setBoolean(8, v.isConstruction());
+            preparedStatement.setBoolean(9, v.isCooking());
+            preparedStatement.setBoolean(10, v.isAccessibility());
+            preparedStatement.setBoolean(11, v.isMental_Health());
+            preparedStatement.setBoolean(12, v.isEvent_Planning());
+            preparedStatement.setBoolean(13, v.isGardening());
+            preparedStatement.setBoolean(14, v.isMusic());
+            preparedStatement.setBoolean(15, v.isDance());
             preparedStatement.setString(16, volunteerId);
 
 
