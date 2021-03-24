@@ -1,9 +1,11 @@
+
 package com.smilestreet;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.smilestreet.model.SaveVolunteerIntrests;
 import com.smilestreet.model.VolunteerAvailability;
 import jdk.incubator.jpackage.internal.Log;
 import org.apache.logging.log4j.LogManager;
@@ -13,9 +15,9 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class SaveVolunteerIntrestsHandaler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    private static final Logger LOG = LogManager.getLogger(SaveVolunteerAvailabilityHandler.class);
+    private static final Logger LOG = LogManager.getLogger(SaveVolunteerIntrestsHandaler.class);
 
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
@@ -26,7 +28,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
         LOG.info("received the request");
 
         String volunteerId = request.getPathParameters().get("volunteer_id");
-       // Log.info(volunteerId);
+        // Log.info(volunteerId);
         String requestBody = request.getBody();
         ObjectMapper objMapper = new ObjectMapper();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
@@ -39,7 +41,7 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
         try {
 
             LOG.debug("trying");
-            VolunteerAvailability v = objMapper.readValue(requestBody, VolunteerAvailability.class);
+            SaveVolunteerIntrests i = objMapper.readValue(requestBody, SaveVolunteerIntrests.class);
 
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -49,15 +51,27 @@ public class SaveVolunteerAvailabilityHandler implements RequestHandler<APIGatew
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement  = connection.prepareStatement(
-                    "UPDATE volunteer SET employername = ? , primarylocation = ? , numberofdays= ? , startdate = ? , enddate = ?  WHERE volunteer_id = ? ");
+            preparedStatement  = connection.prepareStatement("UPDATE volunteer SET Web_Design = ? , SEO = ? , Graphic_Design= ? , Teaching = ? , Public_Health = ?  ,Empowerment = ? ,Sports= ?,Construction= ? ,Cooking= ? , Accessibility= ? ,Mental_Health= ? ,Event_Planning= ? ,Gardening= ? , Music = ? ,Dance= ?  WHERE volunteer_id = ? ");
 
-            preparedStatement.setString(1, v.getEmployername());
-            preparedStatement.setString(2, v.getPrimarylocation());
-            preparedStatement.setInt(3, v.getNumberofdays());
-            preparedStatement.setDate(4, v.getStartdate());
-            preparedStatement.setDate(5, v.getEnddate());
-            preparedStatement.setString(6, volunteerId);
+            preparedStatement.setBoolean(1,i.isWeb_Design());
+            preparedStatement.setBoolean(2,i.isSEO());
+            preparedStatement.setBoolean(3,i.isGraphic_Design());
+            preparedStatement.setBoolean(4,i.isTeaching());
+            preparedStatement.setBoolean(5,i.isPublic_Health());
+            preparedStatement.setBoolean(6,i.isEmpowerment());
+            preparedStatement.setBoolean(7,i.isSports());
+            preparedStatement.setBoolean(8,i.isConstruction());
+            preparedStatement.setBoolean(9,i.isCooking());
+            preparedStatement.setBoolean(10,i.isAccessibility());
+            preparedStatement.setBoolean(11,i.isMental_Health());
+            preparedStatement.setBoolean(12,i.isEvent_Planning());
+            preparedStatement.setBoolean(13,i.isGardening());
+            preparedStatement.setBoolean(14,i.isMusic());
+            preparedStatement.setBoolean(15,i.isDance());
+            preparedStatement.setString(16, volunteerId);
+
+
+
             LOG.debug("this is the prepared statement object");
 
             LOG.debug(preparedStatement);
