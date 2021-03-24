@@ -2,8 +2,10 @@ package com.smilestreet;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.smilestreet.model.GetVolunteerMatchSingle;
+import com.smilestreet.model.GetVolunteerMatches;
 import com.smilestreet.model.GetVolunteerMatchesOpportunityObject;
-import com.smilestreet.model.Volunteer;
+import com.smilestreet.model.GetVolunteerMatchSingle;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +20,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
     //private static final Logger LOG= LogManager.getLogger(GetVolunteerMatchesHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet=null;
+    private ResultSet resultSet = null;
 
     @Override
     public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
@@ -34,7 +36,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                     System.getenv("DB_PASSWORD")
             ));
             preparedStatement = connection.prepareStatement(
-                            "SELECT * FROM good_cause_opportunity" +
+                    "SELECT * FROM good_cause_opportunity" +
                             "WHERE good_cause_opportunity.good_cause_opportunity_id NOT IN" +
                             "( SELECT matching_list.join_id FROM matching_list WHERE matching_list.voln_id = 1234 )" +
                             "AND good_cause_opportunity.opportunitydate BETWEEN" +
@@ -43,30 +45,30 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                             "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = 1234 );");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-            GetVolunteerMatchesOpportunityObject MatchedLocationAndData=new GetVolunteerMatchesOpportunityObject(resultSet.getString("good_cause_opportunity_id"),
+                GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject(resultSet.getString("good_cause_opportunity_id"),
                         resultSet.getString("opportunityname"),
-                            resultSet.getDate("opportunitydate"),
-                            resultSet.getString("opportunitydescription"),
-                            resultSet.getString("good_cause_uid"),
-                    resultSet.getInt("joining_id"),
-                    resultSet.getBoolean("Web_Design"),
-                    resultSet.getBoolean("SEO"),
-                    resultSet.getBoolean("Graphic_Design"),
-                    resultSet.getBoolean("Teaching"),
-                    resultSet.getBoolean("Public_Health"),
-                    resultSet.getBoolean("Empowerment"),
-                    resultSet.getBoolean("Sports"),
-                    resultSet.getBoolean("Construction"),
-                    resultSet.getBoolean("Cooking"),
-                    resultSet.getBoolean("Accessibility"),
-                    resultSet.getBoolean("Mental_Health"),
-                    resultSet.getBoolean("Event_Planning"),
-                    resultSet.getBoolean("Gardening"),
-                    resultSet.getBoolean("Music"),
-                            resultSet.getBoolean("Dance"),
-                            resultSet.getString("Location"));
+                        resultSet.getDate("opportunitydate"),
+                        resultSet.getString("opportunitydescription"),
+                        resultSet.getString("good_cause_uid"),
+                        resultSet.getInt("joining_id"),
+                        resultSet.getBoolean("Web_Design"),
+                        resultSet.getBoolean("SEO"),
+                        resultSet.getBoolean("Graphic_Design"),
+                        resultSet.getBoolean("Teaching"),
+                        resultSet.getBoolean("Public_Health"),
+                        resultSet.getBoolean("Empowerment"),
+                        resultSet.getBoolean("Sports"),
+                        resultSet.getBoolean("Construction"),
+                        resultSet.getBoolean("Cooking"),
+                        resultSet.getBoolean("Accessibility"),
+                        resultSet.getBoolean("Mental_Health"),
+                        resultSet.getBoolean("Event_Planning"),
+                        resultSet.getBoolean("Gardening"),
+                        resultSet.getBoolean("Music"),
+                        resultSet.getBoolean("Dance"),
+                        resultSet.getString("Location"));
 
-            //all opportunites that match the volunteers location and dates are in the array
+                //all opportunites that match the volunteers location and dates are in the array
                 locDates.add(MatchedLocationAndData);
             }
 
@@ -85,6 +87,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                         resultSet.getString("employername"),
                         resultSet.getString("primarylocation"),
                         resultSet.getInt("numberofdays"),
+
                         resultSet.getDate("datetime"),
                         resultSet.getDate("enddate"),
                         resultSet.getBoolean("Web_Design"),
@@ -104,19 +107,12 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                         resultSet.getBoolean("Dance"));
 
 
-
-
             }
-            int count =0;
-            for (GetVolunteerMatchesOpportunityObject A : locDates){
-                if (A.isAccessibility() == v1.){
 
-                }
-            }
+
         } catch (Exception e) {
-           // LOG.error(String.format("unable to query database"));
-        }
-        finally {
+            // LOG.error(String.format("unable to query database"));
+        } finally {
             closeConnection();
         }
 
@@ -126,6 +122,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                 .setObjectBody(locDates)
                 .build();
     }
+
     private void closeConnection() {
         try {
             if (resultSet != null) {
@@ -142,8 +139,15 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
         }
     }
 
+    public ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc (GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject>locDates) {
 
-}
+        int count = 0;
+        for (GetVolunteerMatchesOpportunityObject A : locDates) {
+            if (A.isAccessibility() ==) {
+
+        }
+    }
+
         
 
 
