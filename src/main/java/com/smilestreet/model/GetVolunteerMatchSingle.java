@@ -30,8 +30,13 @@ public class GetVolunteerMatchSingle {
     private boolean Gardening;
     private boolean Music;
     private boolean Dance;
+    private int voln_id;
 
-    public GetVolunteerMatchSingle(int vol_id, String volunteer_id, String firstname, String lastname, String contactnumber, String username, String employername, String primarylocation, int numberofdays, Date startdate, Date enddate, boolean web_Design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance) {
+    public GetVolunteerMatchSingle(){
+
+    }
+
+    public GetVolunteerMatchSingle(int vol_id, String volunteer_id, String firstname, String lastname, String contactnumber, String username, String employername, String primarylocation, int numberofdays, Date startdate, Date enddate, boolean web_Design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance, int voln_id) {
         this.vol_id = vol_id;
         this.volunteer_id = volunteer_id;
         this.firstname = firstname;
@@ -58,6 +63,13 @@ public class GetVolunteerMatchSingle {
         Gardening = gardening;
         Music = music;
         Dance = dance;
+        this.voln_id = voln_id;
+    }
+
+    public GetVolunteerMatchSingle(int vol_id) {
+    }
+
+    public GetVolunteerMatchSingle(int vol_id, String volunteer_id, String firstname, String lastname, String contactnumber, String username, String employername, String primarylocation, int numberofdays, java.sql.Date datetime, java.sql.Date enddate, boolean web_design, boolean seo, boolean graphic_design, boolean teaching, boolean public_health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_health, boolean event_planning, boolean gardening, boolean music, boolean dance) {
     }
 
     public int getVol_id() {
@@ -266,5 +278,13 @@ public class GetVolunteerMatchSingle {
 
     public void setDance(boolean dance) {
         Dance = dance;
+    }
+
+    public int getVoln_id() {
+        return voln_id;
+    }
+
+    public void setVoln_id(int voln_id) {
+        this.voln_id = voln_id;
     }
 }

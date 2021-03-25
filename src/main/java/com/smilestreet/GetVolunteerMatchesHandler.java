@@ -2,30 +2,34 @@ package com.smilestreet;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.smilestreet.model.GetVolunteerMatchSingle;
-import com.smilestreet.model.GetVolunteerMatches;
 import com.smilestreet.model.GetVolunteerMatchesOpportunityObject;
-import com.smilestreet.model.GetVolunteerMatchSingle;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
-public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Object>, ApiGatewayResponse> {
-    //private static final Logger LOG= LogManager.getLogger(GetVolunteerMatchesHandler.class);
+public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProxyRequestEvent, ApiGatewayResponse> {
+    private static final Logger LOG= LogManager.getLogger(GetVolunteerMatchesHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
     @Override
-    public ApiGatewayResponse handleRequest(Map<String, Object> input, Context context) {
+    public ApiGatewayResponse handleRequest(APIGatewayProxyRequestEvent request, Context context) {
         List<GetVolunteerMatchesOpportunityObject> locDates = null;
+         String volunteer_id = request.getPathParameters().get("volunteer_id");
+
+
+        ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch = null;
         try {
+            LOG.debug("try 1");
             locDates = new ArrayList<>();
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -35,15 +39,35 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")
             ));
-            preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM good_cause_opportunity" +
-                            "WHERE good_cause_opportunity.good_cause_opportunity_id NOT IN" +
-                            "( SELECT matching_list.join_id FROM matching_list WHERE matching_list.voln_id = 1234 )" +
-                            "AND good_cause_opportunity.opportunitydate BETWEEN" +
-                            "( SELECT volunteer.startdate FROM volunteer WHERE volunteer.vol_id = 1234 )" +
-                            "AND" +
-                            "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = 1234 );");
+
+            //we get the volunteer_id
+            preparedStatement = connection.prepareStatement("SELECT vol_id FROM volunteer WHERE volunteer_id=?");
+
+            LOG.debug("try get vol_id, input volunteer ");
+
+            preparedStatement.setString(1, volunteer_id);
             resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                GetVolunteerMatchSingle v2 = new GetVolunteerMatchSingle(resultSet.getInt("vol_id"));
+
+                        preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM good_cause_opportunity " +
+                                "WHERE good_cause_opportunity.good_cause_opportunity_id NOT IN " +
+                                "( SELECT matching_list.join_id FROM matching_list WHERE matching_list.voln_id = ? ) " +
+                                "AND good_cause_opportunity.opportunitydate BETWEEN " +
+                                "( SELECT volunteer.startdate FROM volunteer WHERE volunteer.vol_id = ?) " +
+                                "AND " +
+                                "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = ? ); ");
+
+                LOG.debug("match on location and dates");
+
+                preparedStatement.setInt(1, v2.getVol_id() );
+                preparedStatement.setInt(2, v2.getVol_id());
+                preparedStatement.setInt(3, v2.getVol_id());
+
+                resultSet = preparedStatement.executeQuery();
+                System.out.print(resultSet + " locdates object query");
+            }
             while (resultSet.next()) {
                 GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject(resultSet.getString("good_cause_opportunity_id"),
                         resultSet.getString("opportunityname"),
@@ -73,9 +97,15 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
             }
 
             preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM volunteer");
+                    "SELECT * FROM volunteer WHERE volunteer_id=?");
+
+            LOG.debug("volunteer object query ");
+
+            preparedStatement.setString(1, volunteer_id);
 
             resultSet = preparedStatement.executeQuery();
+
+            LOG.debug(resultSet + " select * from volunteer");
             while (resultSet.next()) {
 
                 GetVolunteerMatchSingle v1 = new GetVolunteerMatchSingle(resultSet.getInt("vol_id"),
@@ -106,12 +136,14 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                         resultSet.getBoolean("Music"),
                         resultSet.getBoolean("Dance"));
 
-
+                finalMatch = MatchFunc(v1, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
             }
 
 
+            
+
         } catch (Exception e) {
-            // LOG.error(String.format("unable to query database"));
+           LOG.error(String.format("unable to query database"),e);
         } finally {
             closeConnection();
         }
@@ -119,7 +151,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
 
         return ApiGatewayResponse.builder()
                 .setStatusCode(200)
-                .setObjectBody(locDates)
+                .setObjectBody(finalMatch)
                 .build();
     }
 
@@ -135,33 +167,64 @@ public class GetVolunteerMatchesHandler implements RequestHandler<Map<String, Ob
                 connection.close();
             }
         } catch (Exception e) {
-            //LOG.error("unable to close connection", e.getMessage());
+            LOG.error("unable to close connection", e.getMessage());
         }
     }
 
     // function matches the array ist containing the matching location and dates with the skills of our volunteer and saves that in a arraylist of
     //Matched opportunities
-    public ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc (GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject>locDates) {
+    public static ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc(GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject> locDates) {
+        List<GetVolunteerMatchesOpportunityObject> finalMatched = null;
+        finalMatched = new ArrayList<>();
 
         int count = 0;
         for (GetVolunteerMatchesOpportunityObject A : locDates) {
-            if (A.isAccessibility() == V.isAccessibility())
-            count +=1;
-            if
+
+            if (A.isWeb_Design() == true && A.isWeb_Design() == V.isWeb_Design())
+                count += 1;
+            if (A.isSEO() == true && A.isSEO() == V.isSEO())
+                count += 1;
+            if (A.isGraphic_Design() == true && A.isGraphic_Design() == V.isGraphic_Design())
+                count += 1;
+            if (A.isTeaching() == true && A.isGraphic_Design() == V.isGraphic_Design())
+                count += 1;
+            if (A.isPublic_Health() == true && A.isPublic_Health() == V.isPublic_Health())
+                count += 1;
+            if (A.isEmpowerment() == true && A.isEmpowerment() == V.isEmpowerment())
+                count += 1;
+            if (A.isSports() == true && A.isSports() == V.isSports())
+                count += 1;
+            if (A.isConstruction() == true && A.isConstruction() == V.isConstruction())
+                count += 1;
+            if (A.isCooking() == true && A.isCooking() == V.isCooking())
+                count += 1;
+            if (A.isAccessibility() == true && A.isAccessibility() == V.isAccessibility())
+                count += 1;
+            if (A.isMental_Health() == true && A.isMental_Health() == V.isMental_Health())
+                count += 1;
+            if (A.isEvent_Planning() == true && A.isEvent_Planning() == V.isEvent_Planning())
+                count += 1;
+            if (A.isGardening() == true && A.isGardening() == V.isGardening())
+                count += 1;
+            if (A.isMusic() == true && A.isMusic() == V.isMusic())
+                count += 1;
+            if (A.isDance() == true && A.isDance() == V.isDance())
+                count += 1;
+
+            if (count >= 3) {
+
+                A.setVol_id(V.getVol_id());
+
+                finalMatched.add(A);
 
 
-                //if count == 3, add obj to GetOpportubnitiesArray
 
-            // finish matching each parameter
-            // declare a second getVolunteermatchesopportunityobject array
-            // save opportunities with 3 or more matches in that array.
-
-            // what paramters does the match object need????
+            }
 
         }
+        return (ArrayList<GetVolunteerMatchesOpportunityObject>) finalMatched;
     }
-
-        
+}
 
 
 
