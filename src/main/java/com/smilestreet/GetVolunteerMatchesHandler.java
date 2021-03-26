@@ -25,10 +25,10 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
         List<GetVolunteerMatchesOpportunityObject> locDates = null;
         String volunteer_id = request.getPathParameters().get("volunteer_id");
-        ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch = null;
-        finalMatch = new ArrayList<>();
+
         GetVolunteerMatchSingle v2 = new GetVolunteerMatchSingle();
 
+        ArrayList finalMatch = null;
         try {
             LOG.debug("try 1");
             locDates = new ArrayList<>();
@@ -42,7 +42,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             ));
 
             //we get the volunteer_id
-            preparedStatement = connection.prepareStatement("SELECT vol_id FROM volunteer WHERE volunteer_id=?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM volunteer WHERE volunteer_id=?");
 
             LOG.debug("try get vol_id, input volunteer ");
 
@@ -52,28 +52,56 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             while (resultSet.next()) {
 
                 v2.setVol_id(resultSet.getInt("vol_id"));
+                v2.setFirstname(resultSet.getString("firstname"));
+                v2.setLastname(resultSet.getString("lastname"));
+                v2.setContactnumber(resultSet.getString("contactnumber"));
+                v2.setUsername(resultSet.getString("username"));
+                v2.setEmployername(resultSet.getString("employername"));
+                v2.setPrimarylocation(resultSet.getString("primarylocation"));
+                v2.setNumberofdays(resultSet.getInt("numberofdays"));
+
+                v2.setWeb_Design(resultSet.getBoolean("Web_Design"));
+                v2.setSEO(resultSet.getBoolean("SEO"));
+                v2.setGraphic_Design(resultSet.getBoolean("Graphic_Design"));
+                v2.setTeaching(resultSet.getBoolean("Teaching"));
+                v2.setPublic_Health(resultSet.getBoolean("Public_Health"));
+                v2.setEmpowerment(resultSet.getBoolean("Empowerment"));
+                v2.setSports(resultSet.getBoolean("Sports"));
+                v2.setConstruction(resultSet.getBoolean("Construction"));
+                v2.setCooking(resultSet.getBoolean("Cooking"));
+                v2.setAccessibility(resultSet.getBoolean("Accessibility"));
+                v2.setMental_Health(resultSet.getBoolean("Mental_Health"));
+                v2.setEvent_Planning(resultSet.getBoolean("Event_Planning"));
+                v2.setGardening(resultSet.getBoolean("Gardening"));
+                v2.setMusic(resultSet.getBoolean("Music"));
+                v2.setDance(resultSet.getBoolean("Dance"));
+
+
                 LOG.debug(v2);
                 LOG.debug("this is the vol_id " + v2.getVol_id());
+                LOG.debug("this is the first name " + v2.getFirstname());
+                LOG.debug("this is the web design " + v2.isWeb_Design());
+                LOG.debug("this is the primary locatio " + v2.getPrimarylocation());
 
             }
 
             preparedStatement = connection.prepareStatement(
-                        "SELECT * FROM good_cause_opportunity " +
-                                "WHERE good_cause_opportunity.good_cause_opportunity_id NOT IN " +
-                                "( SELECT matching_list.join_id FROM matching_list WHERE matching_list.voln_id = ? ) " +
-                                "AND good_cause_opportunity.opportunitydate BETWEEN " +
-                                "( SELECT volunteer.startdate FROM volunteer WHERE volunteer.vol_id = ?) " +
-                                "AND " +
-                                "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = ? ); ");
+                    "SELECT * FROM good_cause_opportunity " +
+                            "WHERE good_cause_opportunity.good_cause_opportunity_id NOT IN " +
+                            "( SELECT matching_list.join_id FROM matching_list WHERE matching_list.voln_id = ? ) " +
+                            "AND good_cause_opportunity.opportunitydate BETWEEN " +
+                            "( SELECT volunteer.startdate FROM volunteer WHERE volunteer.vol_id = ?) " +
+                            "AND " +
+                            "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = ? ); ");
 
-                LOG.debug("match on location and dates");
+            LOG.debug("match on location and dates");
 
-                preparedStatement.setInt(1, v2.getVol_id());
-                preparedStatement.setInt(2, v2.getVol_id());
-                preparedStatement.setInt(3, v2.getVol_id());
+            preparedStatement.setInt(1, v2.getVol_id());
+            preparedStatement.setInt(2, v2.getVol_id());
+            preparedStatement.setInt(3, v2.getVol_id());
 
-                resultSet = preparedStatement.executeQuery();
-                LOG.debug(" locdates object query");
+            resultSet = preparedStatement.executeQuery();
+            LOG.debug(" locdates object query");
 
             while (resultSet.next()) {
                 GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject(resultSet.getString("good_cause_opportunity_id"),
@@ -105,62 +133,11 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 locDates.add(MatchedLocationAndData);
             }
 
+            finalMatch = MatchFunc(v2, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
 
-
-
-            preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM volunteer WHERE volunteer_id=?");
-
-            LOG.debug("volunteer object query ");
-
-            preparedStatement.setString(1, volunteer_id);
-
-            LOG.debug("volunteer id " + volunteer_id);
-
-            resultSet = preparedStatement.executeQuery();
-
-            LOG.debug(resultSet + "select * from volunteer");
-            while (resultSet.next()) {
-
-                GetVolunteerMatchSingle v1 = new GetVolunteerMatchSingle(resultSet.getInt("vol_id"),
-                        resultSet.getString("volunteer_id"),
-                        resultSet.getString("firstname"),
-                        resultSet.getString("lastname"),
-                        resultSet.getString("contactnumber"),
-                        resultSet.getString("username"),
-                        resultSet.getString("employername"),
-                        resultSet.getString("primarylocation"),
-                        resultSet.getInt("numberofdays"),
-
-                        resultSet.getDate("startdate"),
-                        resultSet.getDate("enddate"),
-
-                        resultSet.getBoolean("Web_Design"),
-                        resultSet.getBoolean("SEO"),
-                        resultSet.getBoolean("Graphic_Design"),
-                        resultSet.getBoolean("Teaching"),
-                        resultSet.getBoolean("Public_Health"),
-                        resultSet.getBoolean("Empowerment"),
-                        resultSet.getBoolean("Sports"),
-                        resultSet.getBoolean("Construction"),
-                        resultSet.getBoolean("Cooking"),
-                        resultSet.getBoolean("Accessibility"),
-                        resultSet.getBoolean("Mental_Health"),
-                        resultSet.getBoolean("Event_Planning"),
-                        resultSet.getBoolean("Gardening"),
-                        resultSet.getBoolean("Music"),
-                        resultSet.getBoolean("Dance"));
-
-                LOG.debug("firstname " + v1.getFirstname());
-
-                finalMatch = MatchFunc(v1, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
-            }
-
-
-            
 
         } catch (Exception e) {
-           LOG.error(String.format("unable to query database"),e);
+            LOG.error(String.format("unable to query database"), e);
         } finally {
             closeConnection();
         }
@@ -191,9 +168,8 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
     // function matches the array ist containing the matching location and dates with the skills of our volunteer and saves that in a arraylist of
     //Matched opportunities
     public static ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc(GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject> locDates) {
-        List<GetVolunteerMatchesOpportunityObject> finalMatched = null;
-        finalMatched = new ArrayList<>();
-
+        ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch = null;
+        finalMatch = new ArrayList<>();
         int count = 0;
         for (GetVolunteerMatchesOpportunityObject A : locDates) {
 
@@ -232,14 +208,14 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
                 A.setVol_id(V.getVol_id());
 
-                finalMatched.add(A);
+                finalMatch.add(A);
 
 
 
             }
 
         }
-        return (ArrayList<GetVolunteerMatchesOpportunityObject>) finalMatched;
+        return (ArrayList<GetVolunteerMatchesOpportunityObject>) finalMatch;
     }
 }
 

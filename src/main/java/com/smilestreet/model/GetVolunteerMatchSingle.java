@@ -66,11 +66,18 @@ public class GetVolunteerMatchSingle {
         this.voln_id = voln_id;
     }
 
-    public GetVolunteerMatchSingle(int vol_id) {
+
+
+    public GetVolunteerMatchSingle(int vol_id, String volunteer_id, String firstname, String lastname,
+                                   String contactnumber, String username, String employername, String primarylocation,
+                                   int numberofdays, java.sql.Date datetime, java.sql.Date enddate, boolean web_design,
+                                   boolean seo, boolean graphic_design, boolean teaching, boolean public_health,
+                                   boolean empowerment, boolean sports, boolean construction, boolean cooking,
+                                   boolean accessibility, boolean mental_health, boolean event_planning, boolean gardening,
+                                   boolean music, boolean dance) {
     }
 
-    public GetVolunteerMatchSingle(int vol_id, String volunteer_id, String firstname, String lastname, String contactnumber, String username, String employername, String primarylocation, int numberofdays, java.sql.Date datetime, java.sql.Date enddate, boolean web_design, boolean seo, boolean graphic_design, boolean teaching, boolean public_health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_health, boolean event_planning, boolean gardening, boolean music, boolean dance) {
-    }
+
 
     public int getVol_id() {
         return vol_id;
