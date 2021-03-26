@@ -1,5 +1,4 @@
 package com.smilestreet;
-
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
@@ -26,9 +25,10 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
         List<GetVolunteerMatchesOpportunityObject> locDates = null;
         String volunteer_id = request.getPathParameters().get("volunteer_id");
-
-
         ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch = null;
+        finalMatch = new ArrayList<>();
+        GetVolunteerMatchSingle v2 = new GetVolunteerMatchSingle();
+
         try {
             LOG.debug("try 1");
             locDates = new ArrayList<>();
@@ -50,12 +50,14 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                GetVolunteerMatchSingle v2 = new GetVolunteerMatchSingle(resultSet.getInt("vol_id"));
+
+                v2.setVol_id(resultSet.getInt("vol_id"));
                 LOG.debug(v2);
-                LOG.debug("this is the vol_id "  + v2.getVol_id());
+                LOG.debug("this is the vol_id " + v2.getVol_id());
 
+            }
 
-                        preparedStatement = connection.prepareStatement(
+            preparedStatement = connection.prepareStatement(
                         "SELECT * FROM good_cause_opportunity " +
                                 "WHERE good_cause_opportunity.good_cause_opportunity_id NOT IN " +
                                 "( SELECT matching_list.join_id FROM matching_list WHERE matching_list.voln_id = ? ) " +
@@ -72,7 +74,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
                 resultSet = preparedStatement.executeQuery();
                 LOG.debug(" locdates object query");
-            }
+
             while (resultSet.next()) {
                 GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject(resultSet.getString("good_cause_opportunity_id"),
                         resultSet.getString("opportunityname"),
@@ -103,6 +105,9 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 locDates.add(MatchedLocationAndData);
             }
 
+
+
+
             preparedStatement = connection.prepareStatement(
                     "SELECT * FROM volunteer WHERE volunteer_id=?");
 
@@ -110,9 +115,11 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
             preparedStatement.setString(1, volunteer_id);
 
+            LOG.debug("volunteer id " + volunteer_id);
+
             resultSet = preparedStatement.executeQuery();
 
-            LOG.debug(resultSet + " select * from volunteer");
+            LOG.debug(resultSet + "select * from volunteer");
             while (resultSet.next()) {
 
                 GetVolunteerMatchSingle v1 = new GetVolunteerMatchSingle(resultSet.getInt("vol_id"),
@@ -143,6 +150,8 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                         resultSet.getBoolean("Gardening"),
                         resultSet.getBoolean("Music"),
                         resultSet.getBoolean("Dance"));
+
+                LOG.debug("firstname " + v1.getFirstname());
 
                 finalMatch = MatchFunc(v1, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
             }

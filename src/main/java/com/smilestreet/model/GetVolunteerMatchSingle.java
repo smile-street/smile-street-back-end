@@ -4,33 +4,33 @@ import java.util.Date;
 
 public class GetVolunteerMatchSingle {
 
-    private int vol_id;
-    private String volunteer_id;
-    private String firstname;
-    private String lastname;
-    private String contactnumber;
-    private String username;
-    private String employername;
-    private String primarylocation;
-    private int numberofdays;
-    private Date startdate;
-    private Date enddate;
-    private boolean Web_Design;
-    private boolean SEO;
-    private boolean Graphic_Design;
-    private boolean Teaching;
-    private boolean Public_Health;
-    private boolean Empowerment;
-    private boolean Sports;
-    private boolean Construction;
-    private boolean Cooking;
-    private boolean Accessibility;
-    private boolean Mental_Health;
-    private boolean Event_Planning;
-    private boolean Gardening;
-    private boolean Music;
-    private boolean Dance;
-    private int voln_id;
+    public int vol_id;
+    public String volunteer_id;
+    public String firstname;
+    public String lastname;
+    public String contactnumber;
+    public String username;
+    public String employername;
+    public String primarylocation;
+    public int numberofdays;
+    public Date startdate;
+    public Date enddate;
+    public boolean Web_Design;
+    public boolean SEO;
+    public boolean Graphic_Design;
+    public boolean Teaching;
+    public boolean Public_Health;
+    public boolean Empowerment;
+    public boolean Sports;
+    public boolean Construction;
+    public boolean Cooking;
+    public boolean Accessibility;
+    public boolean Mental_Health;
+    public boolean Event_Planning;
+    public boolean Gardening;
+    public boolean Music;
+    public boolean Dance;
+    public int voln_id;
 
     public GetVolunteerMatchSingle(){
 
