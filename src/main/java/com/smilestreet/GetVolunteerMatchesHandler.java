@@ -137,9 +137,10 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 LOG.debug("name of opportunity "+ MatchedLocationAndData.isMental_Health());
                 LOG.debug("name of opportunity "+ MatchedLocationAndData.isDance());
                 //all opportunites that match the volunteers location and dates are in the array
-
+                locDates.add(MatchedLocationAndData);
             }
-            locDates.add(MatchedLocationAndData);
+
+            LOG.debug ("===========>>>>>>size of loc dates " + locDates.size());
             finalMatch = MatchFunc(v2, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
 
 
