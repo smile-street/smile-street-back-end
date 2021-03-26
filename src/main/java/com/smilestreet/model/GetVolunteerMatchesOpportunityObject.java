@@ -25,7 +25,7 @@ public class GetVolunteerMatchesOpportunityObject {
     private boolean Gardening;
     private boolean Music;
     private boolean Dance;
-    private boolean Location;
+    private String Location;
     private boolean gc_id1;
     private int vol_id;
 
@@ -33,7 +33,7 @@ public class GetVolunteerMatchesOpportunityObject {
 
     }
 
-    public GetVolunteerMatchesOpportunityObject(String good_cause_opportunity_id, String opportunityname, Date opportunitydate, String opportunitydescription, String good_cause_uid, int joining_id, boolean web_Design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance, boolean location, boolean gc_id1, int vol_id) {
+    public GetVolunteerMatchesOpportunityObject(String good_cause_opportunity_id, String opportunityname, Date opportunitydate, String opportunitydescription, String good_cause_uid, int joining_id, boolean web_Design, boolean SEO, boolean graphic_Design, boolean teaching, boolean public_Health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_Health, boolean event_Planning, boolean gardening, boolean music, boolean dance, String location, boolean gc_id1, int vol_id) {
         this.good_cause_opportunity_id = good_cause_opportunity_id;
         this.opportunityname = opportunityname;
         this.opportunitydate = opportunitydate;
@@ -58,9 +58,6 @@ public class GetVolunteerMatchesOpportunityObject {
         Location = location;
         this.gc_id1 = gc_id1;
         this.vol_id = vol_id;
-    }
-
-    public GetVolunteerMatchesOpportunityObject(String good_cause_opportunity_id, String opportunityname, java.sql.Date opportunitydate, String opportunitydescription, String good_cause_uid, int joining_id, boolean web_design, boolean seo, boolean graphic_design, boolean teaching, boolean public_health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_health, boolean event_planning, boolean gardening, boolean music, boolean dance, String location) {
     }
 
     public String getGood_cause_opportunity_id() {
@@ -231,11 +228,11 @@ public class GetVolunteerMatchesOpportunityObject {
         Dance = dance;
     }
 
-    public boolean isLocation() {
+    public String getLocation() {
         return Location;
     }
 
-    public void setLocation(boolean location) {
+    public void setLocation(String location) {
         Location = location;
     }
 

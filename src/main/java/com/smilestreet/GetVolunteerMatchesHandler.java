@@ -27,7 +27,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         String volunteer_id = request.getPathParameters().get("volunteer_id");
 
         GetVolunteerMatchSingle v2 = new GetVolunteerMatchSingle();
-
+        GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject();
         ArrayList finalMatch = null;
         try {
             LOG.debug("try 1");
@@ -104,31 +104,33 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             LOG.debug(" locdates object query");
 
             while (resultSet.next()) {
-                GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject(resultSet.getString("good_cause_opportunity_id"),
-                        resultSet.getString("opportunityname"),
-                        resultSet.getDate("opportunitydate"),
 
-                        resultSet.getString("opportunitydescription"),
-                        resultSet.getString("good_cause_uid"),
-                        resultSet.getInt("joining_id"),
-                        resultSet.getBoolean("Web_Design"),
-                        resultSet.getBoolean("SEO"),
-                        resultSet.getBoolean("Graphic_Design"),
-                        resultSet.getBoolean("Teaching"),
-                        resultSet.getBoolean("Public_Health"),
-                        resultSet.getBoolean("Empowerment"),
-                        resultSet.getBoolean("Sports"),
-                        resultSet.getBoolean("Construction"),
-                        resultSet.getBoolean("Cooking"),
-                        resultSet.getBoolean("Accessibility"),
-                        resultSet.getBoolean("Mental_Health"),
-                        resultSet.getBoolean("Event_Planning"),
-                        resultSet.getBoolean("Gardening"),
-                        resultSet.getBoolean("Music"),
-                        resultSet.getBoolean("Dance"),
-                        resultSet.getString("Location"));
+
+                MatchedLocationAndData.setGood_cause_opportunity_id(resultSet.getString("good_cause_opportunity_id"));
+                MatchedLocationAndData.setOpportunityname(resultSet.getString("opportunityname"));
+                MatchedLocationAndData.setOpportunitydate(resultSet.getDate("opportunitydate"));
+                MatchedLocationAndData.setOpportunitydescription(resultSet.getString("opportunitydescription"));
+                MatchedLocationAndData.setGood_cause_uid(resultSet.getString("good_cause_uid"));
+                MatchedLocationAndData.setJoining_id(resultSet.getInt("joining_id"));
+                MatchedLocationAndData.setWeb_Design(resultSet.getBoolean("Web_Design"));
+                MatchedLocationAndData.setSEO(resultSet.getBoolean("SEO"));
+                MatchedLocationAndData.setGraphic_Design(resultSet.getBoolean("Graphic_Design"));
+                MatchedLocationAndData .setTeaching(resultSet.getBoolean("Teaching"));
+                MatchedLocationAndData.setPublic_Health(resultSet.getBoolean("Public_Health"));
+                MatchedLocationAndData.setEmpowerment(resultSet.getBoolean("Empowerment"));
+                MatchedLocationAndData.setSports(resultSet.getBoolean("Sports"));
+                MatchedLocationAndData.setConstruction(resultSet.getBoolean("Construction"));
+                MatchedLocationAndData.setCooking(resultSet.getBoolean("Cooking"));
+                MatchedLocationAndData.setAccessibility(resultSet.getBoolean("Accessibility"));
+                MatchedLocationAndData.setMental_Health(resultSet.getBoolean("Mental_Health"));
+                MatchedLocationAndData.setEvent_Planning(resultSet.getBoolean("Event_Planning"));
+                MatchedLocationAndData.setGardening(resultSet.getBoolean("Gardening"));
+                MatchedLocationAndData.setMusic(resultSet.getBoolean("Music"));
+                MatchedLocationAndData.setDance(resultSet.getBoolean("Dance"));
+                MatchedLocationAndData.setLocation(resultSet.getString("Location"));
 
                 LOG.debug("opportunity date for matchedLocation and data", MatchedLocationAndData.getOpportunitydate());
+                LOG.debug("name of opportunity ", MatchedLocationAndData.getOpportunityname());
                 //all opportunites that match the volunteers location and dates are in the array
                 locDates.add(MatchedLocationAndData);
             }
