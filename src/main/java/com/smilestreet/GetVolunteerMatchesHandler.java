@@ -23,8 +23,9 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
     @Override
     public ApiGatewayResponse handleRequest(APIGatewayProxyRequestEvent request, Context context) {
+
         List<GetVolunteerMatchesOpportunityObject> locDates = null;
-         String volunteer_id = request.getPathParameters().get("volunteer_id");
+        String volunteer_id = request.getPathParameters().get("volunteer_id");
 
 
         ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch = null;
@@ -46,9 +47,13 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             LOG.debug("try get vol_id, input volunteer ");
 
             preparedStatement.setString(1, volunteer_id);
+
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 GetVolunteerMatchSingle v2 = new GetVolunteerMatchSingle(resultSet.getInt("vol_id"));
+                LOG.debug(v2);
+                LOG.debug("this is the vol_id "  + v2.getVol_id());
+
 
                         preparedStatement = connection.prepareStatement(
                         "SELECT * FROM good_cause_opportunity " +
@@ -61,17 +66,18 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
                 LOG.debug("match on location and dates");
 
-                preparedStatement.setInt(1, v2.getVol_id() );
+                preparedStatement.setInt(1, v2.getVol_id());
                 preparedStatement.setInt(2, v2.getVol_id());
                 preparedStatement.setInt(3, v2.getVol_id());
 
                 resultSet = preparedStatement.executeQuery();
-                System.out.print(resultSet + " locdates object query");
+                LOG.debug(" locdates object query");
             }
             while (resultSet.next()) {
                 GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject(resultSet.getString("good_cause_opportunity_id"),
                         resultSet.getString("opportunityname"),
                         resultSet.getDate("opportunitydate"),
+
                         resultSet.getString("opportunitydescription"),
                         resultSet.getString("good_cause_uid"),
                         resultSet.getInt("joining_id"),
@@ -92,6 +98,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                         resultSet.getBoolean("Dance"),
                         resultSet.getString("Location"));
 
+                LOG.debug("opportunity date for matchedLocation and data", MatchedLocationAndData.getOpportunitydate());
                 //all opportunites that match the volunteers location and dates are in the array
                 locDates.add(MatchedLocationAndData);
             }
@@ -118,8 +125,9 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                         resultSet.getString("primarylocation"),
                         resultSet.getInt("numberofdays"),
 
-                        resultSet.getDate("datetime"),
+                        resultSet.getDate("startdate"),
                         resultSet.getDate("enddate"),
+
                         resultSet.getBoolean("Web_Design"),
                         resultSet.getBoolean("SEO"),
                         resultSet.getBoolean("Graphic_Design"),
