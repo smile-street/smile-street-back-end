@@ -2,6 +2,8 @@
 package com.smilestreet.model;
 
 
+import java.sql.Date;
+
 public class Volunteer {
 
     //private int volunteer_id;
@@ -19,6 +21,8 @@ public class Volunteer {
     public  Volunteer(){
 
     }
+
+
 
     public String getFirstname() {
         return firstname;

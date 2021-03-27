@@ -77,3 +77,11 @@ functions:
           path: /SaveVolunteerIntrests/{volunteer_id}
           method: put
           cors: true
+
+  get-volunteer-matches:
+    handler: com.smilestreet.GetVolunteerMatchesHandler
+    events:
+      - http:
+          path: /GetVolunteerMatches/{volunteer_id}
+          method: get
+          cors: true
