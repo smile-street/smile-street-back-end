@@ -2,11 +2,15 @@ package com.smilestreet;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
+import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.smilestreet.model.GetVolunteerMatchSingle;
 import com.smilestreet.model.GetVolunteerMatchesOpportunityObject;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +29,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         GetVolunteerMatchSingle v2 = new GetVolunteerMatchSingle();
         GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject();
         ArrayList finalMatch = null;
+
         ArrayList finalMatchOnLocation = null;
         try {
 
@@ -123,9 +128,12 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         } finally {
             closeConnection();
         }
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Access-Control-Allow-Origin", "*");
         return ApiGatewayResponse.builder()
                 .setStatusCode(200)
                 .setObjectBody(finalMatch)
+                .setHeaders(headers)
                 .build();
     }
 
