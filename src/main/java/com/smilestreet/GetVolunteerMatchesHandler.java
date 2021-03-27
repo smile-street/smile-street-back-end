@@ -115,7 +115,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 locDates.add(A);
             }
             finalMatch = MatchFunc(v2, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
-            finalMatchOnLocation = MatchFunc1(v2,(ArrayList<GetVolunteerMatchesOpportunityObject>) finalMatch);
+           // finalMatchOnLocation = MatchFunc1(v2,(ArrayList<GetVolunteerMatchesOpportunityObject>) finalMatch);
 
 
         } catch (Exception e) {
@@ -125,7 +125,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         }
         return ApiGatewayResponse.builder()
                 .setStatusCode(200)
-                .setObjectBody(finalMatchOnLocation)
+                .setObjectBody(finalMatch)
                 .build();
     }
 
@@ -145,24 +145,24 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         }
     }
 
-    public static ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc1(GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch) {
-        ArrayList<GetVolunteerMatchesOpportunityObject> finalMatchOnLocation = null;
-        finalMatchOnLocation = new ArrayList<>();
-        String A = V.getPrimarylocation();
-        for (int i = 0; i < finalMatch.size(); i++) {
-            String B = finalMatch.get(i).getLocation();
-            LOG.debug("U strng B " + B + ".");
-            LOG.debug(" U strng A " + A + ".");
-            if (B == A){
-                LOG.debug("strng B " + B);
-                LOG.debug("strng A " + A);
-
-                finalMatchOnLocation.add(finalMatch.get(i));
-            }
-
-        }
-        return finalMatchOnLocation;
-    }
+//    public static ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc1(GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch) {
+//        ArrayList<GetVolunteerMatchesOpportunityObject> finalMatchOnLocation = null;
+//        finalMatchOnLocation = new ArrayList<>();
+//        String A = V.getPrimarylocation();
+//        for (int i = 0; i < finalMatch.size(); i++) {
+//            String B = finalMatch.get(i).getLocation();
+//            LOG.debug("U strng B " + B + ".");
+//            LOG.debug(" U strng A " + A + ".");
+//            if (B == A){
+//                LOG.debug("strng B " + B);
+//                LOG.debug("strng A " + A);
+//
+//                finalMatchOnLocation.add(finalMatch.get(i));
+//            }
+//
+//        }
+//        return finalMatchOnLocation;
+//    }
     // function matches the array ist containing the matching location and dates with the skills of our volunteer and saves that in a arraylist of
     //Matched opportunities
     public static ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc(GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject> locDates) {
@@ -217,9 +217,18 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             }
             if (locDates.get(i).isDance() == true && V.isDance() == true) {
                 count++;
+
             }
 
+            String volLocation = V.getPrimarylocation();
+            String oppoLocation = locDates.get(i).getLocation();
 
+            if(count >=n){
+                if (volLocation.equals(oppoLocation)){
+
+                finalMatch.add(locDates.get(i));
+            }
+            }
 
 
         }
