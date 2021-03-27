@@ -102,42 +102,38 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             LOG.debug(" locdates object query");
 
 
-            ResultSetMetaData rsmd = resultSet.getMetaData();
-            int columnsNumber = rsmd.getColumnCount();
-            while (resultSet.next()) {
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = resultSet.getString(i);
-                    LOG.debug("james debug " + columnValue + " " + rsmd.getColumnName(i));
-                }
-                LOG.debug("second log for rsmd" +  " ");
-            }
+
 
             while (resultSet.next()) {
-                locDates.add(new GetVolunteerMatchesOpportunityObject(
-                resultSet.getString("good_cause_opportunity_id"),
-                resultSet.getString("opportunityname"),
-                resultSet.getDate("opportunitydate"),
-                resultSet.getString("opportunitydescription"),
-                resultSet.getString("good_cause_uid"),
-                resultSet.getInt("joining_id"),
-                resultSet.getBoolean("Web_Design"),
-                resultSet.getBoolean("SEO"),
-                resultSet.getBoolean("Graphic_Design"),
-                resultSet.getBoolean("Teaching"),
-                resultSet.getBoolean("Public_Health"),
-                resultSet.getBoolean("Empowerment"),
-                resultSet.getBoolean("Sports"),
-                resultSet.getBoolean("Construction"),
-                resultSet.getBoolean("Cooking"),
-                resultSet.getBoolean("Accessibility"),
-                resultSet.getBoolean("Mental_Health"),
-                resultSet.getBoolean("Event_Planning"),
-                resultSet.getBoolean("Gardening"),
-                resultSet.getBoolean("Music"),
-                resultSet.getBoolean("Dance"),
-                resultSet.getString("Location")));
 
+
+                GetVolunteerMatchesOpportunityObject A = new GetVolunteerMatchesOpportunityObject();
+                A.setGood_cause_opportunity_id(resultSet.getString("good_cause_opportunity_id"));
+                A.setOpportunityname(resultSet.getString("opportunityname"));
+                A.setOpportunitydate(resultSet.getDate("opportunitydate"));
+                A.setOpportunitydescription(resultSet.getString("opportunitydescription"));
+                A.setGood_cause_uid(resultSet.getString("good_cause_uid"));
+                A.setJoining_id(resultSet.getInt("joining_id"));
+                A.setWeb_Design(resultSet.getBoolean("Web_Design"));
+                A.setSEO(resultSet.getBoolean("SEO"));
+                A.setGraphic_Design(resultSet.getBoolean("Graphic_Design"));
+                A.setTeaching(resultSet.getBoolean("Teaching"));
+                A.setPublic_Health(resultSet.getBoolean("Public_Health"));
+                A.setEmpowerment(resultSet.getBoolean("Empowerment"));
+                A.setSports(resultSet.getBoolean("Sports"));
+                A.setConstruction(resultSet.getBoolean("Construction"));
+                A.setCooking(resultSet.getBoolean("Cooking"));
+                A.setAccessibility(resultSet.getBoolean("Accessibility"));
+                A.setMental_Health(resultSet.getBoolean("Mental_Health"));
+                A.setEvent_Planning(resultSet.getBoolean("Event_Planning"));
+                A.setGardening(resultSet.getBoolean("Gardening"));
+                A.setMusic(resultSet.getBoolean("Music"));
+                A.setDance(resultSet.getBoolean("Dance"));
+                A.setLocation(resultSet.getString("Location"));
+                A.setGc_id1(resultSet.getInt("gc_id1"));
+
+
+                locDates.add(A);
 
             }
 
