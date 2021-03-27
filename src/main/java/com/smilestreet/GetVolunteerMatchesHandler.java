@@ -104,43 +104,35 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             LOG.debug(" locdates object query");
 
             while (resultSet.next()) {
+                locDates.add(new GetVolunteerMatchesOpportunityObject(
+                resultSet.getString("good_cause_opportunity_id"),
+                resultSet.getString("opportunityname"),
+                resultSet.getDate("opportunitydate"),
+                resultSet.getString("opportunitydescription"),
+                resultSet.getString("good_cause_uid"),
+                resultSet.getInt("joining_id"),
+                resultSet.getBoolean("Web_Design"),
+                resultSet.getBoolean("SEO"),
+                resultSet.getBoolean("Graphic_Design"),
+                resultSet.getBoolean("Teaching"),
+                resultSet.getBoolean("Public_Health"),
+                resultSet.getBoolean("Empowerment"),
+                resultSet.getBoolean("Sports"),
+                resultSet.getBoolean("Construction"),
+                resultSet.getBoolean("Cooking"),
+                resultSet.getBoolean("Accessibility"),
+                resultSet.getBoolean("Mental_Health"),
+                resultSet.getBoolean("Event_Planning"),
+                resultSet.getBoolean("Gardening"),
+                resultSet.getBoolean("Music"),
+                resultSet.getBoolean("Dance"),
+                resultSet.getString("Location")));
 
 
-                MatchedLocationAndData.setGood_cause_opportunity_id(resultSet.getString("good_cause_opportunity_id"));
-                MatchedLocationAndData.setOpportunityname(resultSet.getString("opportunityname"));
-                MatchedLocationAndData.setOpportunitydate(resultSet.getDate("opportunitydate"));
-                MatchedLocationAndData.setOpportunitydescription(resultSet.getString("opportunitydescription"));
-                MatchedLocationAndData.setGood_cause_uid(resultSet.getString("good_cause_uid"));
-                MatchedLocationAndData.setJoining_id(resultSet.getInt("joining_id"));
-                MatchedLocationAndData.setWeb_Design(resultSet.getBoolean("Web_Design"));
-                MatchedLocationAndData.setSEO(resultSet.getBoolean("SEO"));
-                MatchedLocationAndData.setGraphic_Design(resultSet.getBoolean("Graphic_Design"));
-                MatchedLocationAndData.setTeaching(resultSet.getBoolean("Teaching"));
-                MatchedLocationAndData.setPublic_Health(resultSet.getBoolean("Public_Health"));
-                MatchedLocationAndData.setEmpowerment(resultSet.getBoolean("Empowerment"));
-                MatchedLocationAndData.setSports(resultSet.getBoolean("Sports"));
-                MatchedLocationAndData.setConstruction(resultSet.getBoolean("Construction"));
-                MatchedLocationAndData.setCooking(resultSet.getBoolean("Cooking"));
-                MatchedLocationAndData.setAccessibility(resultSet.getBoolean("Accessibility"));
-                MatchedLocationAndData.setMental_Health(resultSet.getBoolean("Mental_Health"));
-                MatchedLocationAndData.setEvent_Planning(resultSet.getBoolean("Event_Planning"));
-                MatchedLocationAndData.setGardening(resultSet.getBoolean("Gardening"));
-                MatchedLocationAndData.setMusic(resultSet.getBoolean("Music"));
-                MatchedLocationAndData.setDance(resultSet.getBoolean("Dance"));
-                MatchedLocationAndData.setLocation(resultSet.getString("Location"));
-
-                LOG.debug("opportunity date for matchedLocation and data " + MatchedLocationAndData.getOpportunitydate());
-                LOG.debug("name of opportunity "+ MatchedLocationAndData.getOpportunityname());
-                LOG.debug("name of opportunity "+ MatchedLocationAndData.isEvent_Planning());
-                LOG.debug("name of opportunity "+ MatchedLocationAndData.isGardening());
-                LOG.debug("name of opportunity "+ MatchedLocationAndData.isMusic());
-                LOG.debug("name of opportunity "+ MatchedLocationAndData.isMental_Health());
-                LOG.debug("name of opportunity "+ MatchedLocationAndData.isDance());
-                //all opportunites that match the volunteers location and dates are in the array
-                locDates.add(MatchedLocationAndData);
             }
 
             LOG.debug ("===========>>>>>>size of loc dates " + locDates.size());
+
             finalMatch = MatchFunc(v2, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
 
 
@@ -185,20 +177,25 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             locDates.get(i);
 
             if (locDates.get(i).isWeb_Design() == true && V.isWeb_Design() == true)
+                LOG.debug("web design " + locDates.get(i).isWeb_Design());
                 count = count + 1;
             if (locDates.get(i).isSEO() == true && V.isSEO() == true)
+                LOG.debug("is SEO ", locDates.get(i).isSEO());
                 count = count + 1;
             if (locDates.get(i).isGraphic_Design() == true && V.isGraphic_Design() == true)
                 count = count + 1;
+            LOG.debug("graphic deign " + locDates.get(i).isGraphic_Design());
             if (locDates.get(i).isTeaching() == true && V.isTeaching() == true)
                 count = count + 1;
+
+            LOG.debug("teaching " + locDates.get(i));
             if (locDates.get(i).isPublic_Health() == true && V.isPublic_Health() == true)
                 count = count + 1;
             if (locDates.get(i).isEmpowerment() == true && V.isEmpowerment() == true)
                 count = count + 1;
             if (locDates.get(i).isSports() == true && V.isSports() == true)
-                LOG.debug("code hit  spots " + count);
             count = count + 1;
+            LOG.debug("code hit  spots " + count);
             if (locDates.get(i).isConstruction() == true && V.isConstruction() == true)
                 count = count + 1;
             if (locDates.get(i).isCooking() == true && V.isCooking() == true)
@@ -221,6 +218,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             count = count + 1;
             if (locDates.get(i).isDance() == true && V.isDance() == true)
                 count = count + 1;
+            LOG.debug("danc e " + locDates.get(i));
             LOG.debug("code hit dance " + count);
             if (count >= n) {
                 finalMatch.add(locDates.get(i));

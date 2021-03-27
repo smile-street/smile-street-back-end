@@ -60,6 +60,9 @@ public class GetVolunteerMatchesOpportunityObject {
         this.vol_id = vol_id;
     }
 
+    public GetVolunteerMatchesOpportunityObject(String good_cause_opportunity_id, String opportunityname, java.sql.Date opportunitydate, String opportunitydescription, String good_cause_uid, int joining_id, boolean web_design, boolean seo, boolean graphic_design, boolean teaching, boolean public_health, boolean empowerment, boolean sports, boolean construction, boolean cooking, boolean accessibility, boolean mental_health, boolean event_planning, boolean gardening, boolean music, boolean dance, String location) {
+    }
+
     public String getGood_cause_opportunity_id() {
         return good_cause_opportunity_id;
     }
