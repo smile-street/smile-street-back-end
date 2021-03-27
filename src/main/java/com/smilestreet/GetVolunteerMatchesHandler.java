@@ -4,7 +4,6 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.smilestreet.model.GetVolunteerMatchSingle;
 import com.smilestreet.model.GetVolunteerMatchesOpportunityObject;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +22,10 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
         List<GetVolunteerMatchesOpportunityObject> locDates = null;
         String volunteer_id = request.getPathParameters().get("volunteer_id");
-
         GetVolunteerMatchSingle v2 = new GetVolunteerMatchSingle();
         GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject();
         ArrayList finalMatch = null;
+        ArrayList finalMatchOnLocation = null;
         try {
 
             locDates = new ArrayList<>();
@@ -41,13 +40,10 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
             //we get the volunteer_id
             preparedStatement = connection.prepareStatement("SELECT * FROM volunteer WHERE volunteer_id=?");
-
-
             preparedStatement.setString(1, volunteer_id);
 
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-
                 v2.setVol_id(resultSet.getInt("vol_id"));
                 v2.setFirstname(resultSet.getString("firstname"));
                 v2.setLastname(resultSet.getString("lastname"));
@@ -56,7 +52,6 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 v2.setEmployername(resultSet.getString("employername"));
                 v2.setPrimarylocation(resultSet.getString("primarylocation"));
                 v2.setNumberofdays(resultSet.getInt("numberofdays"));
-
                 v2.setWeb_Design(resultSet.getBoolean("Web_Design"));
                 v2.setSEO(resultSet.getBoolean("SEO"));
                 v2.setGraphic_Design(resultSet.getBoolean("Graphic_Design"));
@@ -72,8 +67,6 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 v2.setGardening(resultSet.getBoolean("Gardening"));
                 v2.setMusic(resultSet.getBoolean("Music"));
                 v2.setDance(resultSet.getBoolean("Dance"));
-
-
             }
 
             preparedStatement = connection.prepareStatement(
@@ -85,16 +78,13 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                             "AND " +
                             "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = ? ); ");
 
-
             preparedStatement.setInt(1, v2.getVol_id());
             preparedStatement.setInt(2, v2.getVol_id());
             preparedStatement.setInt(3, v2.getVol_id());
 
             resultSet = preparedStatement.executeQuery();
 
-
             while (resultSet.next()) {
-
 
                 GetVolunteerMatchesOpportunityObject A = new GetVolunteerMatchesOpportunityObject();
                 A.setGood_cause_opportunity_id(resultSet.getString("good_cause_opportunity_id"));
@@ -102,9 +92,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 A.setOpportunitydate(resultSet.getDate("opportunitydate"));
                 A.setOpportunitydescription(resultSet.getString("opportunitydescription"));
                 A.setGood_cause_uid(resultSet.getString("good_cause_uid"));
-
                 A.setJoining_id(resultSet.getInt("joining_id"));
-
                 A.setWeb_Design(resultSet.getBoolean("Web_Design"));
                 A.setSEO(resultSet.getBoolean("SEO"));
                 A.setGraphic_Design(resultSet.getBoolean("Graphic_Design"));
@@ -125,11 +113,9 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 A.setVol_id(v2.getVol_id());
 
                 locDates.add(A);
-
             }
-
-
             finalMatch = MatchFunc(v2, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
+            finalMatchOnLocation = MatchFunc1(v2,(ArrayList<GetVolunteerMatchesOpportunityObject>) finalMatch);
 
 
         } catch (Exception e) {
@@ -137,11 +123,9 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         } finally {
             closeConnection();
         }
-
-
         return ApiGatewayResponse.builder()
                 .setStatusCode(200)
-                .setObjectBody(finalMatch)
+                .setObjectBody(finalMatchOnLocation)
                 .build();
     }
 
@@ -161,6 +145,24 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         }
     }
 
+    public static ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc1(GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch) {
+        ArrayList<GetVolunteerMatchesOpportunityObject> finalMatchOnLocation = null;
+        finalMatchOnLocation = new ArrayList<>();
+        String A = V.getPrimarylocation();
+        for (int i = 0; i < finalMatch.size(); i++) {
+            String B = finalMatch.get(i).getLocation();
+            LOG.debug("U strng B " + B + ".");
+            LOG.debug(" U strng A " + A + ".");
+            if (B == A){
+                LOG.debug("strng B " + B);
+                LOG.debug("strng A " + A);
+
+                finalMatchOnLocation.add(finalMatch.get(i));
+            }
+
+        }
+        return finalMatchOnLocation;
+    }
     // function matches the array ist containing the matching location and dates with the skills of our volunteer and saves that in a arraylist of
     //Matched opportunities
     public static ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc(GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject> locDates) {
@@ -171,96 +173,60 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         for (int i = 0; i < locDates.size(); i++) {
             int count = 0;
 
-
-
-                if (locDates.get(i).isWeb_Design() == true && V.isWeb_Design() == true) {
-
-                    count++;
-
-                }
-                if (locDates.get(i).isSEO() == true && V.isSEO() == true) {
-
-                    count++;
-
-                }
-                if (locDates.get(i).isGraphic_Design() == true && V.isGraphic_Design() == true) {
-                    count++;
-
-                }
-
-                if (locDates.get(i).isTeaching() == true && V.isTeaching() == true) {
-                    count++;
-
-                }
-
-
-                if (locDates.get(i).isPublic_Health() == true && V.isPublic_Health() == true) {
-                    count++;
-
-                }
-                if (locDates.get(i).isEmpowerment() == true && V.isEmpowerment() == true) {
-                    count++;
-
-                }
-                if (locDates.get(i).isSports() == true && V.isSports() == true) {
-                    count++;
-
-                }
-
-                if (locDates.get(i).isConstruction() == true && V.isConstruction() == true) {
-                    count++;
-
-                }
-                if (locDates.get(i).isCooking() == true && V.isCooking() == true) {
-                    count++;
-
-                }
-                if (locDates.get(i).isAccessibility() == true && V.isAccessibility() == true) {
-                    count++;
-
-                }
-                if (locDates.get(i).isMental_Health() == true && V.isMental_Health() == true) {
-                    count++;
-
-                }
-                if (locDates.get(i).isEvent_Planning() == true && V.isEvent_Planning() == true) {
-
-                    count++;
-
-                }
-                if (locDates.get(i).isGardening() == true && V.isGardening() == true) {
-                    count++;
-
-                }
-                if (locDates.get(i).isMusic() == true && V.isMusic() == true) {
-
-                    count++;
-
-                }
-                if (locDates.get(i).isDance() == true && V.isDance() == true) {
-                    count++;
-
-
-
-                }
-                if (count >= n) {
-
-                    finalMatch.add(locDates.get(i));
-
-
-                }
-
-
-
-
-
-
-
+            if (locDates.get(i).isWeb_Design() == true && V.isWeb_Design() == true) {
+                count++;
             }
+            if (locDates.get(i).isSEO() == true && V.isSEO() == true) {
+                count++;
+            }
+            if (locDates.get(i).isGraphic_Design() == true && V.isGraphic_Design() == true) {
+                count++;
+            }
+            if (locDates.get(i).isTeaching() == true && V.isTeaching() == true) {
+                count++;
+            }
+            if (locDates.get(i).isPublic_Health() == true && V.isPublic_Health() == true) {
+                count++;
+            }
+            if (locDates.get(i).isEmpowerment() == true && V.isEmpowerment() == true) {
+                count++;
+            }
+            if (locDates.get(i).isSports() == true && V.isSports() == true) {
+                count++;
+            }
+            if (locDates.get(i).isConstruction() == true && V.isConstruction() == true) {
+                count++;
+            }
+            if (locDates.get(i).isCooking() == true && V.isCooking() == true) {
+                count++;
+            }
+            if (locDates.get(i).isAccessibility() == true && V.isAccessibility() == true) {
+                count++;
+            }
+            if (locDates.get(i).isMental_Health() == true && V.isMental_Health() == true) {
+                count++;
+            }
+            if (locDates.get(i).isEvent_Planning() == true && V.isEvent_Planning() == true) {
+                count++;
+            }
+            if (locDates.get(i).isGardening() == true && V.isGardening() == true) {
+                count++;
+            }
+            if (locDates.get(i).isMusic() == true && V.isMusic() == true) {
+                count++;
+            }
+            if (locDates.get(i).isDance() == true && V.isDance() == true) {
+                count++;
+            }
+
+
+
+
+        }
+
 
         return finalMatch;
     }
-
 }
 
 
