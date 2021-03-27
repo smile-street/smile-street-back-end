@@ -4,10 +4,8 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.smilestreet.model.GetVolunteerMatchSingle;
 import com.smilestreet.model.GetVolunteerMatchesOpportunityObject;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -102,6 +100,18 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
             resultSet = preparedStatement.executeQuery();
             LOG.debug(" locdates object query");
+
+
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnsNumber; i++) {
+                    if (i > 1) System.out.print(",  ");
+                    String columnValue = resultSet.getString(i);
+                    LOG.debug("james debug " + columnValue + " " + rsmd.getColumnName(i));
+                }
+                LOG.debug("second log for rsmd" +  " ");
+            }
 
             while (resultSet.next()) {
                 locDates.add(new GetVolunteerMatchesOpportunityObject(
