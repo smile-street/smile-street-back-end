@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 
 public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProxyRequestEvent, ApiGatewayResponse> {
-    private static final Logger LOG= LogManager.getLogger(GetVolunteerMatchesHandler.class);
+    private static final Logger LOG = LogManager.getLogger(GetVolunteerMatchesHandler.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -28,7 +28,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
         GetVolunteerMatchesOpportunityObject MatchedLocationAndData = new GetVolunteerMatchesOpportunityObject();
         ArrayList finalMatch = null;
         try {
-            LOG.debug("try 1");
+
             locDates = new ArrayList<>();
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -42,7 +42,6 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
             //we get the volunteer_id
             preparedStatement = connection.prepareStatement("SELECT * FROM volunteer WHERE volunteer_id=?");
 
-            LOG.debug("try get vol_id, input volunteer ");
 
             preparedStatement.setString(1, volunteer_id);
 
@@ -75,12 +74,6 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 v2.setDance(resultSet.getBoolean("Dance"));
 
 
-                LOG.debug(v2);
-                LOG.debug("this is the vol_id " + v2.getVol_id());
-                LOG.debug("this is the first name " + v2.getFirstname());
-                LOG.debug("this is the web design " + v2.isWeb_Design());
-                LOG.debug("this is the primary locatio " + v2.getPrimarylocation());
-
             }
 
             preparedStatement = connection.prepareStatement(
@@ -92,16 +85,12 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                             "AND " +
                             "( SELECT volunteer.enddate FROM volunteer WHERE volunteer.vol_id = ? ); ");
 
-            LOG.debug("match on location and dates");
 
             preparedStatement.setInt(1, v2.getVol_id());
             preparedStatement.setInt(2, v2.getVol_id());
             preparedStatement.setInt(3, v2.getVol_id());
 
             resultSet = preparedStatement.executeQuery();
-            LOG.debug(" locdates object query");
-
-
 
 
             while (resultSet.next()) {
@@ -137,7 +126,6 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
 
             }
 
-            LOG.debug ("===========>>>>>>size of loc dates " + locDates.size());
 
             finalMatch = MatchFunc(v2, (ArrayList<GetVolunteerMatchesOpportunityObject>) locDates);
 
@@ -176,78 +164,103 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
     public static ArrayList<GetVolunteerMatchesOpportunityObject> MatchFunc(GetVolunteerMatchSingle V, ArrayList<GetVolunteerMatchesOpportunityObject> locDates) {
         ArrayList<GetVolunteerMatchesOpportunityObject> finalMatch = null;
         finalMatch = new ArrayList<>();
-        int n = 0;
-        for (int i= 0; i< locDates.size(); i++) {
+        int n = 3;
+
+        for (int i = 0; i < locDates.size(); i++) {
             int count = 0;
 
-            locDates.get(i);
-
-            if (locDates.get(i).isWeb_Design() == true && V.isWeb_Design() == true)
-                LOG.debug("web design " + locDates.get(i).isWeb_Design());
-                count = count + 1;
-            if (locDates.get(i).isSEO() == true && V.isSEO() == true)
-                LOG.debug("is SEO ", locDates.get(i).isSEO());
-                count = count + 1;
-            if (locDates.get(i).isGraphic_Design() == true && V.isGraphic_Design() == true)
-                count = count + 1;
-            LOG.debug("graphic deign " + locDates.get(i).isGraphic_Design());
-            if (locDates.get(i).isTeaching() == true && V.isTeaching() == true)
-                count = count + 1;
-
-            LOG.debug("teaching " + locDates.get(i));
-            if (locDates.get(i).isPublic_Health() == true && V.isPublic_Health() == true)
-                count = count + 1;
-            if (locDates.get(i).isEmpowerment() == true && V.isEmpowerment() == true)
-                count = count + 1;
-            if (locDates.get(i).isSports() == true && V.isSports() == true)
-            count = count + 1;
-            LOG.debug("code hit  spots " + count);
-            if (locDates.get(i).isConstruction() == true && V.isConstruction() == true)
-                count = count + 1;
-            if (locDates.get(i).isCooking() == true && V.isCooking() == true)
-                LOG.debug("code hit cooking " + count);
-            count = count + 1;
-            if (locDates.get(i).isAccessibility() == true && V.isAccessibility() == true)
-                LOG.debug("code hit access " + count);
-            count = count + 1;
-            if (locDates.get(i).isMental_Health() == true && V.isMental_Health() == true)
-                LOG.debug("code hit mental heath " + count);
-            count = count + 1;
-            if (locDates.get(i).isEvent_Planning() == true && V.isEvent_Planning() == true)
-                LOG.debug("code hit event planning" + count);
-            count = count + 1;
-            if (locDates.get(i).isGardening() == true && V.isGardening() == true)
-                count = count + 1;
-            LOG.debug("code hit  gardening " + count);
-            if (locDates.get(i).isMusic() == true && V.isMusic() == true)
-                LOG.debug("code hit  music " + count);
-            count = count + 1;
-            if (locDates.get(i).isDance() == true && V.isDance() == true)
-                count = count + 1;
-            LOG.debug("danc e " + locDates.get(i));
-            LOG.debug("code hit dance " + count);
-            if (count >= n) {
-                finalMatch.add(locDates.get(i));
-            }
-
-        }
 
 
-           // if (count >= 1) {
+                if (locDates.get(i).isWeb_Design() == true && V.isWeb_Design() == true) {
+
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isSEO() == true && V.isSEO() == true) {
+
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isGraphic_Design() == true && V.isGraphic_Design() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+
+                if (locDates.get(i).isTeaching() == true && V.isTeaching() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+
+
+                if (locDates.get(i).isPublic_Health() == true && V.isPublic_Health() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isEmpowerment() == true && V.isEmpowerment() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isSports() == true && V.isSports() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+
+                if (locDates.get(i).isConstruction() == true && V.isConstruction() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isCooking() == true && V.isCooking() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isAccessibility() == true && V.isAccessibility() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isMental_Health() == true && V.isMental_Health() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isEvent_Planning() == true && V.isEvent_Planning() == true) {
+
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isGardening() == true && V.isGardening() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isMusic() == true && V.isMusic() == true) {
+
+                    count++;
+                    LOG.debug(("count " + count));
+                }
+                if (locDates.get(i).isDance() == true && V.isDance() == true) {
+                    count++;
+                    LOG.debug(("count " + count));
+
+
+                }
+                if (count >= n) {
+                    LOG.debug(("count " + count));
+                    finalMatch.add(locDates.get(i));
+
+
+                }
+
+
+                // if (count >= 1) {
 //LOG.debug("ths is the count " + count);
                 //A.setVol_id(V.getVol_id());
 
 
 
-
-
-
-
+            }
 
         return finalMatch;
     }
-}
 
+}
 
 
 
