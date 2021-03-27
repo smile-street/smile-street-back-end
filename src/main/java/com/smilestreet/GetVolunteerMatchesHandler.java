@@ -102,7 +102,9 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 A.setOpportunitydate(resultSet.getDate("opportunitydate"));
                 A.setOpportunitydescription(resultSet.getString("opportunitydescription"));
                 A.setGood_cause_uid(resultSet.getString("good_cause_uid"));
+
                 A.setJoining_id(resultSet.getInt("joining_id"));
+
                 A.setWeb_Design(resultSet.getBoolean("Web_Design"));
                 A.setSEO(resultSet.getBoolean("SEO"));
                 A.setGraphic_Design(resultSet.getBoolean("Graphic_Design"));
@@ -120,7 +122,7 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 A.setDance(resultSet.getBoolean("Dance"));
                 A.setLocation(resultSet.getString("Location"));
                 A.setGc_id1(resultSet.getInt("gc_id1"));
-
+                A.setVol_id(v2.getVol_id());
 
                 locDates.add(A);
 
@@ -174,84 +176,83 @@ public class GetVolunteerMatchesHandler implements RequestHandler<APIGatewayProx
                 if (locDates.get(i).isWeb_Design() == true && V.isWeb_Design() == true) {
 
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isSEO() == true && V.isSEO() == true) {
 
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isGraphic_Design() == true && V.isGraphic_Design() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
 
                 if (locDates.get(i).isTeaching() == true && V.isTeaching() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
 
 
                 if (locDates.get(i).isPublic_Health() == true && V.isPublic_Health() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isEmpowerment() == true && V.isEmpowerment() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isSports() == true && V.isSports() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
 
                 if (locDates.get(i).isConstruction() == true && V.isConstruction() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isCooking() == true && V.isCooking() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isAccessibility() == true && V.isAccessibility() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isMental_Health() == true && V.isMental_Health() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isEvent_Planning() == true && V.isEvent_Planning() == true) {
 
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isGardening() == true && V.isGardening() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isMusic() == true && V.isMusic() == true) {
 
                     count++;
-                    LOG.debug(("count " + count));
+
                 }
                 if (locDates.get(i).isDance() == true && V.isDance() == true) {
                     count++;
-                    LOG.debug(("count " + count));
+
 
 
                 }
                 if (count >= n) {
-                    LOG.debug(("count " + count));
+
                     finalMatch.add(locDates.get(i));
 
 
                 }
 
 
-                // if (count >= 1) {
-//LOG.debug("ths is the count " + count);
-                //A.setVol_id(V.getVol_id());
+
+
 
 
 
