@@ -119,8 +119,8 @@ Will add more information about volunteers desired intrests for volunteering  in
         "Mental_Health" : "mental_Health",
         "Event_Planning" : "event_Planning",
         "Gardening" :"gardening",
-        Music : "music",
-        Dance : "dance",
+        "Music" : "music",
+        "Dance" : "dance",
 }
 ```
 ##### POST /sgoodcauseregistration
