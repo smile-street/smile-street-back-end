@@ -156,22 +156,22 @@ Will add more infornation to an existing  good cause  information :
     "opportunityname":"Action 4 Children";
     "opportunitydescription":"More Action 4 children";
     "Date" :24-04-2021;
-    "web_design":true;
-    "SEO":true;
-    "Graphic_Design":false;
-    "Teaching":true;
-    "Public_Health":true;
-    "Empowerment":false;
-    "Sports":true;
-    "Construction":false;
-    "Cooking":true;
-    "Accessibility":false;
-    "Mental_Health":true;
-    "Event_Planning":false;
-    "Gardening":true;
-    "Music":false;
-    "Dance":true;
-    "Location":false;
+    "web_design":true,
+    "SEO":true,
+    "Graphic_Design":false,
+    "Teaching":true,
+    "Public_Health":true,
+    "Empowerment":false,
+    "Sports":true,
+    "Construction":false,
+    "Cooking":true,
+    "Accessibility":false,
+    "Mental_Health":true,
+    "Event_Planning":false,
+    "Gardening":true,
+    "Music":false,
+    "Dance":true,
+    "Location":false,
 }
 ```
 
@@ -179,7 +179,7 @@ Will add more infornation to an existing  good cause  information :
 
 ```json
 {
-  "good_cause_name":"Action 4 Children";
+  "good_cause_name":"Action 4 Children",
   "descriptionofgoodcause":"more information about action 4 children"
 }
 ```
