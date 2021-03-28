@@ -133,7 +133,7 @@ Will create a new good cause  information :
    "descriptionofgoodcause":"This is a charity with deals with children",
    "firstname":"Jane",
    "lastname":"Doe",
-   "emailaddress":action4children@gmail.com",
+   "emailaddress":"action4children@gmail.com",
    "contactnumber":234989000,
     }
 ```
