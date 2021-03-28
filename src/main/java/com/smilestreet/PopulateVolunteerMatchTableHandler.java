@@ -44,11 +44,10 @@ public class PopulateVolunteerMatchTableHandler implements RequestHandler<APIGat
                     System.getenv("DB_USER"),
                     System.getenv("DB_PASSWORD")));
 
-            preparedStatement = connection.prepareStatement("INSERT INTO matching_list (voln_id, join_id, matched) VALUES (  ?, ?, ?)");
+            preparedStatement = connection.prepareStatement("INSERT INTO matching_list (voln_id, join_id, matched) VALUES ( ?, ?, ?)");
             preparedStatement.setInt(1, p.getVoln_id());
             preparedStatement.setInt(2, p.getJoin_id());
             preparedStatement.setBoolean(3, p.getMatched());
-
 
             preparedStatement.execute();
 

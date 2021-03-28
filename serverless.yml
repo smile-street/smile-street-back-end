@@ -85,3 +85,10 @@ functions:
           path: /GetVolunteerMatches/{volunteer_id}
           method: get
           cors: true
+  populate-volunteer-match-table:
+     handler: com.smilestreet.PopulateVolunteerMatchTableHandler
+    events:
+      - http:
+          path: /PopulateVolunteerMatchTable
+          method: post
+          cors: true
