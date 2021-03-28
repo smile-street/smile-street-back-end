@@ -106,14 +106,14 @@ Will add more information about volunteers desired intrests for volunteering  in
 ```json   
    
    {
-        "web_design" : "web_design";
-        "SEO" :"SEO";
-        "Graphic_Design" :"graphic_Design";
-        "Teaching" : "teaching";
-        "Public_Health" : "public_Health";
-        "Empowerment" : "empowerment";
-        "Sports" : "sports";
-        "Construction" : "construction";
+        "web_design" : "web_design",
+        "SEO" :"SEO",
+        "Graphic_Design" :"graphic_Design",
+        "Teaching" : "teaching",
+        "Public_Health" : "public_Health",
+        "Empowerment" : "empowerment",
+        "Sports" : "sports",
+        "Construction" : "construction",
         "Cooking" : "cooking";
         "Accessibility" :"accessibility";
         "Mental_Health" : "mental_Health";
