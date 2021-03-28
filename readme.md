@@ -114,13 +114,13 @@ Will add more information about volunteers desired intrests for volunteering  in
         "Empowerment" : "empowerment",
         "Sports" : "sports",
         "Construction" : "construction",
-        "Cooking" : "cooking";
-        "Accessibility" :"accessibility";
-        "Mental_Health" : "mental_Health";
-        "Event_Planning" : "event_Planning";
-        "Gardening" :"gardening";
-        Music = "music";
-        Dance = "dance";
+        "Cooking" : "cooking",
+        "Accessibility" :"accessibility",
+        "Mental_Health" : "mental_Health",
+        "Event_Planning" : "event_Planning",
+        "Gardening" :"gardening",
+        Music = "music",
+        Dance = "dance",
 }
 ```
 ##### POST /sgoodcauseregistration
@@ -132,7 +132,7 @@ Will create a new good cause  information :
    {
    "descriptionofgoodcause":"This is a charity with deals with children",
    "firstname":"Jane",
-   'lastname":"Doe",
+   "lastname":"Doe",
    "emailaddress":action4children@gmail.com,
    "contactnumber":234989000,
     }
