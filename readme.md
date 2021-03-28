@@ -24,10 +24,38 @@ The API exposes the following endpoints:
 
 ---
 
-##### GET /VolunteerMatches
+##### GET /GetVolunteerMatches/{volunteer_id}
 
 
 Responds with JSON containing all matched opportunities for volunteers based on their interest ,skills and availability.
+```json
+
+
+    "Firstname":"Taslima";
+    "lastname":Patel";
+    "contactnumber":01234567;
+    "username":"Tassu26";
+    "employername":"Tech Returners";
+    "primarylocation":"Preston";
+    "numberofdays":3;
+    "startdate":26-05-2021;
+    "enddate":30-05-2021;
+    "Web_Design":true;
+    "SEO":true;
+    "Graphic_Design":false;
+    "Teaching":True;
+    "Public_Health":False;
+    "Empowerment":True;
+    "Sports":False;
+    "Construction":True;
+    "Cooking":False;
+    "Accessibility":True;
+    "Mental_Health":False;
+    "Event_Planning":True;
+    "Gardening":False;
+    "Music":True;
+    "Dance":True;
+```
 
 ---
 
@@ -41,9 +69,9 @@ Responds with JSON containing all matched opportunities for good cause based on 
 
 ---
 
-##### POST /Volunteer/SaveVolunteerHandler
+##### POST /SaveVolunteerHandler
 
-Will create a new volunteer information  for an authorised  when sent a JSON payload in the format:
+Will create a new volunteer information:
 
 ```json
 
@@ -52,7 +80,7 @@ Will create a new volunteer information  for an authorised  when sent a JSON pay
         "lastname": "Banglawala",
         "contactnumber": "123456",
         "username":"tassu26"
-    }
+}
 ```
 
 ##### PUT /UpdateVolunteerHandler/:volunteerId
@@ -67,10 +95,97 @@ Will add more information in to a volunteer table :
         "numberofdays": 3,
         "startdate": 20-03-2021,
         "groupNum": 26-03-2021
+   }
+```
+
+##### PUT /SaveVolunteerIntrestsHandler/:volunteerId
+
+
+Will add more information about volunteers desired intrests for volunteering  in to a volunteer table :
+
+```json   
+   
+   {
+        "web_design" : "web_design";
+        "SEO" :"SEO";
+        "Graphic_Design" :"graphic_Design";
+        "Teaching" : "teaching";
+        "Public_Health" : "public_Health";
+        "Empowerment" : "empowerment";
+        "Sports" : "sports";
+        "Construction" : "construction";
+        "Cooking" : "cooking";
+        "Accessibility" :"accessibility";
+        "Mental_Health" : "mental_Health";
+        "Event_Planning" : "event_Planning";
+        "Gardening" :"gardening";
+        Music = "music";
+        Dance = "dance";
+}
+```
+##### POST /sgoodcauseregistration
+
+Will create a new good cause  information :
+
+```json
+
+   {
+   "descriptionofgoodcause":"This is a charity with deals with children";
+   "firstname":"Jane";
+   'lastname":"Doe";
+   "emailaddress":action4children@gmail.com;
+   "contactnumber":234989000;
+    }
+```
+##### PUT /SaveGoodCauseDetailsHandler
+
+Will add more infornation to an existing  good cause  information : 
+
+```json
+{
+  "good_cause_name":"Action 4 Children";
+  "descriptionofgoodcause":"more information about action 4 children"
+}
+```
+##### POST /SaveGoodCauseOpportunity/{good_cause_id}
+
+Will add more infornation to an existing  good cause  information : 
+
+```json
+{
+    "opportunityname":"Action 4 Children";
+    "opportunitydescription":"More Action 4 children";
+    "Date" :24-04-2021;
+    "web_design":true;
+    "SEO":true;
+    "Graphic_Design":false;
+    "Teaching":true;
+    "Public_Health":true;
+    "Empowerment":false;
+    "Sports":true;
+    "Construction":false;
+    "Cooking":true;
+    "Accessibility":false;
+    "Mental_Health":true;
+    "Event_Planning":false;
+    "Gardening":true;
+    "Music":false;
+    "Dance":true;
+    "Location":false;
+}
+```
+
+Will add more infornation to an existing  good cause  information : 
+
+```json
+{
+  "good_cause_name":"Action 4 Children";
+  "descriptionofgoodcause":"more information about action 4 children"
 }
 ```
 
 ---
+
 
 
 
