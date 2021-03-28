@@ -31,30 +31,30 @@ Responds with JSON containing all matched opportunities for volunteers based on 
 ```json
 
 
-    "Firstname":"Taslima";
-    "lastname":Patel";
-    "contactnumber":01234567;
-    "username":"Tassu26";
-    "employername":"Tech Returners";
-    "primarylocation":"Preston";
-    "numberofdays":3;
-    "startdate":26-05-2021;
-    "enddate":30-05-2021;
-    "Web_Design":true;
-    "SEO":true;
-    "Graphic_Design":false;
-    "Teaching":True;
-    "Public_Health":False;
-    "Empowerment":True;
-    "Sports":False;
-    "Construction":True;
-    "Cooking":False;
-    "Accessibility":True;
-    "Mental_Health":False;
-    "Event_Planning":True;
-    "Gardening":False;
-    "Music":True;
-    "Dance":True;
+    "Firstname":"Taslima",
+    "lastname":Patel",
+    "contactnumber":01234567,
+    "username":"Tassu26",
+    "employername":"Tech Returners",
+    "primarylocation":"Preston",
+    "numberofdays":3,
+    "startdate":26-05-2021,
+    "enddate":30-05-2021,
+    "Web_Design":true,
+    "SEO":true,
+    "Graphic_Design":false,
+    "Teaching":True,
+    "Public_Health":False,
+    "Empowerment":True,
+    "Sports":False,
+    "Construction":True,
+    "Cooking":False,
+    "Accessibility":True,
+    "Mental_Health":False,
+    "Event_Planning":True,
+    "Gardening":False,
+    "Music":True,
+    "Dance":True,
 ```
 
 ---
@@ -130,11 +130,11 @@ Will create a new good cause  information :
 ```json
 
    {
-   "descriptionofgoodcause":"This is a charity with deals with children";
-   "firstname":"Jane";
-   'lastname":"Doe";
-   "emailaddress":action4children@gmail.com;
-   "contactnumber":234989000;
+   "descriptionofgoodcause":"This is a charity with deals with children",
+   "firstname":"Jane",
+   'lastname":"Doe",
+   "emailaddress":action4children@gmail.com,
+   "contactnumber":234989000,
     }
 ```
 ##### PUT /SaveGoodCauseDetailsHandler
@@ -143,7 +143,7 @@ Will add more infornation to an existing  good cause  information :
 
 ```json
 {
-  "good_cause_name":"Action 4 Children";
+  "good_cause_name":"Action 4 Children",
   "descriptionofgoodcause":"more information about action 4 children"
 }
 ```
@@ -153,9 +153,9 @@ Will add more infornation to an existing  good cause  information :
 
 ```json
 {
-    "opportunityname":"Action 4 Children";
-    "opportunitydescription":"More Action 4 children";
-    "Date" :24-04-2021;
+    "opportunityname":"Action 4 Children",
+    "opportunitydescription":"More Action 4 children",
+    "Date" :24-04-2021,
     "web_design":true,
     "SEO":true,
     "Graphic_Design":false,
